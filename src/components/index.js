@@ -1,0 +1,11 @@
+import "./page/header.js";
+import "./page/layout.js";
+import "./page/logo.js";
+import "./page/main.js";
+import "./page/nav.js";
+import "./page/socials.js";
+import "./content/article.js";
+import "./content/carousel.js";
+import "./content/hero.js";
+import "./content/section.js";
+import "./content/tags.js";
