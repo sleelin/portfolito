@@ -53,8 +53,8 @@ export class ContentHero extends LitElement {
     static get styles() {
         return css`
           :host {
+            scroll-margin-top: 86px;
             container-type: inline-size;
-            container-name: hero;
           }
           
           section {

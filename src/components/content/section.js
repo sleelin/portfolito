@@ -19,7 +19,7 @@ export class ContentSection extends LitElement {
         return css`
           :host {
             display: block;
-            scroll-margin-top: 85px;
+            scroll-margin-top: 76px;
             max-width: 976px;
             margin: 0 auto;
           }
