@@ -24,7 +24,6 @@ export class PageHeader extends LitElement {
           }
 
           header {
-            overflow: hidden;
             display: grid;
             position: sticky;
             z-index: 100;
@@ -38,7 +37,7 @@ export class PageHeader extends LitElement {
             margin-top: 8px;
             display: grid;
             grid-auto-flow: column;
-            grid-template-columns: 256px max-content 256px;
+            grid-template-columns: 256px 1fr;
             justify-content: space-between;
           }
         `;
