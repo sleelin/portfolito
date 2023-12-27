@@ -192,7 +192,7 @@ export class PageNav extends LitElement {
               overflow: hidden;
               container-type: size;
               position: absolute;
-              top: 68px;
+              top: 67px;
               right: -16px;
               width: 100vw;
               height: 0;
