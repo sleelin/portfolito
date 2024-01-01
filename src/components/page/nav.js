@@ -89,6 +89,7 @@ export class PageNav extends LitElement {
           nav {
             justify-items: center;
             grid-template-columns: 1fr 256px;
+            grid-template-areas: "links socials";
             
             @container root (width <= 888px) {
               grid-template-columns: 1fr max-content;
@@ -98,20 +99,37 @@ export class PageNav extends LitElement {
             @container root (width < 480px) {
               overflow-x: scroll;
               position: fixed;
-              top: -64px;
+              top: 0;
               bottom: 0;
               left: 0;
               right: 0;
               height: 64px;
-              transform: translateY(0);
+              transform: translateY(-64px);
               transition: transform 0.3s ease-in-out;
-              z-index: 999999;
               justify-items: start;
               padding: 0 16px;
+            
+              & > * {
+                z-index: 999999;
+              }
+            }
+            
+            @container content (width < 500px) {
+              z-index: 999999;
+              row-gap: 32px;
+              padding: 16px 0;
+              height: fit-content;
+              transform: translateY(-100cqh);
+              justify-items: stretch;
+              grid-template-columns: 1fr;
+              grid-template-areas: 
+                "links"
+                "socials";
             }
           }
           
           [part=links] {
+            grid-area: links;
             justify-items: center;
             column-gap: 32px;
 
@@ -143,9 +161,15 @@ export class PageNav extends LitElement {
             ::slotted(a:hover):before {
               box-shadow: 0 0 3rem 1.3rem #646cffaa;
             }
+            
+            @container content (width < 500px) {
+              grid-auto-flow: row;
+              row-gap: 16px;
+            }
           }
           
           [part=socials] {
+            grid-area: socials;
             justify-self: end;
             align-items: center;
             column-gap: 8px;
@@ -184,20 +208,30 @@ export class PageNav extends LitElement {
             & ::slotted(a[href*="github.com"]) {
               grid-area: github;
             }
+            
+            @container content (width < 500px) {
+              justify-self: center;
+            }
           }
           
           [part=content] {
+            display: grid;
+            grid-auto-flow: row;
+            grid-template-rows: max-content;
+            align-content: center;
+            
             @container root (width < 480px) {
-              transition: height 0.3s ease-in-out;
+              pointer-events: none;
               overflow: hidden;
+              container-name: content;
               container-type: size;
               position: absolute;
               top: 67px;
               right: -16px;
               width: 100vw;
-              height: 0;
+              height: calc(100vh - 76px);
 
-              &:after {
+              > :after {
                 display: block;
                 content: "";
                 position: fixed;
@@ -210,6 +244,22 @@ export class PageNav extends LitElement {
                 background-color: black;
                 transition: opacity 0.2s ease-in;
                 z-index: 999998;
+              }
+            }
+
+            @container root (width < 212px) {
+              &:after {
+                display: block;
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                opacity: 0;
+                pointer-events: none;
+                background-color: black;
+                transition: opacity 0.2s ease-in;
               }
             }
           }
@@ -265,14 +315,23 @@ export class PageNav extends LitElement {
             
             & + [part=content] {
               @container root (width < 480px) {
-                height: 64px;
-                
-                &:after {
+                > :after {
                   opacity: 0.8;
                 }
                 
                 nav {
-                  transform: translateY(64px);
+                  pointer-events: all;
+                  transform: translateY(0);
+                }
+              }
+
+              @container root (width < 212px) {
+                &:after {
+                  opacity: 0.4;
+                }
+                
+                nav {
+                  transform: translateY(0);
                 }
               }
             }
@@ -282,7 +341,7 @@ export class PageNav extends LitElement {
               transform: rotate(-45deg) translate(-1px, -2px);
               
               &:first-child {
-                transform: rotate(45deg) translate(0, -2px)
+                transform: rotate(45deg) translate(0, -2px);
               }
               
               &:nth-last-child(2) {
