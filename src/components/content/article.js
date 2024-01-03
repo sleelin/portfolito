@@ -19,19 +19,26 @@ export class ContentArticle extends LitElement {
     
     render() {
         return html`
-            <article part="container">
-                <header>
-                    <slot name="title"></slot>
-                    <slot name="subtitle"></slot>
-                    <slot name="timestamp"></slot>
-                </header>
-                <slot></slot>
-            </article>
+            <div part="container">
+                <article>
+                    <header>
+                        <slot name="title"></slot>
+                        <slot name="subtitle"></slot>
+                        <slot name="timestamp"></slot>
+                    </header>
+                    <slot></slot>
+                </article>
+            </div>
         `;
     }
     
     static get styles() {
         return css`
+          [part=container] {
+            display: grid;
+            container-type: inline-size;
+          }
+          
           article {
             padding: 16px;
           }
@@ -60,7 +67,6 @@ export class ContentArticle extends LitElement {
           
           :host(.bubble) ::slotted(h4) {
             font-weight: bold;
-            //animation: 1s wave ease-in-out 1;
           }
 
           :host(.bubble) {
@@ -76,21 +82,45 @@ export class ContentArticle extends LitElement {
             animation-delay: 0.5s;
           }
           
-          :host(.bubble) ::slotted(p) {
-            //animation: 2s lineUp ease-out 1;
-          }
-
-          :host(.job) header {
-            display: grid;
-            align-items: center;
-            grid-template-columns: 1fr max-content;
-            grid-template-areas:
-              "title timestamp"
-              "subtitle timestamp";
+          :host(.job) article {
+            @container (width < 944px) {
+              padding: 16px 0;
+            } 
             
-            ::slotted([slot=timestamp]) {
-              grid-area: timestamp;
-              font-size: 1.1em;
+            header {
+              display: grid;
+              align-items: center;
+              grid-template-columns: 1fr max-content;
+              grid-template-areas:
+                "title timestamp"
+                "subtitle timestamp";
+              
+              ::slotted([slot=title]) {
+                grid-area: title;
+              }
+              
+              ::slotted([slot=subtitle]) {
+                grid-area: subtitle;
+              }
+              
+              ::slotted([slot=timestamp]) {
+                grid-area: timestamp;
+                font-size: 1.1em;
+              }
+              
+              @container (width < 500px) {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                  "timestamp"
+                  "title"
+                  "subtitle";
+                  
+                ::slotted([slot=timestamp]) {
+                  font-size: 1.3em;
+                  border-bottom: 1px solid var(--color-primary);
+                  margin-bottom: 8px;
+                }
+              }
             }
           }
         `;
