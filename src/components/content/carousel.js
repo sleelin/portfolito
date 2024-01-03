@@ -35,10 +35,10 @@ export class ContentCarousel extends LitElement {
 
             @container (width <= 876px) {
               margin: 0 -16px;
-              padding: 0 16px;
+              padding: 0 8px 0 16px;
               overflow: scroll;
               column-gap: 8px;
-              grid-template-columns: repeat(3, 352px);
+              grid-template-columns: repeat(3, min(100cqw, 352px));
             }
           }
           
