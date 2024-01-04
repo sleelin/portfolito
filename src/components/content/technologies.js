@@ -21,13 +21,15 @@ export class ContentTechnologies extends LitElement {
     static get styles() {
         return css`
           :host {
+            container-type: inline-size;
             display: flex;
-            border-top: 1px solid var(--color-primary);
-            margin-top: 4px;
           }
           
           [part="container"] {
-            margin-top: -1px;
+            @container (width >= 500px) {
+              margin-top: -1px;
+            }
+            
             display: grid;
             grid-template-columns: max-content 1fr;
             align-items: stretch;
@@ -57,6 +59,7 @@ export class ContentTechnologies extends LitElement {
             list-style-type: none;
             padding-inline-start: 0;
             overflow-x: scroll;
+            overflow-y: hidden;
 
             ::slotted(li) {
               white-space: nowrap;

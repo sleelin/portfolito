@@ -26,7 +26,10 @@ export class ContentArticle extends LitElement {
                         <slot name="subtitle"></slot>
                         <slot name="timestamp"></slot>
                     </header>
-                    <slot></slot>
+                    <slot name="tags"></slot>
+                    <div part="content">
+                        <slot></slot>
+                    </div>
                 </article>
             </div>
         `;
@@ -42,17 +45,17 @@ export class ContentArticle extends LitElement {
           article {
             padding: 16px;
           }
-
+          
           ::slotted(h4), ::slotted(h5) {
             margin: 0;
             font-weight: normal;
           }
-
+          
           ::slotted(h4) {
             line-height: 1.1;
             font-size: 1.1em;
           }
-
+          
           ::slotted(p) {
             margin-bottom: 0;
           }
@@ -68,26 +71,53 @@ export class ContentArticle extends LitElement {
           :host(.bubble) ::slotted(h4) {
             font-weight: bold;
           }
-
+          
           :host(.bubble) {
             opacity: 0;
             animation: 1.5s lineUp ease-out forwards;
           }
-
+          
           :host(.bubble:nth-of-type(2)) {
             animation-delay: 0.25s;
           }
-
+          
           :host(.bubble:nth-of-type(3)) {
             animation-delay: 0.5s;
           }
           
           :host(.job) article {
-            @container (width < 944px) {
-              padding: 16px 0;
-            } 
+            contain: paint;
+            padding: 0;
+            position: relative;
+            
+            @container (width < 500px) {
+              margin-top: 16px;
+              border-radius: 16px;
+              box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0px, rgba(0, 0, 0, 0.12) 0 1px 10px 0px;
+            }
+            
+            ::slotted(p) {
+              margin: 0;
+            }
+            
+            [part=content] {
+              display: grid;
+              padding: 16px 8px;
+              margin-bottom: 16px;
+              
+              @container (width < 500px) {
+                padding: 16px;
+                margin-bottom: 0;
+              }
+            }
             
             header {
+              z-index: 998;
+              padding: 8px 8px 4px;
+              position: sticky;
+              top: var(--header-min-height);
+              background-color: var(--color-foreground);
+              border-bottom: 1px solid var(--color-primary);
               display: grid;
               align-items: center;
               grid-template-columns: 1fr max-content;
@@ -96,31 +126,43 @@ export class ContentArticle extends LitElement {
                 "subtitle timestamp";
               
               ::slotted([slot=title]) {
+                z-index: 999;
                 grid-area: title;
               }
               
               ::slotted([slot=subtitle]) {
+                z-index: 999;
                 grid-area: subtitle;
               }
               
               ::slotted([slot=timestamp]) {
+                z-index: 999;
                 grid-area: timestamp;
                 font-size: 1.1em;
               }
               
               @container (width < 500px) {
+                margin-bottom: -1px;
+                top: calc(var(--header-min-height) - 8px);
+                padding-bottom: 8px;
                 grid-template-columns: 1fr;
                 grid-template-areas:
                   "timestamp"
                   "title"
                   "subtitle";
-                  
+                
                 ::slotted([slot=timestamp]) {
                   font-size: 1.3em;
                   border-bottom: 1px solid var(--color-primary);
                   margin-bottom: 8px;
                 }
               }
+            }
+          }
+          
+          :host(.job:first-of-type) article {
+            @container (width < 500px) {
+              margin-top: 0;
             }
           }
         `;

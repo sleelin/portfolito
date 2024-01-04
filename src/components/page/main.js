@@ -26,8 +26,8 @@ export class PageMain extends LitElement {
           }
           
           ::slotted(content-section:nth-of-type(even)) {
-            box-sizing: border-box;
-            border: 1px solid var(--color-foreground);
+            //box-sizing: border-box;
+            //border: 1px solid var(--color-foreground);
           }
         `;
     }
