@@ -69,7 +69,7 @@ export class ContentHero extends LitElement {
             background: rgb(2, 0, 36);
             background: linear-gradient(45deg, rgba(2, 0, 36, 1) 0%, rgba(100, 108, 255, 1) 80%, rgba(0, 212, 255, 1) 100%);
           }
-
+          
           .grid {
             height: 576px;
             display: grid;
@@ -77,7 +77,7 @@ export class ContentHero extends LitElement {
             align-items: center;
             grid-template-columns: 1fr 512px 1fr;
             grid-template-areas: "face text carousel";
-
+            
             @container (width < 1400px) {
               grid-template-columns: min-content 1fr max-content;
               padding: 0 32px;
@@ -92,20 +92,24 @@ export class ContentHero extends LitElement {
               #face {
                 margin-left: 0;
               }
-            
+              
               ::slotted(.bubble) {
                 justify-self: end;
               }
             }
-
+            
             @container (width <= 1225px) {
               grid-template-columns: max-content 1fr max-content;
-            
+              
               #face {
                 margin-left: 0;
               }
+              
+              ::slotted(content-carousel) {
+                min-width: 352px;
+              }
             }
-
+            
             @container (width <= 1176px) {
               row-gap: 32px;
               grid-template-rows: min-content;
@@ -118,17 +122,22 @@ export class ContentHero extends LitElement {
                 align-self: end;
                 justify-self: center;
               }
-            
+              
               ::slotted(content-carousel) {
                 container-type: inline-size;
+                min-width: unset;
               }
             }
-
+            
             @container (width <= 976px) {
               padding: 0 16px;
               column-gap: 16px;
+              
+              ::slotted(content-carousel) {
+                align-self: stretch;
+              }
             }
-
+            
             @container (width <= 876px) {
               height: auto;
               grid-auto-flow: row;
@@ -167,7 +176,7 @@ export class ContentHero extends LitElement {
           ::slotted(h3) {
             display: none;
           }
-
+          
           ::slotted(p) {
             padding: 0 32px;
             grid-area: text;
@@ -179,12 +188,12 @@ export class ContentHero extends LitElement {
           ::slotted(content-carousel) {
             grid-area: carousel;
           }
-
+          
           @keyframes fadeInToFaint {
             0% {
               opacity: 0;
             }
-
+            
             100% {
               opacity: 0.05;
             }
@@ -194,7 +203,7 @@ export class ContentHero extends LitElement {
             0% {
               opacity: 0.05;
             }
-
+            
             100% {
               opacity: 1;
             }

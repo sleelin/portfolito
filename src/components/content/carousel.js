@@ -21,18 +21,18 @@ export class ContentCarousel extends LitElement {
             display: grid;
             gap: 32px;
             height: 100%;
-
+            
             @container (width <= 1176px) {
               grid-auto-flow: column;
               column-gap: 16px;
-              
+                
               ::slotted(.bubble), ::slotted(.bubble:first-of-type), ::slotted(.bubble:last-of-type) {
                 align-self: stretch;
                 margin-bottom: 16px;
                 display: grid;
               }
             }
-
+            
             @container (width <= 876px) {
               margin: 0 -16px;
               padding: 0 8px 0 16px;
@@ -46,11 +46,11 @@ export class ContentCarousel extends LitElement {
             color: white;
             max-width: 352px;
           }
-
+          
           ::slotted(.bubble:first-of-type) {
             align-self: end;
           }
-
+          
           ::slotted(.bubble:last-of-type) {
             align-self: start;
           }
