@@ -37,6 +37,18 @@ export class ContentArticle extends LitElement {
     
     static get styles() {
         return css`
+          :host {
+            --header-color-fg: inherit;
+            --header-color-bg: #D5D5D5FF;
+            --header-color-bg_maxi: var(--header-color-bg);
+            --header-color-bg_mini: var(--header-color-bg);
+            --header-color-ul: black;
+            --content-color-fg: inherit;
+            --content-color-bg: color-mix(in srgb, var(--content-color-fg), transparent 92%);
+            --content-color-bg_maxi: var(--content-color-bg);
+            --content-color-bg_mini: var(--content-color-bg);
+          }
+          
           [part=container] {
             display: grid;
             container-type: inline-size;
@@ -44,112 +56,113 @@ export class ContentArticle extends LitElement {
           
           article {
             padding: 16px;
-          }
-          
-          ::slotted(h4), ::slotted(h5) {
-            margin: 0;
-            font-weight: normal;
-          }
-          
-          ::slotted(h4) {
-            line-height: 1.1;
-            font-size: 1.1em;
-          }
-          
-          ::slotted(p) {
-            margin-bottom: 0;
-          }
-          
-          :host(.bubble) article {
-            box-sizing: border-box;
-            border-radius: 8px;
-            box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
-            backdrop-filter: blur(10px);
-            background: rgba(255,255,255,0.08);
-          }
-          
-          :host(.bubble) ::slotted(h4) {
-            font-weight: bold;
-          }
-          
-          :host(.job) article {
-            contain: paint;
-            padding: 0;
-            position: relative;
+            color: var(--content-color-fg);
+            background-color: var(--content-color-bg);
             
-            @container (width < 500px) {
-              margin-top: 16px;
-              border-radius: 16px;
-              box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0px, rgba(0, 0, 0, 0.12) 0 1px 10px 0px;
+            header ::slotted(:is(h4, h5)) {
+              font-weight: normal;
             }
             
-            ::slotted(p) {
+            ::slotted(:is(h4, h5)) {
               margin: 0;
             }
             
-            [part=content] {
-              display: grid;
-              padding: 16px 8px;
-              margin-bottom: 16px;
-              
-              @container (width < 500px) {
-                padding: 16px;
-                margin-bottom: 0;
-              }
+            ::slotted(h4) {
+              line-height: 1.1;
+              font-size: 1.1em;
             }
             
-            header {
-              z-index: 998;
-              padding: 8px 8px 4px;
-              position: sticky;
-              top: var(--header-min-height);
-              background-color: var(--color-foreground);
-              border-bottom: 1px solid var(--color-primary);
-              display: grid;
-              align-items: center;
-              grid-template-columns: 1fr max-content;
-              grid-template-areas:
-                "title timestamp"
-                "subtitle timestamp";
-              
-              ::slotted([slot=title]) {
-                z-index: 999;
-                grid-area: title;
-              }
-              
-              ::slotted([slot=subtitle]) {
-                z-index: 999;
-                grid-area: subtitle;
-              }
-              
-              ::slotted([slot=timestamp]) {
-                z-index: 999;
-                grid-area: timestamp;
-                font-size: 1.1em;
-              }
-              
+            ::slotted(p) {
+              margin-bottom: 0;
+            }
+            
+            :host(.bubble) & {
+              box-sizing: border-box;
+              border-radius: 8px;
+              box-shadow: inset 0 0 0 200px var(--content-color-bg);
+              backdrop-filter: blur(10px);
+            }
+            
+            :host(.job) & {
+              contain: paint;
+              padding: 0;
+              position: relative;
+            
               @container (width < 500px) {
-                margin-bottom: -1px;
-                top: calc(var(--header-min-height) - 8px);
-                padding-bottom: 8px;
-                grid-template-columns: 1fr;
+                margin-top: 16px;
+                border-radius: 16px;
+                box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0px, rgba(0, 0, 0, 0.12) 0 1px 10px 0px;
+              }
+              
+              ::slotted(p) {
+                margin: 0;
+              }
+              
+              [part=content] {
+                display: grid;
+                padding: 16px 8px;
+                margin-bottom: 16px;
+              
+                @container (width < 500px) {
+                  padding: 16px;
+                  margin-bottom: 0;
+                }
+              }
+              
+              header {
+                z-index: 998;
+                padding: 8px 8px 4px;
+                position: sticky;
+                top: var(--header-top-maxi, 0px);
+                background-color: var(--header-color-bg_maxi);
+                border-bottom: 1px solid var(--header-color-ul);
+                display: grid;
+                align-items: center;
+                grid-template-columns: 1fr max-content;
                 grid-template-areas:
-                  "timestamp"
-                  "title"
-                  "subtitle";
+                  "title timestamp"
+                  "subtitle timestamp";
+                
+                ::slotted([slot=title]) {
+                  z-index: 999;
+                  grid-area: title;
+                }
+                
+                ::slotted([slot=subtitle]) {
+                  z-index: 999;
+                  grid-area: subtitle;
+                }
                 
                 ::slotted([slot=timestamp]) {
-                  font-size: 1.3em;
-                  border-bottom: 1px solid var(--color-primary);
-                  margin-bottom: 8px;
+                  z-index: 999;
+                  grid-area: timestamp;
+                  font-size: 1.1em;
+                }
+              
+                @container (width < 500px) {
+                  top: var(--header-top-mini, 0px);
+                  background-color: var(--header-color-bg_mini);
+                  margin-bottom: -1px;
+                  padding-bottom: 8px;
+                  grid-template-columns: 1fr;
+                  grid-template-areas:
+                    "timestamp"
+                    "title"
+                    "subtitle";
+                
+                  ::slotted([slot=timestamp]) {
+                    font-size: 1.3em;
+                    border-bottom: 1px solid var(--header-color-ul);
+                    margin-bottom: 8px;
+                  }
                 }
               }
             }
-          }
-          
-          :host(.job:first-of-type) article {
+            
             @container (width < 500px) {
-              margin-top: 0;
+              :host(.job:first-of-type) & {
+                margin-top: 0;
+              }
             }
           }
         `;
