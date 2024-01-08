@@ -72,19 +72,6 @@ export class ContentArticle extends LitElement {
             font-weight: bold;
           }
           
-          :host(.bubble) {
-            opacity: 0;
-            animation: 1.5s lineUp ease-out forwards;
-          }
-          
-          :host(.bubble:nth-of-type(2)) {
-            animation-delay: 0.25s;
-          }
-          
-          :host(.bubble:nth-of-type(3)) {
-            animation-delay: 0.5s;
-          }
-          
           :host(.job) article {
             contain: paint;
             padding: 0;

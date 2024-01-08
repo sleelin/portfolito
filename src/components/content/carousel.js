@@ -1,5 +1,5 @@
 import {LitElement, css, html} from "lit";
-import {customElement} from "lit/decorators.js";
+import {customElement, queryAssignedElements} from "lit/decorators.js";
 
 /**
  * ContentCarousel element
@@ -7,6 +7,15 @@ import {customElement} from "lit/decorators.js";
  */
 @customElement("content-carousel")
 export class ContentCarousel extends LitElement {
+    @queryAssignedElements({selector: ".bubble"})
+    accessor #articles;
+    
+    firstUpdated(_) {
+        for (let article of this.#articles) {
+            article.style = `--index: ${this.#articles.indexOf(article)}`;
+        }
+    }
+    
     render() {
         return html`
             <section part="container">
@@ -43,8 +52,10 @@ export class ContentCarousel extends LitElement {
           }
           
           ::slotted(.bubble) {
-            color: white;
+            opacity: 0;
             max-width: 352px;
+            animation: 1.5s lineUp ease-out forwards;
+            animation-delay: calc(0.25s * var(--index));
           }
           
           ::slotted(.bubble:first-of-type) {
