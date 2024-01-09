@@ -24,6 +24,16 @@ export class ContentSection extends LitElement {
           
           section {
             padding: 16px;
+            
+            :host(.grid) & {
+              display: grid;
+              gap: 16px;
+              grid-template-columns: repeat(3, 1fr);
+              
+              ::slotted(h3) {
+                grid-column: span 3;
+              }
+            }
           }
           
           ::slotted(h3) {
