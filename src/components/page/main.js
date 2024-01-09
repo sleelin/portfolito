@@ -9,8 +9,11 @@ import {customElement} from "lit/decorators.js";
 export class PageMain extends LitElement {
     render() {
         return html`
-            <main slot="container">
-                <slot></slot>
+            <main part="container">
+                <slot name="hero"></slot>
+                <div part="content">
+                    <slot></slot>
+                </div>
             </main>
         `;
     }
@@ -19,15 +22,26 @@ export class PageMain extends LitElement {
         return css` 
           main {
             position: relative;
+            container-type: inline-size;
           }
           
-          ::slotted(content-section:nth-of-type(odd)) {
+          [part=content] {
+            margin: 0 auto 32px;
+            max-width: 976px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0px, rgba(0, 0, 0, 0.12) 0 1px 10px 0px;
+            contain: paint;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
             background-color: var(--color-foreground);
-          }
-          
-          ::slotted(content-section:nth-of-type(even)) {
-            //box-sizing: border-box;
-            //border: 1px solid var(--color-foreground);
+            
+            @container (width <= 976px) {
+              border-bottom-left-radius: 0;
+              border-bottom-right-radius: 0;
+            }
+            
+            @container (width < 532px) {
+              background-color: var(--color-background);
+            }
           }
         `;
     }
