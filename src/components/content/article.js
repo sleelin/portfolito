@@ -40,13 +40,13 @@ export class ContentArticle extends LitElement {
           :host {
             --header-color-fg: inherit;
             --header-color-bg: #D5D5D5FF;
-            --header-color-bg_maxi: var(--header-color-bg);
-            --header-color-bg_mini: var(--header-color-bg);
+            --header-color-bg-maxi: var(--header-color-bg);
+            --header-color-bg-mini: var(--header-color-bg);
             --header-color-ul: black;
             --content-color-fg: inherit;
             --content-color-bg: color-mix(in srgb, var(--content-color-fg), transparent 92%);
-            --content-color-bg_maxi: var(--content-color-bg);
-            --content-color-bg_mini: var(--content-color-bg);
+            --content-color-bg-maxi: var(--content-color-bg);
+            --content-color-bg-mini: var(--content-color-bg);
           }
           
           [part=container] {
@@ -84,18 +84,28 @@ export class ContentArticle extends LitElement {
             }
             
             :host(.job) & {
-              contain: paint;
               padding: 0;
               position: relative;
-            
-              @container (width < 500px) {
-                margin-top: 16px;
-                border-radius: 16px;
-                box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0px, rgba(0, 0, 0, 0.12) 0 1px 10px 0px;
-              }
+              contain: paint;
+              background-color: var(--content-color-bg-maxi, var(--content-color-bg));
               
               ::slotted(p) {
                 margin: 0;
+              }
+              
+              ::slotted([slot=tags]) {
+                margin-top: -1px;
+              }
+              
+              @container (width < 500px) {
+                margin-top: 16px;
+                border-radius: 16px;
+                background-color: var(--content-color-bg-mini, var(--content-color-bg));
+                box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0px, rgba(0, 0, 0, 0.12) 0 1px 10px 0px;
+              
+                ::slotted([slot=tags]) {
+                  margin-top: 0;
+                }
               }
               
               [part=content] {
@@ -114,7 +124,7 @@ export class ContentArticle extends LitElement {
                 padding: 8px 8px 4px;
                 position: sticky;
                 top: var(--header-top-maxi, 0px);
-                background-color: var(--header-color-bg_maxi);
+                background-color: var(--header-color-bg-maxi, var(--header-color-bg));
                 border-bottom: 1px solid var(--header-color-ul);
                 display: grid;
                 align-items: center;
@@ -141,7 +151,7 @@ export class ContentArticle extends LitElement {
               
                 @container (width < 500px) {
                   top: var(--header-top-mini, 0px);
-                  background-color: var(--header-color-bg_mini);
+                  background-color: var(--header-color-bg-mini, var(--header-color-bg));
                   margin-bottom: -1px;
                   padding-bottom: 8px;
                   grid-template-columns: 1fr;

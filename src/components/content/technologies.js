@@ -21,15 +21,10 @@ export class ContentTechnologies extends LitElement {
     static get styles() {
         return css`
           :host {
-            container-type: inline-size;
             display: flex;
           }
           
           [part="container"] {
-            @container (width >= 500px) {
-              margin-top: -1px;
-            }
-            
             display: grid;
             grid-template-columns: max-content 1fr;
             align-items: stretch;
