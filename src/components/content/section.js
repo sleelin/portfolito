@@ -20,8 +20,6 @@ export class ContentSection extends LitElement {
           :host {
             display: block;
             scroll-margin-top: 76px;
-            max-width: 976px;
-            margin: 0 auto;
           }
           
           section {
@@ -30,10 +28,23 @@ export class ContentSection extends LitElement {
           
           ::slotted(h3) {
             margin-top: 0;
-            line-height: 1.1;
-            font-size: 1.1em;
+            line-height: 1.2;
+            font-size: 1.3em;
             font-weight: normal;
             text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: var(--color-heading);
+          }
+          
+          ::slotted(h3):before {
+            display: block;
+            mask-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-color: var(--color-heading);
           }
         `;
     }
