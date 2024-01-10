@@ -20,8 +20,8 @@ export class ContentArticle extends LitElement {
     render() {
         return html`
             <div part="container">
-                <article>
-                    <header>
+                <article part="article">
+                    <header part="header">
                         <slot name="title"></slot>
                         <slot name="subtitle"></slot>
                         <slot name="timestamp"></slot>
@@ -81,6 +81,35 @@ export class ContentArticle extends LitElement {
               border-radius: 8px;
               box-shadow: inset 0 0 0 200px var(--content-color-bg);
               backdrop-filter: blur(10px);
+              
+              header {
+                margin-bottom: 8px;
+                
+                ::slotted(h5) {
+                  font-size: 1em;
+                }
+                
+                ::slotted(.status):before {
+                  content: "";
+                  display: inline-block;
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 50%;
+                  margin-right: 4px;
+                }
+                
+                ::slotted(.active):before {
+                  background-color: green;
+                }
+                
+                ::slotted(.inactive):before {
+                  background-color: orange;
+                }
+                
+                ::slotted(.obsolete):before {
+                  background-color: red;
+                }
+              }
             }
             
             :host(.job) & {
