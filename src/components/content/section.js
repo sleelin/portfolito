@@ -10,7 +10,10 @@ export class ContentSection extends LitElement {
     render() {
         return html`
             <section part="container">
-                <slot></slot>
+                <slot name="title"></slot>
+                <div part="content">
+                    <slot></slot>
+                </div>
             </section>
         `;
     }
@@ -26,12 +29,25 @@ export class ContentSection extends LitElement {
             padding: 16px;
             
             :host(.grid) & {
-              display: grid;
-              gap: 16px;
-              grid-template-columns: repeat(3, 1fr);
+              container-type: inline-size;
               
-              ::slotted(h3) {
-                grid-column: span 3;
+              [part=content] {
+                display: grid;
+                gap: 16px;
+                grid-template-columns: repeat(3, 1fr);
+                
+                ::slotted(.span) {
+                  grid-column: 1 / -1;
+                  margin-bottom: 0;
+                }
+                
+                @container (width <= 876px) {
+                  grid-template-columns: repeat(2, 1fr);
+                }
+                
+                @container (width <= 576px) {
+                  grid-template-columns: 1fr;
+                }
               }
             }
           }
