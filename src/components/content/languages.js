@@ -58,11 +58,11 @@ export class ContentLanguages extends LitElement {
           }
           
           [part="container"] {
+            container-type: inline-size;
             color: var(--color-foreground);
             background-color: var(--color-background);
             padding: 8px 8px 12px;
             margin: 0 -16px;
-            column-gap: 16px;
             row-gap: 8px;
             align-items: center;
             justify-content: space-between;
@@ -80,13 +80,17 @@ export class ContentLanguages extends LitElement {
             grid-area: heading;
             padding-left: 4px;
             color: var(--color-heading);
-            margin: 0;
+            margin: 0 16px 0 0;
             font-weight: normal;
             font-size: 0.95em;
             display: grid;
             grid-auto-flow: column;
             column-gap: 4px;
             line-height: 1;
+            
+            @container (width < 284px) {
+              margin-right: 8px;
+            }
             
             svg {
               fill: var(--color-heading);
@@ -100,6 +104,10 @@ export class ContentLanguages extends LitElement {
             grid-auto-flow: column;
             column-gap: 16px;
             justify-content: start;
+            
+            @container (width < 284px) {
+              column-gap: 8px;  
+            }
             
             div {
               display: grid;
