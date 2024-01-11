@@ -52,6 +52,10 @@ export class ContentArticle extends LitElement {
           [part=container] {
             display: grid;
             container-type: inline-size;
+            
+            :host(.bubble) & {
+              height: 100%;
+            }
           }
           
           article {
