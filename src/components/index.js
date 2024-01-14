@@ -5,6 +5,7 @@ import "./page/main.js";
 import "./page/nav.js";
 import "./content/article.js";
 import "./content/carousel.js";
+import "./content/details.js";
 import "./content/hero.js";
 import "./content/languages.js";
 import "./content/section.js";
