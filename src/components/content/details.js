@@ -38,6 +38,10 @@ export class ContentDetails extends LitElement {
     
     static get styles() {
         return css`
+          [part=container] {
+            container-type: inline-size;
+          }
+          
           [part=summary] {
             display: grid;
             grid-template-columns: max-content 1fr;
@@ -83,6 +87,14 @@ export class ContentDetails extends LitElement {
               ::slotted(.bubble) {
                 opacity: 0;
                 transform: translateY(20%);
+              }
+            
+              @container (width <= 876px) {
+                grid-template-columns: repeat(2, 1fr);
+              }
+              
+              @container (width <= 576px) {
+                grid-template-columns: 1fr;
               }
             }
             
