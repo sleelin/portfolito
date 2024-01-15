@@ -1,5 +1,6 @@
 import {LitElement, css, html} from "lit";
 import {customElement, property, queryAssignedElements} from "lit/decorators.js";
+import {choose} from "lit/directives/choose.js";
 
 /**
  * ContentDetails element
@@ -10,7 +11,10 @@ export class ContentDetails extends LitElement {
     @property({type: Boolean, reflect: true})
     accessor open = false;
     
-    @queryAssignedElements({selector: ".bubble"})
+    @property({type: String})
+    accessor variant;
+    
+    @queryAssignedElements({selector: ":not([slot]), .bubble"})
     accessor #content;
     
     firstUpdated(_) {
@@ -29,9 +33,17 @@ export class ContentDetails extends LitElement {
                 <div part="summary" @click=${this.toggle}>
                     <slot name="summary"></slot>
                 </div>
-                <div part="content">
-                    <slot></slot>
-                </div>
+                ${choose(this.variant, [
+                    ["list", () => html`
+                        <ul part="content">
+                            <slot></slot>
+                        </ul>
+                    `]            
+                ], () => html`
+                    <div part="content">
+                        <slot></slot>
+                    </div>
+                `)}
             </div>
         `;
     }
@@ -79,7 +91,7 @@ export class ContentDetails extends LitElement {
               margin-top: 8px;
             }
             
-            :host(.grid) & {
+            :host([variant=grid]) & {
               display: grid;
               gap: 16px;
               grid-template-columns: repeat(3, 1fr);
@@ -98,11 +110,42 @@ export class ContentDetails extends LitElement {
               }
             }
             
-            :host([open].grid) & ::slotted(.bubble) {
+            :host([open][variant=grid]) & ::slotted(.bubble) {
               opacity: 1;
               transform: translateY(0%);
               transition: transform 0.3s ease-out, opacity 0.5s ease-out;
               transition-delay: calc(0.125s * var(--index));
+            }
+            
+            :host([variant=list]) & {
+              margin: 0;
+              list-style-type: "- ";
+              padding-left: 24px;
+              
+              ::slotted(li) {
+                opacity: 0;
+                transform: translateX(-2%);
+                padding-left: 6px;
+              }
+            
+              @container (width <= 576px) {
+                padding-left: 12px;
+              
+                ::slotted(li) {
+                  padding-left: 4px;
+                }
+              }
+            }
+            
+            :host([open][variant=list]) & {
+              margin-top: 8px;
+              
+              ::slotted(li) {
+                opacity: 1;
+                transform: translateX(0%);
+                transition: transform 0.3s ease-out, opacity 0.5s ease-out;
+                transition-delay: calc(0.125s * var(--index));
+              }
             }
           }
         `;
