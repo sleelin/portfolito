@@ -145,6 +145,7 @@ export class ContentArticle extends LitElement {
                 display: grid;
                 padding: 16px 8px;
                 margin-bottom: 16px;
+                row-gap: 16px;
               
                 @container (width < 500px) {
                   padding: 16px;
