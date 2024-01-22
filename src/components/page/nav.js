@@ -41,7 +41,7 @@ export class PageNav extends LitElement {
         return html`
             ${!this.#aLinkedIn ? nothing : html`<span class="linkedin">${unsafeSVG(LinkedInLogo)}</span>`}
             ${!this.#aGitHub ? nothing : html`<span class="github">${unsafeSVG(GitHubLogo)}</span>`}
-        `
+        `;
     }
     
     render() {
@@ -70,12 +70,15 @@ export class PageNav extends LitElement {
     
     static get styles() {
         return css`
+          :host {
+            display: block;
+          }
+          
           [part=container] {
-            container-type: inline-size;
-            container-name: root;
+            container: root / inline-size;
             box-sizing: border-box;
           }
-
+          
           label, input {
             display: none;
           }
@@ -95,7 +98,7 @@ export class PageNav extends LitElement {
               grid-template-columns: 1fr max-content;
               column-gap: 32px;
             }
-
+            
             @container root (width < 480px) {
               overflow-x: scroll;
               position: fixed;
@@ -108,7 +111,7 @@ export class PageNav extends LitElement {
               transition: transform 0.3s ease-in-out;
               justify-items: start;
               padding: 0 16px;
-            
+              
               & > * {
                 z-index: 999999;
               }
@@ -132,7 +135,7 @@ export class PageNav extends LitElement {
             grid-area: links;
             justify-items: center;
             column-gap: 32px;
-
+            
             ::slotted(a) {
               position: relative;
               text-decoration: none;
@@ -142,11 +145,11 @@ export class PageNav extends LitElement {
               will-change: color;
               transition: color 300ms;
             }
-
+            
             ::slotted(a:hover) {
               color: #45bbfc;
             }
-
+            
             ::slotted(a):before {
               display: block;
               content: "";
@@ -157,7 +160,7 @@ export class PageNav extends LitElement {
               transition: box-shadow 300ms;
               border-radius: 50%;
             }
-
+            
             ::slotted(a:hover):before {
               box-shadow: 0 0 3rem 1.3rem #646cffaa;
             }
@@ -175,36 +178,36 @@ export class PageNav extends LitElement {
             column-gap: 8px;
             justify-content: end;
             grid-template-areas: "linkedin github";
-
+            
             span {
               display: flex;
-
+              
               &.linkedin {
                 grid-area: linkedin;
               }
-
+              
               &.github {
                 grid-area: github;
               }
-
+              
               svg {
                 width: 32px;
                 height: 32px;
                 fill: var(--color-primary);
               }
             }
-
+            
             & ::slotted(a) {
               width: 32px;
               height: 32px;
               overflow: hidden;
               opacity: 0;
             }
-
+            
             & ::slotted(a[href*="linkedin.com"]) {
               grid-area: linkedin;
             }
-
+            
             & ::slotted(a[href*="github.com"]) {
               grid-area: github;
             }
@@ -221,16 +224,15 @@ export class PageNav extends LitElement {
             align-content: center;
             
             @container root (width < 480px) {
+              container: content / size;
               pointer-events: none;
               overflow: hidden;
-              container-name: content;
-              container-type: size;
               position: absolute;
               top: 67px;
               right: -16px;
               width: 100vw;
               height: calc(100vh - 76px);
-
+              
               > :after {
                 display: block;
                 content: "";
@@ -246,7 +248,7 @@ export class PageNav extends LitElement {
                 z-index: 999998;
               }
             }
-
+            
             @container root (width < 212px) {
               &:after {
                 display: block;
@@ -266,8 +268,8 @@ export class PageNav extends LitElement {
           
           label {
             place-self: center end;
-
-            @container(width < 480px) {
+            
+            @container root (width < 480px) {
               display: block;
             }
             
@@ -282,15 +284,15 @@ export class PageNav extends LitElement {
               z-index: 1;
               transform-origin: 4px 0;
               transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
-
+              
               &:first-child {
                 transform-origin: 0 0;
               }
-
+              
               &:last-child {
                 margin-bottom: 0;
               }
-
+              
               &:nth-last-child(2) {
                 transform-origin: 0 100%;
               }
@@ -324,7 +326,7 @@ export class PageNav extends LitElement {
                   transform: translateY(0);
                 }
               }
-
+              
               @container root (width < 212px) {
                 &:after {
                   opacity: 0.4;
