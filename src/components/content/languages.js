@@ -58,7 +58,7 @@ export class ContentLanguages extends LitElement {
           }
           
           [part="container"] {
-            container-type: inline-size;
+            container: content-languages / inline-size;
             color: var(--color-foreground);
             background-color: var(--color-background);
             padding: 8px 8px 12px;
@@ -88,7 +88,7 @@ export class ContentLanguages extends LitElement {
             column-gap: 4px;
             line-height: 1;
             
-            @container (width < 284px) {
+            @container content-languages (width < 284px) {
               margin-right: 8px;
             }
             
@@ -105,7 +105,7 @@ export class ContentLanguages extends LitElement {
             column-gap: 16px;
             justify-content: start;
             
-            @container (width < 284px) {
+            @container content-languages (width < 284px) {
               column-gap: 8px;  
             }
             

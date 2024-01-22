@@ -45,12 +45,10 @@ export class ContentHero extends LitElement {
     render() {
         return html`
             <section part="container">
-                <div class="grid">
-                    <div id="face">
-                        ${until(import("../../assets/face.svg?raw").then(({default: SVG}) => unsafeSVG(SVG)), html`<img alt="face" src=${FaceImage} />`)}
-                    </div>
-                    <slot></slot>
+                <div id="face">
+                    ${until(import("../../assets/face.svg?raw").then(({default: SVG}) => unsafeSVG(SVG)), html`<img alt="face" src=${FaceImage} />`)}
                 </div>
+                <slot></slot>
             </section>
         `;
     }
@@ -58,19 +56,16 @@ export class ContentHero extends LitElement {
     static get styles() {
         return css`
           :host {
+            display: block;
             scroll-margin-top: 86px;
-            container-type: inline-size;
+            container: content-hero / inline-size;
           }
           
           section {
             overflow: hidden;
-            container-type: inline-size;
             border-bottom: 1px solid var(--color-foreground);
             background: rgb(2, 0, 36);
             background: linear-gradient(45deg, rgba(2, 0, 36, 1) 0%, rgba(100, 108, 255, 1) 80%, rgba(0, 212, 255, 1) 100%);
-          }
-          
-          .grid {
             height: 576px;
             display: grid;
             column-gap: 32px;
@@ -78,39 +73,30 @@ export class ContentHero extends LitElement {
             grid-template-columns: 1fr 512px 1fr;
             grid-template-areas: "face text carousel";
             
-            @container (width < 1400px) {
+            ::slotted(content-carousel) {
+              min-width: 352px;
+            }
+            
+            @container content-hero (width < 1400px) {
               grid-template-columns: min-content 1fr max-content;
               padding: 0 32px;
               
               #face {
-                margin: 0;
                 justify-self: start;
               }
             }
             
-            @container (width <= 1280px) {
-              #face {
-                margin-left: 0;
-              }
-              
+            @container content-hero (width <= 1280px) {
               ::slotted(.bubble) {
                 justify-self: end;
               }
             }
             
-            @container (width <= 1225px) {
+            @container content-hero (width <= 1225px) {
               grid-template-columns: max-content 1fr max-content;
-              
-              #face {
-                margin-left: 0;
-              }
-              
-              ::slotted(content-carousel) {
-                min-width: 352px;
-              }
             }
             
-            @container (width <= 1176px) {
+            @container content-hero (width <= 1176px) {
               row-gap: 32px;
               grid-template-rows: min-content;
               grid-template-columns: repeat(3, 1fr);
@@ -124,12 +110,11 @@ export class ContentHero extends LitElement {
               }
               
               ::slotted(content-carousel) {
-                container-type: inline-size;
                 min-width: unset;
               }
             }
             
-            @container (width <= 976px) {
+            @container content-hero (width <= 976px) {
               padding: 0 16px;
               column-gap: 16px;
               
@@ -138,7 +123,7 @@ export class ContentHero extends LitElement {
               }
             }
             
-            @container (width <= 876px) {
+            @container content-hero (width <= 876px) {
               height: auto;
               grid-auto-flow: row;
               grid-template-rows: 1fr min-content;
@@ -153,8 +138,8 @@ export class ContentHero extends LitElement {
           #face {
             align-self: center;
             justify-self: end;
-            margin: 96px 0 96px 96px;
             width: 288px;
+            min-height: 338px;
             grid-area: face;
             
             img {

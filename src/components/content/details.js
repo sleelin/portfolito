@@ -51,7 +51,7 @@ export class ContentDetails extends LitElement {
     static get styles() {
         return css`
           [part=container] {
-            container-type: inline-size;
+            container: content-details / inline-size;
           }
           
           [part=summary] {
@@ -100,12 +100,12 @@ export class ContentDetails extends LitElement {
                 opacity: 0;
                 transform: translateY(20%);
               }
-            
-              @container (width <= 876px) {
+              
+              @container content-details (width <= 876px) {
                 grid-template-columns: repeat(2, 1fr);
               }
               
-              @container (width <= 576px) {
+              @container content-details (width <= 576px) {
                 grid-template-columns: 1fr;
               }
             }
@@ -127,8 +127,8 @@ export class ContentDetails extends LitElement {
                 transform: translateX(-2%);
                 padding-left: 6px;
               }
-            
-              @container (width <= 576px) {
+              
+              @container content-details (width <= 576px) {
                 padding-left: 12px;
               
                 ::slotted(li) {

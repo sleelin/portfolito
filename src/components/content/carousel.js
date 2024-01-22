@@ -26,28 +26,45 @@ export class ContentCarousel extends LitElement {
     
     static get styles() {
         return css`
+          :host {
+            display: block;
+            container: content-carousel / size;
+            height: 100%;
+            min-height: 196px;
+          }
+          
           section {
             display: grid;
             gap: 32px;
             height: 100%;
+            align-content: center;
             
-            @container (width <= 1176px) {
+            @container content-carousel (width <= 1176px) and (height < 256px){
               grid-auto-flow: column;
               column-gap: 16px;
                 
               ::slotted(.bubble), ::slotted(.bubble:first-of-type), ::slotted(.bubble:last-of-type) {
                 align-self: stretch;
-                margin-bottom: 16px;
                 display: grid;
               }
             }
             
-            @container (width <= 876px) {
+            @container content-carousel (width <= 946px) and (height < 256px) {
+              align-content: start;
+            }
+            
+            @container content-carousel (width <= 876px) and (height < 256px) {
+              height: 100%;
               margin: 0 -16px;
               padding: 0 8px 0 16px;
               overflow: scroll;
               column-gap: 8px;
               grid-template-columns: repeat(3, min(100cqw, 352px));
+              align-content: stretch;
+              
+              ::slotted(.bubble), ::slotted(.bubble:first-of-type), ::slotted(.bubble:last-of-type) {
+                margin-bottom: 16px;
+              }
             }
           }
           

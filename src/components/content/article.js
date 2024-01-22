@@ -19,25 +19,25 @@ export class ContentArticle extends LitElement {
     
     render() {
         return html`
-            <div part="container">
-                <article part="article">
-                    <header part="header">
-                        <slot name="title"></slot>
-                        <slot name="subtitle"></slot>
-                        <slot name="timestamp"></slot>
-                    </header>
-                    <slot name="tags"></slot>
-                    <div part="content">
-                        <slot></slot>
-                    </div>
-                </article>
-            </div>
+            <article part="container">
+                <header part="header">
+                    <slot name="title"></slot>
+                    <slot name="subtitle"></slot>
+                    <slot name="timestamp"></slot>
+                </header>
+                <slot name="tags"></slot>
+                <div part="content">
+                    <slot></slot>
+                </div>
+            </article>
         `;
     }
     
     static get styles() {
         return css`
           :host {
+            display: block;
+            container: content-article / inline-size;
             --header-color-fg: inherit;
             --header-color-bg: #D5D5D5FF;
             --header-color-bg-maxi: var(--header-color-bg);
@@ -47,15 +47,6 @@ export class ContentArticle extends LitElement {
             --content-color-bg: color-mix(in srgb, var(--content-color-fg), transparent 92%);
             --content-color-bg-maxi: var(--content-color-bg);
             --content-color-bg-mini: var(--content-color-bg);
-          }
-          
-          [part=container] {
-            display: grid;
-            container-type: inline-size;
-            
-            :host(.bubble) & {
-              height: 100%;
-            }
           }
           
           article {
@@ -81,10 +72,10 @@ export class ContentArticle extends LitElement {
             }
             
             :host(.bubble) & {
+              height: 100%;
               box-sizing: border-box;
               border-radius: 8px;
               box-shadow: inset 0 0 0 200px var(--content-color-bg);
-              backdrop-filter: blur(10px);
               
               header {
                 margin-bottom: 8px;
@@ -130,12 +121,12 @@ export class ContentArticle extends LitElement {
                 margin-top: -1px;
               }
               
-              @container (width < 500px) {
+              @container content-article (width < 500px) {
                 margin-top: 16px;
                 border-radius: 16px;
                 background-color: var(--content-color-bg-mini, var(--content-color-bg));
                 box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0px, rgba(0, 0, 0, 0.12) 0 1px 10px 0px;
-              
+                
                 ::slotted([slot=tags]) {
                   margin-top: 0;
                 }
@@ -146,8 +137,8 @@ export class ContentArticle extends LitElement {
                 padding: 16px 8px;
                 margin-bottom: 16px;
                 row-gap: 16px;
-              
-                @container (width < 500px) {
+                
+                @container content-article (width < 500px) {
                   padding: 16px;
                   margin-bottom: 0;
                 }
@@ -182,8 +173,8 @@ export class ContentArticle extends LitElement {
                   grid-area: timestamp;
                   font-size: 1.1em;
                 }
-              
-                @container (width < 500px) {
+                
+                @container content-article (width < 500px) {
                   top: var(--header-top-mini, 0px);
                   background-color: var(--header-color-bg-mini, var(--header-color-bg));
                   margin-bottom: -1px;
@@ -193,7 +184,7 @@ export class ContentArticle extends LitElement {
                     "timestamp"
                     "title"
                     "subtitle";
-                
+                  
                   ::slotted([slot=timestamp]) {
                     font-size: 1.3em;
                     border-bottom: 1px solid var(--header-color-ul);
@@ -203,7 +194,7 @@ export class ContentArticle extends LitElement {
               }
             }
             
-            @container (width < 500px) {
+            @container content-article (width < 500px) {
               :host(.job:first-of-type) & {
                 margin-top: 0;
               }

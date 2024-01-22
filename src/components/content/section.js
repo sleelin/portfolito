@@ -22,33 +22,27 @@ export class ContentSection extends LitElement {
         return css`
           :host {
             display: block;
+            container: content-section / inline-size;
             scroll-margin-top: 76px;
+            padding: 16px;
           }
           
-          section {
-            padding: 16px;
+          :host(.grid) [part=content] {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(3, 1fr);
             
-            :host(.grid) & {
-              container-type: inline-size;
-              
-              [part=content] {
-                display: grid;
-                gap: 16px;
-                grid-template-columns: repeat(3, 1fr);
-                
-                ::slotted(.span) {
-                  grid-column: 1 / -1;
-                  margin-bottom: 0;
-                }
-                
-                @container (width <= 876px) {
-                  grid-template-columns: repeat(2, 1fr);
-                }
-                
-                @container (width <= 576px) {
-                  grid-template-columns: 1fr;
-                }
-              }
+            ::slotted(.span) {
+              grid-column: 1 / -1;
+              margin-bottom: 0;
+            }
+            
+            @container content-section (width <= 876px) {
+              grid-template-columns: repeat(2, 1fr);
+            }
+            
+            @container content-section (width <= 576px) {
+              grid-template-columns: 1fr;
             }
           }
           
