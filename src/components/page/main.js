@@ -19,10 +19,10 @@ export class PageMain extends LitElement {
     }
     
     static get styles() {
-        return css` 
+        return css`
           main {
+            container: page-main / inline-size;
             position: relative;
-            container-type: inline-size;
           }
           
           [part=content] {
@@ -34,12 +34,12 @@ export class PageMain extends LitElement {
             border-bottom-right-radius: 16px;
             background-color: var(--color-foreground);
             
-            @container (width <= 976px) {
+            @container page-main (width <= 976px) {
               border-bottom-left-radius: 0;
               border-bottom-right-radius: 0;
             }
             
-            @container (width < 532px) {
+            @container page-main (width < 532px) {
               background-color: var(--color-background);
             }
           }

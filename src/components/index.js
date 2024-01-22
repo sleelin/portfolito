@@ -1,5 +1,4 @@
 import "./page/header.js";
-import "./page/layout.js";
 import "./page/logo.js";
 import "./page/main.js";
 import "./page/nav.js";
