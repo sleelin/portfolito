@@ -144,7 +144,7 @@ export class ContentDetails extends LitElement {
                 opacity: 1;
                 transform: translateX(0%);
                 transition: transform 0.3s ease-out, opacity 0.5s ease-out;
-                transition-delay: calc(0.125s * var(--index));
+                transition-delay: 0.125s;
               }
             }
           }
