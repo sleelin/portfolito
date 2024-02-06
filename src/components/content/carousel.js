@@ -30,7 +30,7 @@ export class ContentCarousel extends LitElement {
             display: block;
             container: content-carousel / size;
             height: 100%;
-            min-height: 196px;
+            min-height: 180px;
           }
           
           section {
@@ -50,7 +50,7 @@ export class ContentCarousel extends LitElement {
             }
             
             @container content-carousel (width <= 946px) and (height < 256px) {
-              align-content: start;
+              align-content: center;
             }
             
             @container content-carousel (width <= 876px) and (height < 256px) {

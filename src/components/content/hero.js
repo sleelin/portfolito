@@ -84,6 +84,12 @@ export class ContentHero extends LitElement {
               #face {
                 justify-self: start;
               }
+            
+              ::slotted(p) {
+                padding: 0 32px;
+                max-width: 452px;
+                justify-self: center;
+              }
             }
             
             @container content-hero (width <= 1280px) {
@@ -112,6 +118,10 @@ export class ContentHero extends LitElement {
               ::slotted(content-carousel) {
                 min-width: unset;
               }
+              
+              ::slotted(p) {
+                max-width: 600px;
+              }
             }
             
             @container content-hero (width <= 976px) {
@@ -120,6 +130,10 @@ export class ContentHero extends LitElement {
               
               ::slotted(content-carousel) {
                 align-self: stretch;
+              }
+            
+              ::slotted(p) {
+                max-width: 480px;
               }
             }
             
@@ -132,6 +146,12 @@ export class ContentHero extends LitElement {
                 "face"
                 "text"
                 "carousel";
+            }
+          
+            @container content-hero (width <= 425px) {
+              ::slotted(p) {
+                padding: 0 4px;
+              }
             }
           }
           
@@ -163,11 +183,12 @@ export class ContentHero extends LitElement {
           }
           
           ::slotted(p) {
-            padding: 0 32px;
+            padding: 0 48px;
             grid-area: text;
             text-align: center;
             color: white;
             animation: 1s lineUp ease-in-out;
+            box-sizing: border-box;
           }
           
           ::slotted(content-carousel) {
