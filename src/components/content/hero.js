@@ -1,8 +1,5 @@
 import {LitElement, css, html} from "lit";
-import {customElement, query, queryAsync} from "lit/decorators.js";
-import {unsafeSVG} from "lit/directives/unsafe-svg.js";
-import {until} from "lit/directives/until.js";
-import FaceImage from "../../assets/face.png";
+import {customElement} from "lit/decorators.js";
 
 /**
  * ContentHero element
@@ -10,44 +7,10 @@ import FaceImage from "../../assets/face.png";
  */
 @customElement("content-hero")
 export class ContentHero extends LitElement {
-    @query("#face")
-    accessor #face;
-    
-    @queryAsync("#pupil-left")
-    accessor #pupilLeft;
-    
-    @queryAsync("#pupil-right")
-    accessor #pupilRight;
-    
-    constructor() {
-        super();
-        
-        window.addEventListener("mousemove", async (e) => {
-            const pupilLeft = await this.#pupilLeft;
-            const pupilRight = await this.#pupilRight;
-            
-            if (!!pupilLeft && !!pupilRight) {
-                const bcLeft = pupilLeft.getBoundingClientRect();
-                const bcRight = pupilRight.getBoundingClientRect();
-                const midpointX = bcLeft.x + ((bcRight.x - bcLeft.x) / 2);
-                const midpointY = bcLeft.y + ((bcRight.y - bcLeft.y) / 2);
-                const percentX = Math.min(Math.max(Math.ceil(midpointX - e.clientX), -100), 100) / 100;
-                const percentY = Math.min(Math.max(Math.ceil(midpointY - e.clientY), -100), 100) / 100;
-                
-                window.requestAnimationFrame(() => {
-                    pupilLeft.style.transform = `translate(${-10 * percentX}px, ${-4 * (percentY)}px)`;
-                    pupilRight.style.transform = `translate(${-10 * percentX}px, ${-4 * (percentY)}px)`;
-                });
-            }
-        });
-    }
-    
     render() {
         return html`
             <section part="container">
-                <div id="face">
-                    ${until(import("../../assets/face.svg?raw").then(({default: SVG}) => unsafeSVG(SVG)), html`<img alt="face" src=${FaceImage} />`)}
-                </div>
+                <slot name="face"></slot>
                 <slot></slot>
             </section>
         `;
@@ -81,7 +44,7 @@ export class ContentHero extends LitElement {
               grid-template-columns: min-content 1fr max-content;
               padding: 0 32px;
               
-              #face {
+              ::slotted([slot=face]) {
                 justify-self: start;
               }
             
@@ -109,8 +72,8 @@ export class ContentHero extends LitElement {
               grid-template-areas:
                 "face text text"
                 "carousel carousel carousel";
-              
-              #face {
+            
+              ::slotted([slot=face]) {
                 align-self: end;
                 justify-self: center;
               }
@@ -155,27 +118,11 @@ export class ContentHero extends LitElement {
             }
           }
           
-          #face {
+          ::slotted([slot=face]) {
             align-self: center;
             justify-self: end;
-            width: 288px;
             min-height: 338px;
             grid-area: face;
-            
-            img {
-              opacity: 0.05;
-              width: 100%;
-              animation: 1s ease-in-out fadeInToFaint;
-            }
-            
-            svg {
-              max-width: 100%;
-              max-height: 100%;
-              overflow: hidden;
-              border-radius: 32px;
-              filter: drop-shadow(0 0 3rem rgb(197, 201, 204));
-              animation: 0.3s ease-in-out fadeInFromFaint;
-            }
           }
           
           ::slotted(h3) {
@@ -193,26 +140,6 @@ export class ContentHero extends LitElement {
           
           ::slotted(content-carousel) {
             grid-area: carousel;
-          }
-          
-          @keyframes fadeInToFaint {
-            0% {
-              opacity: 0;
-            }
-            
-            100% {
-              opacity: 0.05;
-            }
-          }
-          
-          @keyframes fadeInFromFaint {
-            0% {
-              opacity: 0.05;
-            }
-            
-            100% {
-              opacity: 1;
-            }
           }
         `;
     }
