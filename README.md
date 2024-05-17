@@ -2,6 +2,8 @@
 
 PortfoLitO is a small library of Lit-based Web Components for Software Developers to build simple Portfolio of Work Pages.
 
+<img src="./docs/public/logo.svg" alt="PortfoLitO" width="128">
+
 ##### Requirements
 
 - [Node.js](https://nodejs.org/) version 18 or higher.
