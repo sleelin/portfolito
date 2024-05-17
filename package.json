@@ -13,7 +13,10 @@
     "start": "vite build -w",
     "build": "vite build",
     "prepare": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vite build && vitepress build",
+    "docs:preview": "vitepress preview"
   },
   "peerDependencies": {
     "lit": "^3.1.0"
@@ -21,8 +24,11 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
+    "shiki": "^1.5.1",
     "vite": "^5.1.4",
     "vite-plugin-babel": "^1.2.0",
-    "vite-plugin-cem": "^0.7.0"
+    "vite-plugin-cem": "^0.7.0",
+    "vitepress": "^1.1.4",
+    "vue": "^3.4.27"
   }
 }
