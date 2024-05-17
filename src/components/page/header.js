@@ -3,7 +3,9 @@ import {customElement} from "lit/decorators.js";
 
 /**
  * PageHeader element
- * @slot - This element has a slot
+ * @summary
+ * Provides a responsive container for the native HTML header element
+ * @slot default - contents of the page header
  */
 @customElement("page-header")
 export class PageHeader extends LitElement {
@@ -19,26 +21,38 @@ export class PageHeader extends LitElement {
     
     static get styles() {
         return css`
-          :host {
+          header {
+            container: header / inline-size;
             position: sticky;
             z-index: 100;
-            top: -8px;
-            background-color: var(--color-header);
-          }
-          
-          header {
-            position: relative;
+            top: -24px;
             width: 100%;
             background-color: var(--color-header);
             box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
+            
+            &::before, &::after {
+              display: block;
+              content: "";
+            }
+            
+            &::before {
+              padding: 8px 0;
+            }
+            
+            &::after {
+              padding: 8px 0;
+            }
           }
           
           .container {
-            padding: 16px;
+            padding: 0 16px 4px;
             display: grid;
             grid-auto-flow: column;
             grid-template-columns: 256px 1fr;
             justify-content: space-between;
+            align-items: stretch;
+            position: sticky;
+            top: 4px;
           }
         `;
     }

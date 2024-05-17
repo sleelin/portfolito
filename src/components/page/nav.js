@@ -6,7 +6,10 @@ import GitHubLogo from "../../assets/github.svg?raw";
 
 /**
  * PageNav element
- * @slot - This element has a slot
+ * @summary
+ * Provides a responsive page navigation menu which handles positioning and social links
+ * @slot default - in-page navigation links, expected to be HTML anchor elements
+ * @slot socials - links to social networks, expected to be HTML anchor elements
  */
 @customElement("page-nav")
 export class PageNav extends LitElement {
@@ -46,8 +49,8 @@ export class PageNav extends LitElement {
     
     render() {
         return html`
+            <input id="toggle" type="checkbox">
             <div part="container">
-                <input id="toggle" type="checkbox">
                 <label for="toggle">
                     <span></span>
                     <span></span>
@@ -70,26 +73,34 @@ export class PageNav extends LitElement {
     
     static get styles() {
         return css`
-          :host {
-            display: block;
-          }
-          
           [part=container] {
             container: root / inline-size;
             box-sizing: border-box;
+            display: flex;
+            height: 100%;
+            justify-content: end;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: calc(100% - 16px - 256px);
+            padding: 0 16px;
           }
           
           label, input {
             display: none;
           }
           
-          nav, div {
-            height: 100%;
-            display: grid;
-            grid-auto-flow: column;
+          nav {
+            &, & > div {
+              height: 100%;
+              display: grid;
+              grid-auto-flow: column;
+            }
           }
           
           nav {
+            position: sticky;
+            top: 16px;
             justify-items: center;
             grid-template-columns: 1fr 256px;
             grid-template-areas: "links socials";
@@ -222,16 +233,19 @@ export class PageNav extends LitElement {
             grid-auto-flow: row;
             grid-template-rows: max-content;
             align-content: center;
+            right: 0;
+            flex-grow: 1;
+            box-sizing: border-box;
             
             @container root (width < 480px) {
+              padding: 0 16px;
               container: content / size;
               pointer-events: none;
               overflow: hidden;
-              position: absolute;
-              top: 67px;
-              right: -16px;
+              position: fixed;
+              top: 100%;
               width: 100vw;
-              height: calc(100vh - 76px);
+              height: calc(100vh - 64px);
               
               > :after {
                 display: block;
@@ -268,6 +282,8 @@ export class PageNav extends LitElement {
           
           label {
             place-self: center end;
+            position: sticky;
+            top: 20px;
             
             @container root (width < 480px) {
               display: block;
@@ -310,7 +326,7 @@ export class PageNav extends LitElement {
             }
           }
           
-          input:checked + label {
+          input:checked + div > label {
             &:after {
               pointer-events: all;
             }
