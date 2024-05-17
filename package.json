@@ -9,6 +9,10 @@
       "import": "./dist/portfolito.js"
     }
   },
+  "files": [
+    "src/**",
+    "dist/**"
+  ],
   "scripts": {
     "start": "vite build -w",
     "build": "vite build",
