@@ -1,8 +1,14 @@
 {
   "name": "@sleelin/portfolito",
+  "description": "A Lit Web Components Library for building Software Developer Portfolio of Work Pages",
   "version": "1.0.0",
   "type": "module",
-  "exports": "./dist/portfolito.js",
+  "exports": {
+    ".": {
+      "development": "./src/components/index.js",
+      "import": "./dist/portfolito.js"
+    }
+  },
   "scripts": {
     "start": "vite build -w",
     "build": "vite build",
@@ -16,6 +22,7 @@
     "@babel/plugin-proposal-decorators": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
     "vite": "^5.1.4",
-    "vite-plugin-babel": "^1.2.0"
+    "vite-plugin-babel": "^1.2.0",
+    "vite-plugin-cem": "^0.7.0"
   }
 }
