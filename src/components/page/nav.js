@@ -1,6 +1,5 @@
-import {LitElement, css, html, nothing} from "lit";
-import {customElement, state, query, queryAssignedElements} from "lit/decorators.js";
-import {unsafeSVG} from "lit/directives/unsafe-svg.js";
+import {LitElement, css, html, unsafeCSS} from "lit";
+import {customElement, query, queryAssignedElements} from "lit/decorators.js";
 import LinkedInLogo from "../../assets/linkedin.svg?raw";
 import GitHubLogo from "../../assets/github.svg?raw";
 
@@ -19,32 +18,18 @@ export class PageNav extends LitElement {
     @queryAssignedElements({selector: "[href^='#']"})
     accessor #links;
     
-    @queryAssignedElements({slot: "socials"})
-    accessor #socials;
-    
-    @state()
+    @queryAssignedElements({slot: "socials", selector: "[href^='github.com']"})
     accessor #aGitHub;
     
-    @state()
+    @queryAssignedElements({slot: "socials", selector: "[href^='linkedin.com']"})
     accessor #aLinkedIn;
     
-    firstUpdated(_) {
+    #listenLinks() {
         for (let link of this.#links) link.addEventListener("click", (e) => {
             e.preventDefault();
             this.#toggle.checked = false;
             document.getElementById(e.target.hash.substring(1))?.scrollIntoView({behavior: "smooth", inline: "start"});
         });
-        
-        this.#aGitHub = this.#socials.find((a) => a.matches("[href*='github.com']"));
-        this.#aLinkedIn = this.#socials.find((a) => a.matches("[href*='linkedin.com']"));
-        this.requestUpdate();
-    }
-    
-    #renderSocials() {
-        return html`
-            ${!this.#aLinkedIn ? nothing : html`<span class="linkedin">${unsafeSVG(LinkedInLogo)}</span>`}
-            ${!this.#aGitHub ? nothing : html`<span class="github">${unsafeSVG(GitHubLogo)}</span>`}
-        `;
     }
     
     render() {
@@ -59,10 +44,9 @@ export class PageNav extends LitElement {
                 <div part="content">
                     <nav>
                         <div part="links">
-                            <slot></slot>
+                            <slot @slotchange=${this.#listenLinks}></slot>
                         </div>
                         <div part="socials">
-                            ${this.#renderSocials()}
                             <slot name="socials"></slot>
                         </div>
                     </nav>
@@ -72,6 +56,9 @@ export class PageNav extends LitElement {
     }
     
     static get styles() {
+        const gitHubLogo = unsafeCSS(encodeURIComponent(String(GitHubLogo)));
+        const linkedInLogo = unsafeCSS(encodeURIComponent(String(LinkedInLogo)));
+        
         return css`
           [part=container] {
             container: root / inline-size;
@@ -188,39 +175,23 @@ export class PageNav extends LitElement {
             align-items: center;
             column-gap: 8px;
             justify-content: end;
-            grid-template-areas: "linkedin github";
-            
-            span {
-              display: flex;
-              
-              &.linkedin {
-                grid-area: linkedin;
-              }
-              
-              &.github {
-                grid-area: github;
-              }
-              
-              svg {
-                width: 32px;
-                height: 32px;
-                fill: var(--color-primary);
-              }
-            }
+            grid-auto-flow: column;
             
             & ::slotted(a) {
               width: 32px;
               height: 32px;
               overflow: hidden;
-              opacity: 0;
+              color: transparent;
+              background-color: var(--color-primary);
+              mask-repeat: no-repeat;
             }
             
             & ::slotted(a[href*="linkedin.com"]) {
-              grid-area: linkedin;
+              mask-image: url("data:image/svg+xml,${linkedInLogo}");
             }
             
             & ::slotted(a[href*="github.com"]) {
-              grid-area: github;
+              mask-image: url("data:image/svg+xml,${gitHubLogo}");
             }
             
             @container content (width < 500px) {

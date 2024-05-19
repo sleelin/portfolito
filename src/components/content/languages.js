@@ -14,32 +14,27 @@ export class ContentLanguages extends LitElement {
     @state()
     accessor #languages;
     
-    firstUpdated(_) {
+    #parseLanguages() {
         this.#languages = this.#data?.map(({title, value, textContent}) => ({name: title, weight: Number(value), label: textContent}))
         this.requestUpdate();
     }
     
-    #renderList() {
-        return html`${this.#languages?.map(({name, label}) => html`<div class=${name.toLowerCase()} title=${label}>${name}</div>`)}`;
-    }
-    
-    #renderLine() {
-        return html`${this.#languages?.map(({name, weight}) => html`<div class=${name.toLowerCase()} title="${weight}%"></div>`)}`;
-    }
-    
     render() {
+        const list = html`${this.#languages?.map(({name, label}) => html`<div class=${name.toLowerCase()} title=${label}>${name}</div>`)}`;
+        const line = html`${this.#languages?.map(({name, weight}) => html`<div class=${name.toLowerCase()} title="${weight}%"></div>`)}`;
+        
         return html`
             <div part="container">
                 <h6 part="heading">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16" viewBox="0 -960 960 960" width="16"><path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z"/></svg>
                     <span>Languages:</span>
                 </h6>
-                <div part="list">${this.#renderList()}</div>
+                <div part="list">${list}</div>
                 <div part="line" style=${styleMap({gridTemplateColumns: this.#languages?.map(({weight}) => (`${weight}%`)).join(" ")})}>
-                    ${this.#renderLine()}
+                    ${line}
                 </div>
                 <ul>
-                    <slot></slot>
+                    <slot @slotchange=${this.#parseLanguages}></slot>
                 </ul>
             </div>
         `;
