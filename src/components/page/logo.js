@@ -25,6 +25,11 @@ export class PageLogo extends LitElement {
     
     static get styles() {
         return css`
+          :host {
+            --color-foreground: var(--color-background, transparent);
+            --color-border: var(--color-background, transparent);
+          }
+          
           .collapse {
             position: sticky;
             top: 0;
@@ -34,27 +39,74 @@ export class PageLogo extends LitElement {
           
           .container {
             display: grid;
+            align-items: center;
             grid-template-rows: repeat(2, max-content);
             grid-template-columns: max-content 1fr;
             min-height: 52px;
           }
           
           .logo {
+            position: relative;
             grid-row-start: 1;
             grid-row-end: span 2;
             max-height: 48px;
             margin-top: 4px;
+            margin-right: 12px;
             display: flex;
             align-items: center;
+            
+            &:before, &:after {
+              content: "";
+              display: block;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              box-sizing: border-box;
+            }
+            
+            &:before {
+              background-image: radial-gradient(ellipse at center left, var(--color-foreground, transparent), var(--color-background, transparent));
+            }
+            
+            :host(.animate) & {
+              &:before, &:after {
+                animation: spin 15s linear infinite;
+              }
+              
+              &:after {
+                animation-direction: reverse;
+              }
+            }
+            
+            :host(.round) & {
+              &:before, &:after {
+                border-radius: 32px;
+              }
+            }
+            
+            :host(.border) & {
+              &:before {
+                box-shadow: var(--color-border) 0 0 2px 0;
+              }
+              
+              &:after {
+                border: 1px solid transparent;
+                background: linear-gradient(to right, white, white) padding-box, linear-gradient(to right, var(--color-border, transparent), var(--color-foreground, transparent)) border-box;
+                mask-image: radial-gradient(circle, white, white), radial-gradient(circle, white, white);
+                mask-clip: content-box, border-box;
+                mask-composite: subtract;
+              }
+            }
           }
           
           ::slotted(img) {
-            height: 100%;
+            width: 100%;
             aspect-ratio: 1;
             max-height: 48px;
-            margin-right: 12px;
-            border-radius: 32px;
-            background-color: grey;
+            z-index: 0;
+            object-fit: contain;
           }
           
           ::slotted(h1), ::slotted(h2) {
@@ -71,6 +123,20 @@ export class PageLogo extends LitElement {
           ::slotted(h2) {
             font-size: 1.1em;
             font-weight: normal;
+          }
+          
+          @keyframes spin {
+            from {
+              transform: rotate(0deg);
+            }
+            
+            50% {
+              transform: rotate(180deg);
+            }
+            
+            to {
+              transform: rotate(360deg);
+            }
           }
         `;
     }
