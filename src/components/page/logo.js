@@ -10,11 +10,15 @@ import {customElement} from "lit/decorators.js";
  */
 @customElement("page-logo")
 export class PageLogo extends LitElement {
+    #clickLogo() {
+        window.scrollTo({behavior: "smooth", top: 0});
+    }
+    
     render() {
         return html`
             <div class="collapse">
                 <div class="container">
-                    <div class="logo">
+                    <div class="logo" @click=${this.#clickLogo}>
                         <slot></slot>
                     </div>
                     <slot name="headings"></slot>
@@ -46,6 +50,7 @@ export class PageLogo extends LitElement {
           }
           
           .logo {
+            cursor: pointer;
             position: relative;
             grid-row-start: 1;
             grid-row-end: span 2;
