@@ -1,7 +1,7 @@
 import {LitElement, css, html, unsafeCSS} from "lit";
 import {customElement, query, queryAssignedElements} from "lit/decorators.js";
-import LinkedInLogo from "../../assets/linkedin.svg?raw";
-import GitHubLogo from "../../assets/github.svg?raw";
+import LinkedInLogo from "../../assets/linkedin.svg";
+import GitHubLogo from "../../assets/github.svg";
 
 /**
  * PageNav element
@@ -56,9 +56,6 @@ export class PageNav extends LitElement {
     }
     
     static get styles() {
-        const gitHubLogo = unsafeCSS(encodeURIComponent(String(GitHubLogo)));
-        const linkedInLogo = unsafeCSS(encodeURIComponent(String(LinkedInLogo)));
-        
         return css`
           [part=container] {
             container: root / inline-size;
@@ -187,11 +184,11 @@ export class PageNav extends LitElement {
             }
             
             & ::slotted(a[href*="linkedin.com"]) {
-              mask-image: url("data:image/svg+xml,${linkedInLogo}");
+              mask-image: url("${unsafeCSS(LinkedInLogo)}");
             }
             
             & ::slotted(a[href*="github.com"]) {
-              mask-image: url("data:image/svg+xml,${gitHubLogo}");
+              mask-image: url("${unsafeCSS(GitHubLogo)}");
             }
             
             @container content (width < 500px) {
