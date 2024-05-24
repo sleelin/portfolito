@@ -7,7 +7,7 @@ import GitHubLogo from "../../assets/github.svg";
  * PageNav element
  * @summary
  * Provides a responsive page navigation menu which handles positioning and social links
- * @slot default - in-page navigation links, expected to be HTML anchor elements
+ * @slot - in-page navigation links, expected to be HTML anchor elements
  * @slot socials - links to social networks, expected to be HTML anchor elements
  */
 @customElement("page-nav")

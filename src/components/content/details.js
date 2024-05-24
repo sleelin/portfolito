@@ -1,27 +1,26 @@
 import {LitElement, css, html} from "lit";
-import {customElement, property, queryAssignedElements} from "lit/decorators.js";
+import {customElement, property} from "lit/decorators.js";
 import {choose} from "lit/directives/choose.js";
 
 /**
  * ContentDetails element
- * @slot - This element has a slot
+ * @summary
+ * Provides a replacement to the native details element, which does not trigger transitions on expansion
+ * @slot - content to show when details is expanded
+ * @slot summary - preview of content shown when details is expanded
+ * @csspart container - overall responsive container element
+ * @csspart summary - container element for summary slot, including toggle arrow
+ * @csspart content - the actual content of the details element
  */
 @customElement("content-details")
 export class ContentDetails extends LitElement {
+    /** @attribute */
     @property({type: Boolean, reflect: true})
     accessor open = false;
     
+    /** @attribute */
     @property({type: String})
-    accessor variant;
-    
-    @queryAssignedElements({selector: ":not([slot]), .bubble"})
-    accessor #content;
-    
-    firstUpdated(_) {
-        for (let el of this.#content) {
-            el.style = `--index: ${this.#content.indexOf(el)}`;
-        }
-    }
+    accessor variant = "";
     
     toggle() {
         this.open = !this.open;
@@ -31,7 +30,9 @@ export class ContentDetails extends LitElement {
         return html`
             <div part="container">
                 <div part="summary" @click=${this.toggle}>
-                    <slot name="summary"></slot>
+                    <slot name="summary">
+                        <u>Details</u>
+                    </slot>
                 </div>
                 ${choose(this.variant, [
                     ["list", () => html`
@@ -40,9 +41,9 @@ export class ContentDetails extends LitElement {
                         </ul>
                     `]            
                 ], () => html`
-                    <div part="content">
+                    <content-section part="content" class="grid">
                         <slot></slot>
-                    </div>
+                    </content-section>
                 `)}
             </div>
         `;
@@ -92,9 +93,7 @@ export class ContentDetails extends LitElement {
             }
             
             :host([variant=grid]) & {
-              display: grid;
-              gap: 16px;
-              grid-template-columns: repeat(3, 1fr);
+              padding: 0;
               
               ::slotted(.bubble) {
                 opacity: 0;

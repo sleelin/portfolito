@@ -1,26 +1,19 @@
 import {LitElement, css, html} from "lit";
-import {customElement, queryAssignedElements} from "lit/decorators.js";
+import {customElement} from "lit/decorators.js";
 
 /**
  * ContentCarousel element
- * @slot - This element has a slot
+ * @summary
+ * Provides a responsive container for feature articles
+ * @slot - up to three elements to place in the carousel
  */
 @customElement("content-carousel")
 export class ContentCarousel extends LitElement {
-    @queryAssignedElements({selector: ".bubble"})
-    accessor #articles;
-    
-    firstUpdated(_) {
-        for (let article of this.#articles) {
-            article.style = `--index: ${this.#articles.indexOf(article)}`;
-        }
-    }
-    
     render() {
         return html`
-            <section part="container">
+            <content-section>
                 <slot></slot>
-            </section>
+            </content-section>
         `;
     }
     
@@ -33,16 +26,27 @@ export class ContentCarousel extends LitElement {
             min-height: 180px;
           }
           
-          section {
-            display: grid;
-            gap: 32px;
-            height: 100%;
-            align-content: center;
+          content-section {
+            display: contents;
+            container: none;
+            
+            &::part(container) {
+              display: grid;
+              gap: 32px;
+              height: 100%;
+              align-content: center;
+            }
+            
+            &::part(content) {
+              display: contents;
+            }
             
             @container content-carousel (width <= 1176px) and (height < 256px){
-              grid-auto-flow: column;
-              column-gap: 16px;
-                
+              &::part(container) {
+                grid-auto-flow: column;
+                column-gap: 16px;
+              }
+                  
               ::slotted(.bubble), ::slotted(.bubble:first-of-type), ::slotted(.bubble:last-of-type) {
                 align-self: stretch;
                 display: grid;
@@ -50,20 +54,32 @@ export class ContentCarousel extends LitElement {
             }
             
             @container content-carousel (width <= 946px) and (height < 256px) {
-              align-content: center;
+              &::part(container) {
+                align-content: center;
+              }
             }
             
             @container content-carousel (width <= 876px) and (height < 256px) {
-              height: 100%;
-              margin: 0 -16px;
-              padding: 0 8px 0 16px;
-              overflow: scroll;
-              column-gap: 8px;
-              grid-template-columns: repeat(3, min(100cqw, 352px));
-              align-content: stretch;
+              &::part(container) {
+                margin: 0 -16px;
+                height: 100%;
+                padding: 0 8px 0 16px;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                column-gap: 8px;
+                grid-template-columns: repeat(3, min(100cqw, 352px));
+                align-content: stretch;
+                box-sizing: border-box;
+              }
               
               ::slotted(.bubble), ::slotted(.bubble:first-of-type), ::slotted(.bubble:last-of-type) {
                 margin-bottom: 16px;
+              }
+            }
+          
+            @container content-carousel (width <= 425px) and (height < 256px) {
+              ::slotted(.bubble) {
+                font-size: 0.9em;
               }
             }
           }

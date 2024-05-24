@@ -3,7 +3,10 @@ import {customElement} from "lit/decorators.js";
 
 /**
  * ContentSection element
- * @slot - This element has a slot
+ * @slot - content of the section, typically article elements
+ * @slot title - element to show above content as section title
+ * @csspart container - overall responsive container element
+ * @csspart content - the actual content of the section element
  */
 @customElement("content-section")
 export class ContentSection extends LitElement {
@@ -46,7 +49,7 @@ export class ContentSection extends LitElement {
             }
           }
           
-          ::slotted(h3) {
+          ::slotted([slot=title]) {
             margin-top: 0;
             line-height: 1.2;
             font-size: 1.3em;
@@ -58,7 +61,7 @@ export class ContentSection extends LitElement {
             color: var(--color-heading);
           }
           
-          ::slotted(h3):before {
+          ::slotted([slot=title]):before {
             display: block;
             mask-repeat: no-repeat;
             width: 24px;

@@ -3,23 +3,59 @@ import {customElement, query, queryAssignedNodes} from "lit/decorators.js";
 
 /**
  * ContentArticle element
- * @slot - This element has a slot
+ * @summary
+ * Provides responsive layout and styling to the native HTML article element
+ * @slot - contents of the article, not including titles or tags
+ * @slot title - primary title of the article
+ * @slot subtitle - secondary subtitle of the article
+ * @slot timestamp - any date/time associated with the article
+ * @slot tags - any category or grouping details relevant to the article
+ * @csspart container - overall responsive container element
+ * @csspart header - container element for title, subtitle, and timestamp slots
+ * @csspart content - the actual content of the article
+ * @cssprop [--header-color-fg=inherit] - foreground color of the article header
+ * @cssprop [--header-color-bg=#D5D5D5FF] - background color of the article header
+ * @cssprop [--header-color-bg-maxi=var(--header-color-bg)] - background color of the article header for large containers
+ * @cssprop [--header-color-bg-mini=var(--header-color-bg)] - background color of the article header for small containers
+ * @cssprop [--header-color-ul=black] - bottom border (underline) color of the article header
+ * @cssprop [--content-color-fg=inherit] - foreground color of the article content
+ * @cssprop [--content-color-bg=color-mix(in srgb, var(--content-color-fg), transparent 92%)] - background color of the article content
+ * @cssprop [--content-color-bg-maxi=var(--content-color-bg)] - background color of the article content for large containers
+ * @cssprop [--content-color-bg-mini=var(--content-color-bg)] - background color of the article content for small containers
  */
 @customElement("content-article")
 export class ContentArticle extends LitElement {
-    @query("header")
+    /** @internal */
+    @query("header", true)
     accessor #header;
     
+    /** @internal */
     @queryAssignedNodes({slot: "title"})
     accessor #title;
     
-    firstUpdated(_) {
-        if (!this.#title.length) this.#header.remove();
+    constructor() {
+        super();
+        
+        // Add index variable to bubble articles so their animations can be delayed
+        if (this.classList.contains("bubble")) {
+            const index = [...this.parentElement.querySelectorAll("content-article")].indexOf(this);
+            this.setAttribute("style", `--index: ${index}`);
+        }
+    }
+    
+    /** @internal */
+    #slotChange({currentTarget}) {
+        // Reattach header with associated named slots...
+        if (currentTarget.children.item(0) !== this.#header)
+            currentTarget.prepend(this.#header);
+        // ...then remove it if there's no title
+        if (!this.#title.length)
+            this.#header.remove();
     }
     
     render() {
         return html`
-            <article part="container">
+            <article part="container" @slotchange=${this.#slotChange}>
                 <header part="header">
                     <slot name="title"></slot>
                     <slot name="subtitle"></slot>
@@ -125,7 +161,7 @@ export class ContentArticle extends LitElement {
                 margin-top: 16px;
                 border-radius: 16px;
                 background-color: var(--content-color-bg-mini, var(--content-color-bg));
-                box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0px, rgba(0, 0, 0, 0.12) 0 1px 10px 0px;
+                box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
                 
                 ::slotted([slot=tags]) {
                   margin-top: 0;
@@ -198,6 +234,27 @@ export class ContentArticle extends LitElement {
               :host(.job:first-of-type) & {
                 margin-top: 0;
               }
+            }
+          }
+          
+          @keyframes lineUp {
+            0% {
+              opacity: 0;
+              transform: translateY(80%);
+            }
+            
+            20% {
+              opacity: 0;
+            }
+            
+            50% {
+              opacity: 1;
+              transform: translateY(0%);
+            }
+            
+            100% {
+              opacity: 1;
+              transform: translateY(0%);
             }
           }
         `;
