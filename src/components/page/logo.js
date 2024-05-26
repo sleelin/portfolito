@@ -129,6 +129,10 @@ export class PageLogo extends LitElement {
             font-size: 1.6em;
           }
           
+          ::slotted(h1:last-child:only-of-type) {
+            grid-row-end: span 2;
+          }
+          
           ::slotted(h2) {
             font-size: 1.1em;
             font-weight: normal;
