@@ -27,6 +27,8 @@ function copyCode() {
   margin-bottom: 1.2em;
   margin-top: 1.2em;
   transition: background-color 0.5s ease;
+  display: grid;
+  grid-template-columns: 100%;
   
   p {
     margin: 0;
@@ -34,10 +36,32 @@ function copyCode() {
   
   .content {
     margin: 20px 20px 18px;
+    contain: paint;
+  }
+  
+  &.resizable .content {
+    overflow-x: hidden;
+    resize: horizontal;
+    max-width: calc(100% - 40px);
+    justify-self: center;
+    width: 100%;
   }
   
   .code {
     position: relative;
+    
+    :deep(div[class*='language-']) {
+      border-radius: 0 0 8px 8px;
+      margin: 0;
+      
+      .dark & {
+        box-shadow: none;
+      }
+    }
+    
+    &:hover :deep(.lang) {
+      opacity: 0;
+    }
     
     .controls {
       z-index: 1000;
@@ -103,57 +127,38 @@ function copyCode() {
 }
 </style>
 
-<style>
-.demo .code {
-  div[class*='language-'] {
-    border-radius: 0 0 8px 8px;
-    margin-bottom: 0;
-    
-    .dark & {
-      box-shadow: none;
-    }
-  }
-  
-  &:hover .lang {
-    opacity: 0;
-  }
-}
-</style>
-
 <template>
-    <ClientOnly>
-        <div class="demo">
-            <div class="content">
-                <slot />
+    <div class="demo">
+        <div class="content vp-raw">
+            <slot />
+        </div>
+        <div class="code" @mouseover="hover = true" @mouseleave="hover = false">
+            <transition name="fade">
+                <div class="controls" v-show="source && hover">
+                    <button class="copy" :class={copied} @click="copyCode"></button>
+                    <button class="fold" @click="fold = !fold;" v-if="$slots.source">
+                        <div v-if="fold">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="currentColor" d="M160 389a20.91 20.91 0 0 1-13.82-5.2l-128-112a21 21 0 0 1 0-31.6l128-112a21 21 0 0 1 27.66 31.61L63.89 256l109.94 96.19A21 21 0 0 1 160 389z"></path>
+                                <path fill="currentColor" d="M352 389a21 21 0 0 1-13.84-36.81L448.11 256l-109.94-96.19a21 21 0 0 1 27.66-31.61l128 112a21 21 0 0 1 0 31.6l-128 112A20.89 20.89 0 0 1 352 389z"></path>
+                                <path fill="currentColor" d="M208 437a21 21 0 0 1-20.12-27l96-320a21 21 0 1 1 40.23 12l-96 320A21 21 0 0 1 208 437z"></path>
+                            </svg>
+                        </div>
+                        <div v-else>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="currentColor" d="M160 389a20.91 20.91 0 0 1-13.82-5.2l-128-112a21 21 0 0 1 0-31.6l128-112a21 21 0 0 1 27.66 31.61L63.89 256l109.94 96.19A21 21 0 0 1 160 389z"></path>
+                                <path fill="currentColor" d="M352 389a21 21 0 0 1-13.84-36.81L448.11 256l-109.94-96.19a21 21 0 0 1 27.66-31.61l128 112a21 21 0 0 1 0 31.6l-128 112A20.89 20.89 0 0 1 352 389z"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </transition>
+            <div v-if="!fold" ref="source">
+                <slot name="snippet" />
             </div>
-            <div class="code" @mouseover="hover = true" @mouseleave="hover = false">
-                <transition name="fade">
-                    <div class="controls" v-show="source && hover">
-                        <button class="copy" :class={copied} @click="copyCode"></button>
-                        <button class="fold" @click="fold = !fold;" v-if="$slots.source">
-                            <div v-if="fold">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
-                                    <path fill="currentColor" d="M160 389a20.91 20.91 0 0 1-13.82-5.2l-128-112a21 21 0 0 1 0-31.6l128-112a21 21 0 0 1 27.66 31.61L63.89 256l109.94 96.19A21 21 0 0 1 160 389z"></path>
-                                    <path fill="currentColor" d="M352 389a21 21 0 0 1-13.84-36.81L448.11 256l-109.94-96.19a21 21 0 0 1 27.66-31.61l128 112a21 21 0 0 1 0 31.6l-128 112A20.89 20.89 0 0 1 352 389z"></path>
-                                    <path fill="currentColor" d="M208 437a21 21 0 0 1-20.12-27l96-320a21 21 0 1 1 40.23 12l-96 320A21 21 0 0 1 208 437z"></path>
-                                </svg>
-                            </div>
-                            <div v-else>
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
-                                    <path fill="currentColor" d="M160 389a20.91 20.91 0 0 1-13.82-5.2l-128-112a21 21 0 0 1 0-31.6l128-112a21 21 0 0 1 27.66 31.61L63.89 256l109.94 96.19A21 21 0 0 1 160 389z"></path>
-                                    <path fill="currentColor" d="M352 389a21 21 0 0 1-13.84-36.81L448.11 256l-109.94-96.19a21 21 0 0 1 27.66-31.61l128 112a21 21 0 0 1 0 31.6l-128 112A20.89 20.89 0 0 1 352 389z"></path>
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
-                </transition>
-                <div v-if="!fold" ref="source">
-                    <slot name="snippet" />
-                </div>
-                <div v-if="$slots.source && fold" ref="source">
-                    <slot name="source" />
-                </div>
+            <div v-if="$slots.source && fold" ref="source">
+                <slot name="source" />
             </div>
         </div>
-    </ClientOnly>
+    </div>
 </template>
