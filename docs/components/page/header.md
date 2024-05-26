@@ -3,9 +3,13 @@ import {inject} from "vue";
 const element = inject("manifest").for("page", "header");
 </script>
 
-<style>
+<style scoped>
+.demo :deep(.content) {
+  padding: 4px;
+}
+
 page-header {
-  z-index: 0;
+  position: sticky;
   --color-header: var(--vp-c-white);
 
   .dark & {
