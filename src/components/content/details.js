@@ -14,13 +14,13 @@ import {choose} from "lit/directives/choose.js";
  */
 @customElement("content-details")
 export class ContentDetails extends LitElement {
-    /** @attribute */
+    /** Whether the details element is expanded */
     @property({type: Boolean, reflect: true})
     accessor open = false;
     
-    /** @attribute */
+    /** Which layout to use for the details contents */
     @property({type: String})
-    accessor variant = "";
+    accessor variant;
     
     toggle() {
         this.open = !this.open;

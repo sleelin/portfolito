@@ -25,11 +25,9 @@ import {customElement, query, queryAssignedNodes} from "lit/decorators.js";
  */
 @customElement("content-article")
 export class ContentArticle extends LitElement {
-    /** @internal */
     @query("header", true)
     accessor #header;
     
-    /** @internal */
     @queryAssignedNodes({slot: "title"})
     accessor #title;
     
@@ -43,7 +41,6 @@ export class ContentArticle extends LitElement {
         }
     }
     
-    /** @internal */
     #slotChange({currentTarget}) {
         // Reattach header with associated named slots...
         if (currentTarget.children.item(0) !== this.#header)
