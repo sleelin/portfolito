@@ -1,4 +1,5 @@
 import DefaultTheme from "vitepress/theme";
+import DeclarationComponent from "./Declaration.vue";
 import DemoComponent from "./Demo.vue";
 import "@sleelin/portfolito";
 import "./style.css";
@@ -15,6 +16,7 @@ export default {
             )
         });
         
-        app.component("demo", DemoComponent);
+        app.component("Declaration", DeclarationComponent);
+        app.component("Demo", DemoComponent);
     }
 };
