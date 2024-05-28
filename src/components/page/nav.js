@@ -9,6 +9,13 @@ import GitHubLogo from "../../assets/github.svg";
  * Provides a responsive page navigation menu which handles positioning and social links
  * @slot - in-page navigation links, expected to be HTML anchor elements
  * @slot socials - links to social networks, expected to be HTML anchor elements
+ * @csspart container - responsive container element
+ * @csspart content - wrapper for native nav element
+ * @csspart links - wrapper for non-social page links
+ * @csspart socials - wrapper for social page links
+ * @cssprop [--color-primary=#1d1d1d] - color of the links and social logos, and hamburger menu button
+ * @cssprop [--color-link-hover=#45bbfc] - color of the links on hover
+ * @cssprop [--color-link-shadow=#45bbfc] - color of the radial shadow of links on hover
  */
 @customElement("page-nav")
 export class PageNav extends LitElement {
@@ -76,7 +83,6 @@ export class PageNav extends LitElement {
           
           nav {
             &, & > div {
-              height: 100%;
               display: grid;
               grid-auto-flow: column;
             }
@@ -96,13 +102,13 @@ export class PageNav extends LitElement {
             @container root (width < 480px) {
               overflow-x: scroll;
               position: absolute;
-              top: 0;
+              top: -64px;
               bottom: 0;
               left: 0;
               right: 0;
               height: 64px;
-              transform: translateY(-64px);
-              transition: transform 0.3s ease-in-out;
+              transform: translateY(0);
+              transition: transform 0.3s ease-in-out, height 0.5s ease-in-out;
               justify-items: start;
               padding: 0 16px;
               
@@ -112,11 +118,11 @@ export class PageNav extends LitElement {
             }
             
             @container root (width < 228px) {
+              top: -100cqh;
               z-index: 999999;
               row-gap: 32px;
               padding: 16px 0;
               height: fit-content;
-              transform: translateY(-100cqh);
               justify-items: stretch;
               grid-template-columns: 1fr;
               grid-template-areas: 
@@ -133,7 +139,7 @@ export class PageNav extends LitElement {
             ::slotted(a) {
               position: relative;
               text-decoration: none;
-              color: var(--color-primary);
+              color: var(--color-primary, #1d1d1d);
               display: flex;
               align-items: center;
               will-change: color;
@@ -141,7 +147,7 @@ export class PageNav extends LitElement {
             }
             
             ::slotted(a:hover) {
-              color: #45bbfc;
+              color: var(--color-link-hover, #45bbfc);
             }
             
             ::slotted(a):before {
@@ -156,12 +162,13 @@ export class PageNav extends LitElement {
             }
             
             ::slotted(a:hover):before {
-              box-shadow: 0 0 3rem 1.3rem #646cffaa;
+              --shadow: var(--color-link-shadow, #646cffaa);
+              box-shadow: 0 0 3rem 1.3rem var(--shadow);
             }
             
             @container root (width < 228px) {
               grid-auto-flow: row;
-              row-gap: 16px;
+              row-gap: 24px;
             }
           }
           
@@ -178,7 +185,7 @@ export class PageNav extends LitElement {
               height: 32px;
               overflow: hidden;
               color: transparent;
-              background-color: var(--color-primary, black);
+              background-color: var(--color-primary, #1d1d1d);
               mask-repeat: no-repeat;
             }
             
@@ -207,6 +214,7 @@ export class PageNav extends LitElement {
             right: 0;
             flex-grow: 1;
             box-sizing: border-box;
+            contain: paint;
             
             @container root (width < 480px) {
               padding: 0 16px;
@@ -249,11 +257,11 @@ export class PageNav extends LitElement {
               height: 4px;
               margin-bottom: 5px;
               position: relative;
-              background: var(--color-primary, black);
+              background: var(--color-primary, #1d1d1d);
               border-radius: 3px;
               z-index: 1;
               transform-origin: 4px 0;
-              transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+              transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
               
               &:first-child {
                 transform-origin: 0 0;
@@ -284,6 +292,8 @@ export class PageNav extends LitElement {
           input:checked + div > label {
             &:after {
               pointer-events: all;
+              background-color: black;
+              transition: opacity 0.2s ease-in;
             }
             
             @container root (width < 480px) {
@@ -298,7 +308,11 @@ export class PageNav extends LitElement {
                 
                 nav {
                   pointer-events: all;
-                  transform: translateY(0);
+                  transform: translateY(64px);
+                
+                  @container root (width < 228px) {
+                    transform: translateY(100cqh);
+                  }
                 }
               }
             }
@@ -306,8 +320,6 @@ export class PageNav extends LitElement {
             @container root (width < 228px) {
               &:after {
                 opacity: 0.4;
-                background-color: black;
-                transition: opacity 0.2s ease-in;
               }
             }
             
