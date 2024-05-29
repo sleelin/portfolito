@@ -4,6 +4,9 @@ const props = defineProps<{
         name: string;
         description: string;
         default?: string;
+        type?: {
+            text: string;
+        };
     }>;
 }>();
 
@@ -32,6 +35,18 @@ th, td {
 code {
   white-space: nowrap;
 }
+
+.color {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    
+    & > div:first-child {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+    }
+}
 </style>
 
 <template>
@@ -46,17 +61,18 @@ code {
         <tbody>
             <tr v-for="row in $props.rows" :key="row.name">
                 <template v-for="col in columns" :key="col.name">
-                    <template v-if="col.name === 'name'">
-                        <th v-if="extended">
-                            {{ row[col.name] || "-" }}
-                        </th>
-                        <td v-else>
-                            <code v-if="row[col.name]">{{ row[col.name] }}</code>
-                            <i v-else>none</i>
-                        </td>
-                    </template>
+                    <td v-if="col.name === 'name'">
+                        <code v-if="row[col.name]">{{ row[col.name] }}</code>
+                        <i v-else>none</i>
+                    </td>
+                    <td v-else-if="col.name === 'default' && row?.type?.text === 'color' && row?.[col.name]?.startsWith('#')">
+                        <div class="color">
+                            <div :style="{backgroundColor: row[col.name]}"></div>
+                            <div>{{ row[col.name].slice(1).toUpperCase() }}</div>
+                        </div>
+                    </td>
                     <td v-else>
-                        <code v-if="col.name === 'type'">{{ row.type.text }}</code>
+                        <code v-if="col.name === 'type' && !!row?.type?.text">{{ row.type.text }}</code>
                         <template v-else>{{ row[col.name] || "-" }}</template>
                     </td>
                 </template>
