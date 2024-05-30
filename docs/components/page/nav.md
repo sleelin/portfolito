@@ -6,13 +6,13 @@ const element = inject("manifest").for("page", "nav");
 <style scoped>
 .demo {
   page-nav {
+    --color-primary: var(--vp-c-neutral);
+    --color-link-hover: var(--vp-button-brand-active-bg);
+    --color-link-shadow: var(--vp-button-brand-hover-bg);
+    
     &::part(container) {
       position: relative;
       width: 100%;
-    }
-    
-    .dark & {
-      --color-primary: white;
     }
   }
   
@@ -70,11 +70,7 @@ const element = inject("manifest").for("page", "nav");
       
       @container demo-container (width < 510px) {
         &::part(content) {
-          --color-primary: white;
-          
-          .dark & {
-            --color-primary: black;
-          }
+          --color-primary: var(--vp-c-white);
         }
         
         &::part(links) {
@@ -96,7 +92,7 @@ const element = inject("manifest").for("page", "nav");
         
         @container demo-container (width >= 342px) {
           &::part(content) {
-            --color-primary: black;
+            --color-primary: var(--vp-c-neutral);
           }
           
           &::part(links) {
@@ -117,7 +113,7 @@ const element = inject("manifest").for("page", "nav");
         
         @container demo-container (width > 255px) {
           &::part(content) {
-            --color-primary: black;
+            --color-primary: var(--vp-c-neutral);
           }
           
           &::part(links) {
@@ -171,3 +167,15 @@ const element = inject("manifest").for("page", "nav");
     <a slot="socials" href="https://github.com/sleelin/portfolito">GitHub</a>
   </page-nav>
 </demo>
+
+## CSS Parts
+
+<declaration :rows="element.cssParts" />
+
+## CSS Variables
+
+<declaration :rows="element.cssProperties" />
+
+## Slots
+
+<declaration :rows="element.slots" />

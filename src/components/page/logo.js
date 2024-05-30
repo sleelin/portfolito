@@ -5,11 +5,11 @@ import {customElement} from "lit/decorators.js";
  * PageLogo element
  * @summary
  * Provides a responsive container for a logo image and top level page headings
- * @slot - image to use as the logo in a page header
- * @slot headings - page headings to place next to the logo image
- * @cssprop [--color-background=inherit] - background color of the logo image
- * @cssprop [--color-foreground=var(--color-background, transparent)] - foreground color of logo image to blend with background and border colors
- * @cssprop [--color-border=var(--color-background, transparent)] - border color of logo image, if any
+ * @slot {<img>} - image to use as the logo in a page header
+ * @slot {<h1> | <h2>} headings - page headings to place next to the logo image
+ * @cssprop {color} [--color-background=inherit] - background color of the logo image
+ * @cssprop {color} [--color-foreground=transparent] - foreground color of logo image to blend with background and border colors
+ * @cssprop {color} [--color-border=transparent] - border color of logo image, if any
  */
 @customElement("page-logo")
 export class PageLogo extends LitElement {

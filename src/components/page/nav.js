@@ -7,28 +7,28 @@ import GitHubLogo from "../../assets/github.svg";
  * PageNav element
  * @summary
  * Provides a responsive page navigation menu which handles positioning and social links
- * @slot - in-page navigation links, expected to be HTML anchor elements
- * @slot socials - links to social networks, expected to be HTML anchor elements
+ * @slot {<a>} - in-page navigation links to content with specific IDs
+ * @slot {<a>} socials - links to social networks, displayed with relevant logo
  * @csspart container - responsive container element
  * @csspart content - wrapper for native nav element
  * @csspart links - wrapper for non-social page links
  * @csspart socials - wrapper for social page links
- * @cssprop [--color-primary=#1d1d1d] - color of the links and social logos, and hamburger menu button
- * @cssprop [--color-link-hover=#45bbfc] - color of the links on hover
- * @cssprop [--color-link-shadow=#45bbfc] - color of the radial shadow of links on hover
+ * @cssprop {color} [--color-primary=#1d1d1d] - color of the links and social logos, and hamburger menu button
+ * @cssprop {color} [--color-link-hover=#45bbfc] - color of the links on hover
+ * @cssprop {color} [--color-link-shadow=#646cffaa] - color of the radial shadow of links on hover
  */
 @customElement("page-nav")
 export class PageNav extends LitElement {
     @query("#toggle")
     accessor #toggle;
     
-    @queryAssignedElements({selector: "[href^='#']"})
+    @queryAssignedElements({selector: "a[href^='#']"})
     accessor #links;
     
-    @queryAssignedElements({slot: "socials", selector: "[href^='github.com']"})
+    @queryAssignedElements({slot: "socials", selector: "a[href^='github.com']"})
     accessor #aGitHub;
     
-    @queryAssignedElements({slot: "socials", selector: "[href^='linkedin.com']"})
+    @queryAssignedElements({slot: "socials", selector: "a[href^='linkedin.com']"})
     accessor #aLinkedIn;
     
     #listenLinks() {

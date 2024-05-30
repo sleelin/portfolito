@@ -5,8 +5,8 @@ import {customElement} from "lit/decorators.js";
  * PageHeader element
  * @summary
  * Provides a responsive container for the native HTML header element
- * @slot - contents of the page header
- * @cssprop --color-header - background color of the header element
+ * @slot {*} - contents of the page header
+ * @cssprop {color} [--color-header=inherit] - background color of the header element
  */
 @customElement("page-header")
 export class PageHeader extends LitElement {

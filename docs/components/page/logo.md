@@ -23,6 +23,16 @@ The logo element itself does not provide any content of its own, instead acting 
   <page-logo>
     <img src="/logo.svg" alt="PortfoLitO" />
   </page-logo>
+  <template #source>
+    <body>
+      <page-header>
+        {{preview}}
+      </page-header>
+      <page-main>
+        <!-- Your Content -->
+      </page-main>
+    </body>
+  </template>
 </demo>
 
 ### With Headings
@@ -47,3 +57,11 @@ When both a first-level heading element and second-level heading element are spe
     <h2 slot="headings">Showcase your Portfolio of Work</h2>
   </page-logo>
 </demo>
+
+## CSS Variables
+
+<declaration :rows="element.cssProperties" />
+
+## Slots
+
+<declaration :rows="element.slots" />

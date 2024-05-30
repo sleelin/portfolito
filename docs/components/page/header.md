@@ -26,8 +26,24 @@ page-header {
 
 ### Basic Header
 
-The header component itself does not provide any content of its own, instead acting as a sticky, responsive container wrapping your supplied content
+The header component itself does not provide any content of its own, instead acting as a sticky, responsive container wrapping your supplied content.
 
 <demo>
   <page-header>PortfoLitO</page-header>
+  <template #snippet>
+    <body>
+      {{preview}}
+      <page-main>
+        <!-- Your Content -->
+      </page-main>
+    </body>
+  </template>
 </demo>
+
+## CSS Variables
+
+<declaration :rows="element.cssProperties" />
+
+## Slots
+
+<declaration :rows="element.slots" />
