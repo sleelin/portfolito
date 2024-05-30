@@ -6,8 +6,8 @@ import {choose} from "lit/directives/choose.js";
  * ContentDetails element
  * @summary
  * Provides a replacement to the native details element, which does not trigger transitions on expansion
- * @slot - content to show when details is expanded
- * @slot summary - preview of content shown when details is expanded
+ * @slot {* | <li>} - content to show when details is expanded
+ * @slot {*} summary - preview of content shown when details is expanded
  * @csspart container - overall responsive container element
  * @csspart summary - container element for summary slot, including toggle arrow
  * @csspart content - the actual content of the details element

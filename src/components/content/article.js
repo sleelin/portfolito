@@ -6,22 +6,22 @@ import {customElement, query, queryAssignedNodes} from "lit/decorators.js";
  * @summary
  * Provides responsive layout and styling to the native HTML article element
  * @slot - contents of the article, not including titles or tags
- * @slot title - primary title of the article
- * @slot subtitle - secondary subtitle of the article
- * @slot timestamp - any date/time associated with the article
- * @slot tags - any category or grouping details relevant to the article
+ * @slot {<h4>} title - primary title of the article
+ * @slot {<h5>} subtitle - secondary subtitle of the article
+ * @slot {<div>} timestamp - any date/time associated with the article
+ * @slot {<div>} tags - any category or grouping details relevant to the article
  * @csspart container - overall responsive container element
  * @csspart header - container element for title, subtitle, and timestamp slots
  * @csspart content - the actual content of the article
- * @cssprop [--header-color-fg=inherit] - foreground color of the article header
- * @cssprop [--header-color-bg=#D5D5D5FF] - background color of the article header
- * @cssprop [--header-color-bg-maxi=var(--header-color-bg)] - background color of the article header for large containers
- * @cssprop [--header-color-bg-mini=var(--header-color-bg)] - background color of the article header for small containers
- * @cssprop [--header-color-ul=black] - bottom border (underline) color of the article header
- * @cssprop [--content-color-fg=inherit] - foreground color of the article content
- * @cssprop [--content-color-bg=color-mix(in srgb, var(--content-color-fg), transparent 92%)] - background color of the article content
- * @cssprop [--content-color-bg-maxi=var(--content-color-bg)] - background color of the article content for large containers
- * @cssprop [--content-color-bg-mini=var(--content-color-bg)] - background color of the article content for small containers
+ * @cssprop {color} [--header-color-fg=inherit] - foreground color of the article header
+ * @cssprop {color} [--header-color-bg=#D5D5D5] - background color of the article header
+ * @cssprop {color} [--header-color-bg-maxi] - background color of the article header for large containers
+ * @cssprop {color} [--header-color-bg-mini] - background color of the article header for small containers
+ * @cssprop {color} [--header-color-ul=#000000] - bottom border (underline) color of the article header
+ * @cssprop {color} [--content-color-fg=inherit] - foreground color of the article content
+ * @cssprop {color} [--content-color-bg] - background color of the article content
+ * @cssprop {color} [--content-color-bg-maxi] - background color of the article content for large containers
+ * @cssprop {color} [--content-color-bg-mini] - background color of the article content for small containers
  */
 @customElement("content-article")
 export class ContentArticle extends LitElement {
@@ -72,10 +72,10 @@ export class ContentArticle extends LitElement {
             display: block;
             container: content-article / inline-size;
             --header-color-fg: inherit;
-            --header-color-bg: #D5D5D5FF;
+            --header-color-bg: #D5D5D5;
             --header-color-bg-maxi: var(--header-color-bg);
             --header-color-bg-mini: var(--header-color-bg);
-            --header-color-ul: black;
+            --header-color-ul: #000000;
             --content-color-fg: inherit;
             --content-color-bg: color-mix(in srgb, var(--content-color-fg), transparent 92%);
             --content-color-bg-maxi: var(--content-color-bg);

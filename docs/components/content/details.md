@@ -5,6 +5,18 @@ const element = inject("manifest").for("content", "details");
 
 # Details Element
 
-{{ element.description }}
+{{ element.summary }}
 
 ## Usage
+
+## CSS Parts
+
+<declaration :rows="element.cssParts" />
+
+## Slots
+
+<declaration :rows="element.slots" />
+
+## Attributes
+
+<declaration :rows="element.attributes" />

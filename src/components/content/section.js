@@ -3,10 +3,11 @@ import {customElement} from "lit/decorators.js";
 
 /**
  * ContentSection element
- * @slot - content of the section, typically article elements
- * @slot title - element to show above content as section title
+ * @slot {*} - content of the section, typically article elements
+ * @slot {*} title - element to show above content as section title
  * @csspart container - overall responsive container element
  * @csspart content - the actual content of the section element
+ * @cssprop {color} [--color-heading=inherit] - color of the section heading
  */
 @customElement("content-section")
 export class ContentSection extends LitElement {
