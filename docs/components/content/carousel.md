@@ -5,6 +5,10 @@ const element = inject("manifest").for("content", "carousel");
 
 # Carousel Element
 
-{{ element.description }}
+{{ element.summary }}
 
 ## Usage
+
+## Slots
+
+<declaration :rows="element.slots" />
