@@ -5,15 +5,15 @@ import {customElement} from "lit/decorators.js";
  * ContentCarousel element
  * @summary
  * Provides a responsive container for feature articles
- * @slot - up to three elements to place in the carousel
+ * @slot {*} - up to three elements to place in the carousel
  */
 @customElement("content-carousel")
 export class ContentCarousel extends LitElement {
     render() {
         return html`
-            <content-section>
+            <section part="container">
                 <slot></slot>
-            </content-section>
+            </section>
         `;
     }
     
@@ -21,66 +21,31 @@ export class ContentCarousel extends LitElement {
         return css`
           :host {
             display: block;
-            container: content-carousel / size;
+            container: content-carousel / inline-size;
             height: 100%;
             min-height: 180px;
           }
           
-          content-section {
-            display: contents;
-            container: none;
+          section {
+            display: grid;
+            gap: 32px;
+            height: 100%;
+            align-content: center;
+            grid-auto-flow: column;
+            box-sizing: border-box;
+            overflow-x: scroll;
+            overflow-y: hidden;
             
-            &::part(container) {
-              display: grid;
-              gap: 32px;
-              height: 100%;
+            @container content-carousel (width <= 1176px) {
+              column-gap: 16px;
               align-content: center;
             }
             
-            &::part(content) {
-              display: contents;
-            }
-            
-            @container content-carousel (width <= 1176px) and (height < 256px){
-              &::part(container) {
-                grid-auto-flow: column;
-                column-gap: 16px;
-              }
-                  
-              ::slotted(.bubble), ::slotted(.bubble:first-of-type), ::slotted(.bubble:last-of-type) {
-                align-self: stretch;
-                display: grid;
-              }
-            }
-            
-            @container content-carousel (width <= 946px) and (height < 256px) {
-              &::part(container) {
-                align-content: center;
-              }
-            }
-            
-            @container content-carousel (width <= 876px) and (height < 256px) {
-              &::part(container) {
-                margin: 0 -16px;
-                height: 100%;
-                padding: 0 8px 0 16px;
-                overflow-x: scroll;
-                overflow-y: hidden;
-                column-gap: 8px;
-                grid-template-columns: repeat(3, min(100cqw, 352px));
-                align-content: stretch;
-                box-sizing: border-box;
-              }
-              
-              ::slotted(.bubble), ::slotted(.bubble:first-of-type), ::slotted(.bubble:last-of-type) {
-                margin-bottom: 16px;
-              }
-            }
-          
-            @container content-carousel (width <= 425px) and (height < 256px) {
-              ::slotted(.bubble) {
-                font-size: 0.9em;
-              }
+            @container content-carousel (width <= 976px) {
+              height: 100%;
+              column-gap: 8px;
+              grid-auto-columns: min(calc(100cqw - 32px), 352px);
+              align-content: end;
             }
           }
           
@@ -91,12 +56,23 @@ export class ContentCarousel extends LitElement {
             animation-delay: calc(0.25s * var(--index));
           }
           
-          ::slotted(.bubble:first-of-type) {
-            align-self: end;
+          @container (width <= 1176px) {
+            ::slotted(.bubble) {
+              align-self: stretch;
+              display: grid;
+            }
           }
           
-          ::slotted(.bubble:last-of-type) {
-            align-self: start;
+          @container (width <= 976px) {
+            ::slotted(.bubble) {
+              margin-bottom: 16px;
+            }
+          }
+          
+          @container (width <= 425px) {
+            ::slotted(.bubble) {
+              font-size: 0.9em;
+            }
           }
         `;
     }
