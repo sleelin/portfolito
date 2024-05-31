@@ -4,7 +4,20 @@ import {styleMap} from "lit/directives/style-map.js";
 
 /**
  * ContentLanguages element
- * @slot - This element has a slot
+ * @summary
+ * Provides a bar graph overview of programming languages with percentage for developer project listings
+ * @slot {<li>} - language names and percent of overall code in project
+ * @csspart container - responsive container element
+ * @csspart heading - languages heading and icon container
+ * @csspart list - wrapper for language names and color bubbles
+ * @csspart line - wrapper for language percentage line graph
+ * @cssprop {color} [--color-heading=#1A194F] - color of the languages heading and icon
+ * @cssprop {color} [--color-foreground=#000000] - foreground color of text inside the languages element container
+ * @cssprop {color} [--color-background=#F6F6F6] - background color of the languages element container
+ * @cssprop {color} [--color-lang-js=#FFD700] - JavaScript line and bubble color
+ * @cssprop {color} [--color-lang-ts=#4169E1] - TypeScript line and bubble color
+ * @cssprop {color} [--color-lang-html=#FF4500] - HTML line and bubble color
+ * @cssprop {color} [--color-lang-css=#663399] - CSS line and bubble color
  */
 @customElement("content-languages")
 export class ContentLanguages extends LitElement {
@@ -44,12 +57,12 @@ export class ContentLanguages extends LitElement {
         return css`
           :host {
             --color-heading: #1a194f;
-            --color-foreground: black;
-            --color-background: #fafafa;
-            --color-lang-js: gold;
-            --color-lang-ts: royalblue;
-            --color-lang-html: orangered;
-            --color-lang-css: rebeccapurple;
+            --color-foreground: #000000;
+            --color-background: #f6f6f6;
+            --color-lang-js: #ffd700;
+            --color-lang-ts: #4169e1;
+            --color-lang-html: #ff4500;
+            --color-lang-css: #663399;
           }
           
           [part="container"] {
@@ -82,10 +95,10 @@ export class ContentLanguages extends LitElement {
             grid-auto-flow: column;
             column-gap: 4px;
             line-height: 1;
-            
-            @container content-languages (width < 284px) {
-              margin-right: 8px;
-            }
+          
+          @container content-languages (width < 284 px) {
+            margin-right: 8px;
+          }
             
             svg {
               fill: var(--color-heading);
@@ -99,10 +112,10 @@ export class ContentLanguages extends LitElement {
             grid-auto-flow: column;
             column-gap: 16px;
             justify-content: start;
-            
-            @container content-languages (width < 284px) {
-              column-gap: 8px;  
-            }
+          
+          @container content-languages (width < 284 px) {
+            column-gap: 8px;
+          }
             
             div {
               display: grid;

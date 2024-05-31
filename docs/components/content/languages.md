@@ -5,6 +5,18 @@ const element = inject("manifest").for("content", "languages");
 
 # Languages Element
 
-{{ element.description }}
+{{ element.summary }}
 
 ## Usage
+
+## CSS Parts
+
+<declaration :rows="element.cssParts" />
+
+## CSS Variables
+
+<declaration :rows="element.cssProperties" />
+
+## Slots
+
+<declaration :rows="element.slots" />
