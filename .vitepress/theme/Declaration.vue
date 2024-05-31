@@ -45,6 +45,7 @@ code {
         width: 16px;
         height: 16px;
         border-radius: 4px;
+        border: 1px solid var(--vp-c-border);
     }
 }
 </style>
