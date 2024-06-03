@@ -1,15 +1,15 @@
 <script setup>
-import {ref, computed} from "vue";
+import {ref} from "vue";
 
+const props = defineProps({class: String});
 const source = ref();
 const hover = ref(false);
 const fold = ref(false);
 const copied = ref(false);
-const code = computed(() => source.value.querySelector("code").textContent);
 
-function copyCode() {
+async function copyCode() {
     try {
-        navigator.clipboard.writeText(code.value);
+        await navigator.clipboard.writeText(source.value.querySelector("code").textContent);
         copied.value = true;
     } catch (err) {
         console.log(err);
@@ -50,7 +50,7 @@ function copyCode() {
   .code {
     position: relative;
     
-    :deep(div[class*='language-']) {
+    &:deep(div[class*='language-']) {
       border-radius: 0 0 8px 8px;
       margin: 0;
       
@@ -64,7 +64,7 @@ function copyCode() {
     }
     
     .controls {
-      z-index: 1000;
+      z-index: 10;
       position: absolute;
       display: flex;
       top: 12px;
@@ -129,14 +129,13 @@ function copyCode() {
 
 <template>
     <div class="demo">
-        <div class="content vp-raw">
+        <div class="content vp-raw" :class="props.class">
             <slot />
         </div>
-        <div class="code" @mouseover="hover = true" @mouseleave="hover = false">
+        <div class="code" ref="source" @mouseover="hover = true" @mouseleave="hover = false">
             <transition name="fade">
                 <div class="controls" v-show="source && hover">
-                    <button class="copy" :class={copied} @click="copyCode"></button>
-                    <button class="fold" @click="fold = !fold;" v-if="$slots.source">
+                    <button class="fold" :title="fold ? 'Collapse Code' : 'Expand Code'" @click="fold = !fold;" v-if="$slots.source">
                         <div v-if="fold">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path fill="currentColor" d="M160 389a20.91 20.91 0 0 1-13.82-5.2l-128-112a21 21 0 0 1 0-31.6l128-112a21 21 0 0 1 27.66 31.61L63.89 256l109.94 96.19A21 21 0 0 1 160 389z"></path>
@@ -151,14 +150,11 @@ function copyCode() {
                             </svg>
                         </div>
                     </button>
+                    <button class="copy" title="Copy Code" :class={copied} @click="copyCode"></button>
                 </div>
             </transition>
-            <div v-if="!fold" ref="source">
-                <slot name="snippet" />
-            </div>
-            <div v-if="$slots.source && fold" ref="source">
-                <slot name="source" />
-            </div>
+            <slot v-if="!fold" name="snippet" />
+            <slot v-if="$slots.source && fold" name="source" />
         </div>
     </div>
 </template>

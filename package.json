@@ -29,6 +29,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
+    "indent.js": "^0.3.5",
     "vite": "^5.1.4",
     "vite-plugin-babel": "^1.2.0",
     "vite-plugin-cem": "^0.7.0",
