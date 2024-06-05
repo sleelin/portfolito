@@ -1,7 +1,6 @@
 <script setup>
 import {ref} from "vue";
 
-const props = defineProps({class: String});
 const source = ref();
 const hover = ref(false);
 const fold = ref(false);
@@ -129,7 +128,7 @@ async function copyCode() {
 
 <template>
     <div class="demo">
-        <div class="content vp-raw" :class="props.class">
+        <div class="content vp-raw">
             <slot />
         </div>
         <div class="code" ref="source" @mouseover="hover = true" @mouseleave="hover = false">

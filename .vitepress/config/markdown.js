@@ -77,6 +77,10 @@ export default (md) => {
                 for (let i = 1, found = false; !found && ((idx+i) < tokens.length); ++i) {
                     const t = lookahead.at(lookahead.push(tokens[idx+i])-1);
                     
+                    // If code block does not begin at last token's end, prefix an extra newline
+                    if (t?.type === "code_block" && t?.map.at(0) !== (lookahead[i-2] ?? token).map.at(1))
+                        t.content = `\n${t.content}`;
+                    // Complete block if we've reached an HTML block that closes the demo tag
                     if (t?.type === "html_block" && t?.content?.trim?.()?.endsWith("</demo>")) {
                         found = true;
                         
@@ -109,7 +113,7 @@ export default (md) => {
             
             return (
                 `<demo${attribs} :class="'demo-${demoId}'">\n` +
-                    `${preview.replaceAll(/<style>(.*?)<\/style>/gs, `<component :is="'style'">\n.demo-${demoId} {\n$1}\n</component>`)}\n` +
+                    `${preview.replaceAll(/<style>(.*?)<\/style>/gs, `<component :is="'style'">\n.demo-${demoId} > .content {\n$1}\n</component>`)}\n` +
                     `<template #snippet>\n` +
                         `${renderCode(md, snippetCode)}\n` +
                     `</template>\n` + (!source ? "" : (
