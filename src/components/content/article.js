@@ -31,16 +31,6 @@ export class ContentArticle extends LitElement {
     @queryAssignedNodes({slot: "title"})
     accessor #title;
     
-    constructor() {
-        super();
-        
-        // Add index variable to bubble articles so their animations can be delayed
-        if (this.classList.contains("bubble")) {
-            const index = [...this.parentElement.querySelectorAll("content-article")].indexOf(this);
-            this.setAttribute("style", `--index: ${index}`);
-        }
-    }
-    
     #slotChange({currentTarget}) {
         // Reattach header with associated named slots...
         if (currentTarget.children.item(0) !== this.#header)
@@ -51,6 +41,12 @@ export class ContentArticle extends LitElement {
     }
     
     render() {
+        // Add index variable to bubble articles so their animations can be delayed
+        if (this.classList.contains("bubble")) {
+            const index = [...this.parentElement.querySelectorAll("content-article")].indexOf(this);
+            this.setAttribute("style", `--index: ${index}`);
+        }
+        
         return html`
             <article part="container" @slotchange=${this.#slotChange}>
                 <header part="header">
@@ -80,6 +76,10 @@ export class ContentArticle extends LitElement {
             --content-color-bg: color-mix(in srgb, var(--content-color-fg), transparent 92%);
             --content-color-bg-maxi: var(--content-color-bg);
             --content-color-bg-mini: var(--content-color-bg);
+          }
+          
+          :host(.bubble) {
+            border-radius: 8px;
           }
           
           article {
