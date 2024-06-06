@@ -24,7 +24,7 @@ page-header {
 
 ## Usage
 
-### Basic Header
+### Basic Usage
 
 The header component itself does not provide any content of its own, instead acting as a sticky, responsive container wrapping your supplied content.
 
