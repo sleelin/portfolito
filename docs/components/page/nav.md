@@ -45,12 +45,12 @@ const element = inject("manifest").for("page", "nav");
       min-width: 256px;
 
       @media (max-width: 640px) {
-        min-width: 152px;
+        zoom: calc(1 / 1.5);
+        line-height: 1.5;
       }
       
       @media (max-width: 480px) {
-        height: calc(64px + 120px);
-        min-width: 110px;
+        zoom: 50%;
       }
     }
     
@@ -81,50 +81,6 @@ const element = inject("manifest").for("page", "nav");
       @container demo-container (width < 260px) {
         &::part(socials) {
           margin-left: 100px;
-        }
-      }
-      
-      @media (max-width: 640px) {
-        transform-origin: top center;
-        justify-self: center;
-        width: 150%;
-        scale: calc(1 / 1.5);
-        
-        @container demo-container (width >= 342px) {
-          &::part(content) {
-            --color-primary: var(--vp-c-neutral);
-          }
-          
-          &::part(links) {
-            margin-left: 0;
-          }
-        }
-        
-        @container demo-container (width >= 174px) {
-          &::part(socials) {
-            margin-left: 0;
-          }
-        }
-      }
-      
-      @media (max-width: 480px) {
-        width: 200%;
-        scale: calc(1 / 2);
-        
-        @container demo-container (width > 255px) {
-          &::part(content) {
-            --color-primary: var(--vp-c-neutral);
-          }
-          
-          &::part(links) {
-            margin-left: 0;
-          }
-        }
-        
-        @container demo-container (width >= 130px) {
-          &::part(socials) {
-            margin-left: 0;
-          }
         }
       }
     }
