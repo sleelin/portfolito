@@ -5,7 +5,7 @@ import {choose} from "lit/directives/choose.js";
 /**
  * ContentDetails element
  * @summary
- * Provides a replacement to the native details element, which does not trigger transitions on expansion
+ * Provides a replacement to the native details element, which does not trigger animations on expansion
  * @slot {* | <li>} - content to show when details is expanded
  * @slot {*} summary - preview of content shown when details is expanded
  * @csspart container - overall responsive container element
@@ -19,7 +19,7 @@ export class ContentDetails extends LitElement {
     accessor open = false;
     
     /** Which layout to use for the details contents */
-    @property({type: String})
+    @property({type: String, reflect: true})
     accessor variant;
     
     toggle() {
@@ -39,11 +39,18 @@ export class ContentDetails extends LitElement {
                         <ul part="content">
                             <slot></slot>
                         </ul>
-                    `]            
+                    `],
+                    ["grid", () => html`
+                        <content-section part="content" class="grid">
+                            <slot></slot>
+                        </content-section>
+                    `]
                 ], () => html`
-                    <content-section part="content" class="grid">
-                        <slot></slot>
-                    </content-section>
+                    <div part="content">
+                        <div>
+                            <slot></slot>
+                        </div>
+                    </div>
                 `)}
             </div>
         `;
@@ -83,43 +90,45 @@ export class ContentDetails extends LitElement {
           }
           
           [part=content] {
-            max-height: 0;
-            visibility: hidden;
+            display: grid;
+            grid-template-rows: 0fr;
+            
+            div& > div {
+              max-height: 100%;
+              overflow: hidden;
+            }
             
             :host([open]) & {
-              visibility: visible;
-              max-height: 100%;
-              margin-top: 8px;
+              grid-template-rows: 1fr;
             }
             
             :host([variant=grid]) & {
+              max-height: 0;
               padding: 0;
               
               ::slotted(.bubble) {
                 opacity: 0;
                 transform: translateY(20%);
               }
-              
-              @container content-details (width <= 876px) {
-                grid-template-columns: repeat(2, 1fr);
-              }
-              
-              @container content-details (width <= 576px) {
-                grid-template-columns: 1fr;
-              }
             }
             
-            :host([open][variant=grid]) & ::slotted(.bubble) {
-              opacity: 1;
-              transform: translateY(0%);
-              transition: transform 0.3s ease-out, opacity 0.5s ease-out;
-              transition-delay: calc(0.125s * var(--index));
+            :host([open][variant=grid]) & {
+              max-height: 100%;
+              margin-top: 12px;
+              
+              ::slotted(.bubble) {
+                opacity: 1;
+                transform: translateY(0%);
+                transition: transform 0.3s ease-out, opacity 0.5s ease-out;
+                transition-delay: calc(0.125s * var(--index));
+              }
             }
             
             :host([variant=list]) & {
               margin: 0;
               list-style-type: "- ";
               padding-left: 24px;
+              max-height: 0;
               
               ::slotted(li) {
                 opacity: 0;
@@ -138,6 +147,7 @@ export class ContentDetails extends LitElement {
             
             :host([open][variant=list]) & {
               margin-top: 8px;
+              max-height: 100%;
               
               ::slotted(li) {
                 opacity: 1;
