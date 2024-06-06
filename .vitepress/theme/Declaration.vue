@@ -19,6 +19,11 @@ const columns = [
 </script>
 
 <style scoped>
+.table {
+  width: 100%;
+  overflow-x: scroll;
+}
+
 table {
   display: table;
   width: 100%;
@@ -30,6 +35,10 @@ tr, th, td {
 
 th, td {
   border: none;
+}
+
+td.description {
+  min-width: 240px;
 }
 
 code {
@@ -51,33 +60,35 @@ code {
 </style>
 
 <template>
-    <table>
-        <thead>
-            <tr>
-                <th v-for="col in columns" :key="col.name">
-                    {{ col.label }}
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="row in $props.rows" :key="row.name">
-                <template v-for="col in columns" :key="col.name">
-                    <td v-if="col.name === 'name'">
-                        <code v-if="row[col.name]">{{ row[col.name] }}</code>
-                        <i v-else>none</i>
-                    </td>
-                    <td v-else-if="col.name === 'default' && row?.type?.text === 'color' && row?.[col.name]?.startsWith('#')">
-                        <div class="color">
-                            <div :style="{backgroundColor: row[col.name]}"></div>
-                            <div>{{ row[col.name].slice(1).toUpperCase() }}</div>
-                        </div>
-                    </td>
-                    <td v-else>
-                        <code v-if="col.name === 'type' && !!row?.type?.text">{{ row.type.text }}</code>
-                        <template v-else>{{ row[col.name] || "-" }}</template>
-                    </td>
-                </template>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th v-for="col in columns" :key="col.name">
+                        {{ col.label }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="row in $props.rows" :key="row.name">
+                    <template v-for="col in columns" :key="col.name">
+                        <td :class="col.name" v-if="col.name === 'name'">
+                            <code v-if="row[col.name]">{{ row[col.name] }}</code>
+                            <i v-else>none</i>
+                        </td>
+                        <td :class="col.name" v-else-if="col.name === 'default' && row?.type?.text === 'color' && row?.[col.name]?.startsWith('#')">
+                            <div class="color">
+                                <div :style="{backgroundColor: row[col.name]}"></div>
+                                <div>{{ row[col.name].slice(1).toUpperCase() }}</div>
+                            </div>
+                        </td>
+                        <td :class="col.name" v-else>
+                            <code v-if="col.name === 'type' && !!row?.type?.text">{{ row.type.text }}</code>
+                            <template v-else>{{ row[col.name] || "-" }}</template>
+                        </td>
+                    </template>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
