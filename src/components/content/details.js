@@ -106,7 +106,7 @@ export class ContentDetails extends LitElement {
               max-height: 0;
               padding: 0;
               
-              ::slotted(.bubble) {
+              ::slotted([variant=panel]) {
                 opacity: 0;
                 transform: translateY(20%);
               }
@@ -116,7 +116,7 @@ export class ContentDetails extends LitElement {
               max-height: 100%;
               margin-top: 12px;
               
-              ::slotted(.bubble) {
+              ::slotted([variant=panel]) {
                 opacity: 1;
                 transform: translateY(0%);
                 transition: transform 0.3s ease-out, opacity 0.5s ease-out;

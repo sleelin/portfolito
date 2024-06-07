@@ -134,7 +134,7 @@ export class ContentHero extends LitElement {
                   padding: 0 32px;
                 }
                 
-                ::slotted(.bubble) {
+                ::slotted([variant=panel]) {
                   margin: 8px 0 24px;
                 }
               }
@@ -146,7 +146,7 @@ export class ContentHero extends LitElement {
                   padding: 0 16px;
                 }
                 
-                ::slotted(.bubble) {
+                ::slotted([variant=panel]) {
                   margin: 0 0 16px;
                 }
               }

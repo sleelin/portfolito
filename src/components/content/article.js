@@ -1,5 +1,5 @@
 import {LitElement, css, html} from "lit";
-import {customElement, query, queryAssignedNodes} from "lit/decorators.js";
+import {customElement, property, query, queryAssignedNodes} from "lit/decorators.js";
 
 /**
  * ContentArticle element
@@ -25,6 +25,10 @@ import {customElement, query, queryAssignedNodes} from "lit/decorators.js";
  */
 @customElement("content-article")
 export class ContentArticle extends LitElement {
+    /** Which layout to use for the article container */
+    @property({type: String, reflect: true})
+    accessor variant;
+    
     @query("header", true)
     accessor #header;
     
@@ -41,8 +45,8 @@ export class ContentArticle extends LitElement {
     }
     
     render() {
-        // Add index variable to bubble articles so their animations can be delayed
-        if (this.classList.contains("bubble")) {
+        // Add index variable to panel articles so their animations can be delayed
+        if (this.variant === "panel") {
             const index = [...this.parentElement.querySelectorAll("content-article")].indexOf(this);
             this.setAttribute("style", `--index: ${index}`);
         }
@@ -78,7 +82,7 @@ export class ContentArticle extends LitElement {
             --content-color-bg-mini: var(--content-color-bg);
           }
           
-          :host(.bubble) {
+          :host([variant=panel]) {
             border-radius: 8px;
           }
           
@@ -87,8 +91,13 @@ export class ContentArticle extends LitElement {
             color: var(--content-color-fg);
             background-color: var(--content-color-bg);
             
-            header ::slotted(:is(h4, h5)) {
-              font-weight: normal;
+            header {
+              border-bottom: 1px solid var(--header-color-ul);
+              margin-bottom: 8px;
+              
+              ::slotted(:is(h4, h5)) {
+                font-weight: normal;
+              }
             }
             
             ::slotted(:is(h4, h5)) {
@@ -104,7 +113,7 @@ export class ContentArticle extends LitElement {
               margin-bottom: 0;
             }
             
-            :host(.bubble) & {
+            :host([variant=panel]) & {
               height: 100%;
               box-sizing: border-box;
               border-radius: 8px;
@@ -112,6 +121,7 @@ export class ContentArticle extends LitElement {
               
               header {
                 margin-bottom: 8px;
+                border-bottom: unset;
                 
                 ::slotted(h5) {
                   font-size: 1em;
@@ -140,7 +150,7 @@ export class ContentArticle extends LitElement {
               }
             }
             
-            :host(.job) & {
+            :host([variant=job]) & {
               padding: 0;
               position: relative;
               contain: paint;
@@ -181,6 +191,7 @@ export class ContentArticle extends LitElement {
                 z-index: 998;
                 padding: 8px 8px 4px;
                 position: sticky;
+                margin-bottom: 0;
                 top: var(--header-top-maxi, 0px);
                 background-color: var(--header-color-bg-maxi, var(--header-color-bg));
                 border-bottom: 1px solid var(--header-color-ul);

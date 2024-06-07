@@ -49,7 +49,7 @@ export class ContentCarousel extends LitElement {
             }
           }
           
-          ::slotted(.bubble) {
+          ::slotted([variant=panel]) {
             opacity: 0;
             max-width: 352px;
             animation: 1.5s lineUp ease-out forwards;
@@ -57,20 +57,20 @@ export class ContentCarousel extends LitElement {
           }
           
           @container (width <= 1176px) {
-            ::slotted(.bubble) {
+            ::slotted([variant=panel]) {
               align-self: stretch;
               display: grid;
             }
           }
           
           @container (width <= 976px) {
-            ::slotted(.bubble) {
+            ::slotted([variant=panel]) {
               margin-bottom: 16px;
             }
           }
           
           @container (width <= 425px) {
-            ::slotted(.bubble) {
+            ::slotted([variant=panel]) {
               font-size: 0.9em;
             }
           }
