@@ -1,18 +1,34 @@
 import {LitElement, css, html} from "lit";
-import {customElement} from "lit/decorators.js";
+import {customElement, property} from "lit/decorators.js";
+import {choose} from "lit/directives/choose.js";
 
 /**
  * ContentCarousel element
  * @summary
  * Provides a responsive container for feature articles
- * @slot {*} - up to three elements to place in the carousel
+ * @slot {* | <li>} - Elements to place in the carousel
+ * @csspart container - Overall responsive container element
+ * @cssprop {color} [--list-color-border=#C2C2C4] - Border color of list items in the list variant
  */
 @customElement("content-carousel")
 export class ContentCarousel extends LitElement {
+    /** Which layout to use for the details contents */
+    @property({type: String, reflect: true})
+    accessor variant;
+    
     render() {
         return html`
-            <section part="container">
-                <slot></slot>
+            ${choose(this.variant, [
+                ["list", () => html`
+                    <ul part="container">
+                        <slot></slot>
+                    </ul>
+                `]
+            ], () => html`
+                <section part="container">
+                    <slot></slot>
+                </section>
+            `)}
             </section>
         `;
     }
@@ -22,11 +38,9 @@ export class ContentCarousel extends LitElement {
           :host {
             display: block;
             container: content-carousel / inline-size;
-            height: 100%;
-            min-height: 180px;
           }
           
-          section {
+          [part=container] {
             display: grid;
             gap: 32px;
             height: 100%;
@@ -46,6 +60,24 @@ export class ContentCarousel extends LitElement {
               column-gap: 8px;
               grid-auto-columns: min(calc(100cqw - 32px), 352px);
               align-content: end;
+            }
+            
+            :host([variant=list]) ul& {
+              column-gap: 8px;
+              grid-auto-columns: max-content;
+              scrollbar-width: thin;
+              padding: 8px;
+              margin: 0;
+              
+              ::slotted(li) {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                margin: 4px 0;
+                border: 1px solid var(--list-color-border, #c2c2c4);
+                border-radius: 32px;
+                padding: 4px 8px;
+              }
             }
           }
           

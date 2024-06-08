@@ -5,17 +5,17 @@ import {customElement} from "lit/decorators.js";
  * ContentHero element
  * @summary
  * Provides a full-width responsive container for a hero image, tagline, and feature articles
- * @slot {p} - text to show alongside hero image and feature content
- * @slot {<h3>} title - hidden title of the hero section
- * @slot {<img> | *} image - image or other content to show in the hero section
- * @slot {*} feature - articles to feature alongside hero image and tagline
- * @csspart container - overall responsive container section element
- * @cssprop {color} [--color-border=#000000] - bottom border color of hero section
- * @cssprop {color} [--color-tagline=#F4F4F4] - foreground color of tagline text
- * @cssprop {color} [--color-background=#020024] - primary background color, used as fallback to gradient 
- * @cssprop {color} [--color-gradient-from=#020024] - primary color used in background gradient
- * @cssprop {color} [--color-gradient-mid=#646CFF] - secondary color used in background gradient
- * @cssprop {color} [--color-gradient-to=#00D4FF] -  final color used in background gradient
+ * @slot {p} - Text to show alongside hero image and feature content
+ * @slot {<h3>} title - Hidden title of the hero section
+ * @slot {<img> | *} image - Image or other content to show in the hero section
+ * @slot {*} feature - Articles to feature alongside hero image and tagline
+ * @csspart container - Overall responsive container section element
+ * @cssprop {color} [--color-border=#000000] - Bottom border color of hero section
+ * @cssprop {color} [--color-tagline=#F4F4F4] - Foreground color of tagline text
+ * @cssprop {color} [--color-background=#020024] - Primary background color, used as fallback to gradient 
+ * @cssprop {color} [--color-gradient-from=#020024] - Primary color used in background gradient
+ * @cssprop {color} [--color-gradient-mid=#646CFF] - Secondary color used in background gradient
+ * @cssprop {color} [--color-gradient-to=#00D4FF] - Final color used in background gradient
  */
 @customElement("content-hero")
 export class ContentHero extends LitElement {
@@ -50,7 +50,7 @@ export class ContentHero extends LitElement {
             height: 576px;
             display: grid;
             column-gap: 32px;
-            align-items: center;
+            align-items: stretch;
             grid-template-columns: 1fr 512px 1fr;
             grid-template-areas: "image tagline carousel";
             
@@ -139,9 +139,11 @@ export class ContentHero extends LitElement {
                 }
               }
             }
-          
+            
             @container content-hero (width <= 1066px) {
               content-carousel {
+                align-self: end;
+                
                 &::part(container) {
                   padding: 0 16px;
                 }
