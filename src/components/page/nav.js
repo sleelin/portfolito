@@ -1,21 +1,25 @@
-import {LitElement, css, html, unsafeCSS} from "lit";
+import {LitElement, css, html} from "lit";
 import {customElement, query, queryAssignedElements} from "lit/decorators.js";
-import LinkedInLogo from "../../assets/linkedin.svg";
-import GitHubLogo from "../../assets/github.svg";
+import {unsafeSVG} from "lit/directives/unsafe-svg.js";
+import GitHubLogo from "../../assets/github.svg?raw";
+import LinkedInLogo from "../../assets/linkedin.svg?raw";
+import NPMLogo from "../../assets/npm.svg?raw";
+import TwitterLogo from "../../assets/twitter.svg?raw";
+import YouTubeLogo from "../../assets/youtube.svg?raw";
 
 /**
  * PageNav element
  * @summary
  * Provides a responsive page navigation menu which handles positioning and social links
- * @slot {<a>} - in-page navigation links to content with specific IDs
- * @slot {<a>} socials - links to social networks, displayed with relevant logo
- * @csspart container - responsive container element
- * @csspart content - wrapper for native nav element
- * @csspart links - wrapper for non-social page links
- * @csspart socials - wrapper for social page links
- * @cssprop {color} [--color-primary=#1d1d1d] - color of the links and social logos, and hamburger menu button
- * @cssprop {color} [--color-link-hover=#45bbfc] - color of the links on hover
- * @cssprop {color} [--color-link-shadow=#646cffaa] - color of the radial shadow of links on hover
+ * @slot {<a>} - In-page navigation links to content with specific IDs
+ * @slot {<a>} socials - Links to social networks, displayed with relevant logo
+ * @csspart container - Responsive container element
+ * @csspart content - Wrapper for native nav element
+ * @csspart links - Wrapper for non-social page links
+ * @csspart socials - Wrapper for social page links
+ * @cssprop {color} [--color-primary=#1d1d1d] - Color of the links and social logos, and hamburger menu button
+ * @cssprop {color} [--color-link-hover=#45bbfc] - Color of the links on hover
+ * @cssprop {color} [--color-link-shadow=#646cffaa] - Color of the radial shadow of links on hover
  */
 @customElement("page-nav")
 export class PageNav extends LitElement {
@@ -25,11 +29,11 @@ export class PageNav extends LitElement {
     @queryAssignedElements({selector: "a[href^='#']"})
     accessor #links;
     
-    @queryAssignedElements({slot: "socials", selector: "a[href^='github.com']"})
-    accessor #aGitHub;
+    @queryAssignedElements({slot: "socials", selector: "a"})
+    accessor #socials;
     
-    @queryAssignedElements({slot: "socials", selector: "a[href^='linkedin.com']"})
-    accessor #aLinkedIn;
+    @query("#overlay")
+    accessor #overlay
     
     #listenLinks() {
         for (let link of this.#links) link.addEventListener("click", (e) => {
@@ -39,9 +43,16 @@ export class PageNav extends LitElement {
         });
     }
     
+    /** Iterate through each social overlay SVG and restart animation on hamburger menu opening */
+    #reanimateSocials() {
+        if (this.#toggle.checked) for (let svg of this.#overlay.querySelectorAll("svg")) {
+            svg.setCurrentTime(0);
+        }
+    }
+    
     render() {
         return html`
-            <input id="toggle" type="checkbox">
+            <input id="toggle" type="checkbox" @change=${this.#reanimateSocials}>
             <div part="container">
                 <label for="toggle">
                     <span></span>
@@ -54,7 +65,24 @@ export class PageNav extends LitElement {
                             <slot @slotchange=${this.#listenLinks}></slot>
                         </div>
                         <div part="socials">
-                            <slot name="socials"></slot>
+                            <div id="overlay">${this.#socials.map(({href}) => {
+                                switch (href?.match(/^https?:\/\/(?:www\.)?(.*?)\/.*$/)?.at(1)) {
+                                    case "github.com":
+                                        return unsafeSVG(GitHubLogo);
+                                    case "linkedin.com":
+                                        return unsafeSVG(LinkedInLogo);
+                                    case "npmjs.com":
+                                        return unsafeSVG(NPMLogo);
+                                    case "twitter.com":
+                                    case "x.com":
+                                        return unsafeSVG(TwitterLogo);
+                                    case "youtube.com":
+                                        return unsafeSVG(YouTubeLogo);
+                                    default:
+                                        return html`<svg></svg>`
+                                }
+                            })}</div>
+                            <slot name="socials" @slotchange=${() => this.requestUpdate()}></slot>
                         </div>
                     </nav>
                 </div>
@@ -82,13 +110,8 @@ export class PageNav extends LitElement {
           }
           
           nav {
-            &, & > div {
-              display: grid;
-              grid-auto-flow: column;
-            }
-          }
-          
-          nav {
+            display: grid;
+            grid-auto-flow: column;
             position: sticky;
             top: 16px;
             justify-items: center;
@@ -133,6 +156,8 @@ export class PageNav extends LitElement {
           
           [part=links] {
             grid-area: links;
+            display: grid;
+            grid-auto-flow: column;
             justify-items: center;
             column-gap: 32px;
             
@@ -174,27 +199,35 @@ export class PageNav extends LitElement {
           
           [part=socials] {
             grid-area: socials;
+            position: relative;
             justify-self: end;
-            align-items: center;
-            column-gap: 8px;
-            justify-content: end;
-            grid-auto-flow: column;
             
-            & ::slotted(a) {
+            &, #overlay {
+              display: grid;
+              grid-auto-flow: column;
+              align-items: center;
+              column-gap: 8px;
+              justify-content: end;
+            }
+            
+            #overlay {
+              pointer-events: none;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            }
+            
+            ::slotted(a), #overlay svg {
               width: 32px;
               height: 32px;
               overflow: hidden;
               color: transparent;
-              background-color: var(--color-primary, #1d1d1d);
-              mask-repeat: no-repeat;
             }
             
-            & ::slotted(a[href*="linkedin.com"]) {
-              mask-image: url("${unsafeCSS(LinkedInLogo)}");
-            }
-            
-            & ::slotted(a[href*="github.com"]) {
-              mask-image: url("${unsafeCSS(GitHubLogo)}");
+            #overlay svg {
+              color: var(--color-primary, #1d1d1d);
             }
             
             @container root (width < 228px) {
