@@ -1,6 +1,8 @@
-import {LitElement, css, html} from "lit";
+import {LitElement, css, html, nothing} from "lit";
 import {customElement, query, queryAssignedElements} from "lit/decorators.js";
 import {unsafeSVG} from "lit/directives/unsafe-svg.js";
+import {choose} from "lit/directives/choose.js";
+import {until} from "lit/directives/until.js";
 import GitHubLogo from "../../assets/github.svg?raw";
 import LinkedInLogo from "../../assets/linkedin.svg?raw";
 import NPMLogo from "../../assets/npm.svg?raw";
@@ -32,9 +34,10 @@ export class PageNav extends LitElement {
     @queryAssignedElements({slot: "socials", selector: "a"})
     accessor #socials;
     
-    @query("#overlay")
+    @query("[part=socials]")
     accessor #overlay
     
+    /** Add smooth-scrolling behaviour to in-page section links */
     #listenLinks() {
         for (let link of this.#links) link.addEventListener("click", (e) => {
             e.preventDefault();
@@ -65,24 +68,30 @@ export class PageNav extends LitElement {
                             <slot @slotchange=${this.#listenLinks}></slot>
                         </div>
                         <div part="socials">
-                            <div id="overlay">${this.#socials.map(({href}) => {
-                                switch (href?.match(/^https?:\/\/(?:www\.)?(.*?)\/.*$/)?.at(1)) {
-                                    case "github.com":
-                                        return unsafeSVG(GitHubLogo);
-                                    case "linkedin.com":
-                                        return unsafeSVG(LinkedInLogo);
-                                    case "npmjs.com":
-                                        return unsafeSVG(NPMLogo);
-                                    case "twitter.com":
-                                    case "x.com":
-                                        return unsafeSVG(TwitterLogo);
-                                    case "youtube.com":
-                                        return unsafeSVG(YouTubeLogo);
-                                    default:
-                                        return html`<svg></svg>`
-                                }
-                            })}</div>
                             <slot name="socials" @slotchange=${() => this.requestUpdate()}></slot>
+                            ${this.#socials.map((a) => html`
+                                <a href="${a.href}" target="_blank" title="${a.innerText || a.title || a.querySelector("img")?.alt}">
+                                    ${choose(a.href?.match(/^https?:\/\/(?:www\.)?(.*?)\/.*$/)?.at(1), [
+                                        ["github.com", () => unsafeSVG(GitHubLogo)],
+                                        ["linkedin.com", () => unsafeSVG(LinkedInLogo)],
+                                        ["npmjs.com", () => unsafeSVG(NPMLogo)],
+                                        ["twitter.com", () => unsafeSVG(TwitterLogo)],
+                                        ["x.com", () => unsafeSVG(TwitterLogo)],
+                                        ["youtube.com", () => unsafeSVG(YouTubeLogo)]
+                                    ], () => {
+                                        const svgEl = a.querySelector("svg");
+                                        const imgEl = a.querySelector("img");
+                                        
+                                        return (svgEl ? (
+                                            unsafeSVG(svgEl.outerHTML)
+                                        ) : imgEl.src.match(/\.svg\??([^/].)*$/) ? (
+                                            until(fetch(imgEl.src).then(async (res) => unsafeSVG(await res.text())), nothing)
+                                        ) : (
+                                            html`<svg><image href="${imgEl?.src}" height="100%" width="100%" /></svg>`
+                                        ));
+                                    })}
+                                </a>
+                            `)}
                         </div>
                     </nav>
                 </div>
@@ -199,35 +208,32 @@ export class PageNav extends LitElement {
           
           [part=socials] {
             grid-area: socials;
-            position: relative;
             justify-self: end;
+            display: grid;
+            grid-auto-flow: column;
+            align-items: center;
+            column-gap: 8px;
+            justify-content: end;
             
-            &, #overlay {
-              display: grid;
-              grid-auto-flow: column;
-              align-items: center;
-              column-gap: 8px;
-              justify-content: end;
+            ::slotted(a) {
+              display: none;
             }
             
-            #overlay {
-              pointer-events: none;
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-            }
-            
-            ::slotted(a), #overlay svg {
+            a, svg {
               width: 32px;
               height: 32px;
               overflow: hidden;
-              color: transparent;
             }
             
-            #overlay svg {
+            svg {
               color: var(--color-primary, #1d1d1d);
+              transition: color 300ms;
+              will-change: color;
+              
+              &:hover {
+                filter: drop-shadow(0 0 3rem var(--color-link-shadow, #646cffaa));
+                color: var(--color-link-hover, #45bbfc);
+              }
             }
             
             @container root (width < 228px) {
