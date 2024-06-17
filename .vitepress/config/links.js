@@ -1,5 +1,5 @@
 export const head = [
-    ["link", {rel: "icon", type: "image/svg+xml", href: "/logo.svg"}]
+    ["link", {rel: "icon", type: "image/svg+xml", href: "/portfolito/logo.svg"}]
 ];
 
 export const nav = [
