@@ -26,7 +26,8 @@ page-header {
 
 ### Basic Usage
 
-The header component itself does not provide any content of its own, instead acting as a sticky, responsive container wrapping your supplied content.
+The `<page-header>` element itself does not provide any content of its own.
+Instead, it acts as a sticky, responsive container wrapping your supplied content in a native `<header>` element.
 
 <demo>
   <page-header>PortfoLitO</page-header>

@@ -17,7 +17,8 @@ const element = inject("manifest").for("page", "logo");
 
 ### Basic Logo
 
-The logo element itself does not provide any content of its own, instead acting as a responsive container wrapping your supplied logo image.
+The `<page-logo>` element itself does not provide any content of its own.
+Instead, it acts as a responsive container for your supplied logo image and headings.
 
 <demo>
   <page-logo>
@@ -37,7 +38,8 @@ The logo element itself does not provide any content of its own, instead acting 
 
 ### With Headings
 
-It also supports slotting first and second level native heading elements via the `headings` named slot, which will be positioned to the right of the logo image.
+It also supports slotting first and second level native heading elements via the `headings` named slot,
+which will be positioned to the right of the logo image.
 
 When only one first-level heading element is specified, it will be centered to the logo image.
 
