@@ -76,7 +76,7 @@ code {
                             <code v-if="row[col.name]">{{ row[col.name] }}</code>
                             <i v-else>none</i>
                         </td>
-                        <td :class="col.name" v-else-if="col.name === 'default' && row?.type?.text === 'color' && row?.[col.name]?.startsWith('#')">
+                        <td :class="col.name" v-else-if="col.name === 'default' && row?.type?.text === 'color' && row?.default?.startsWith('#')">
                             <div class="color">
                                 <div :style="{backgroundColor: row[col.name]}"></div>
                                 <div>{{ row[col.name].slice(1).toUpperCase() }}</div>
@@ -84,6 +84,7 @@ code {
                         </td>
                         <td :class="col.name" v-else>
                             <code v-if="col.name === 'type' && !!row?.type?.text">{{ row.type.text }}</code>
+                            <code v-else-if="col.name === 'default' && !!row?.default?.startsWith('--')">{{ row.default }}</code>
                             <template v-else>{{ row[col.name] || "-" }}</template>
                         </td>
                     </template>
