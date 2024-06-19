@@ -1,16 +1,25 @@
 import {LitElement, css, html} from "lit";
-import {customElement} from "lit/decorators.js";
+import {customElement, property} from "lit/decorators.js";
 
 /**
  * ContentSection element
- * @slot {*} - content of the section, typically article elements
- * @slot {*} title - element to show above content as section title
- * @csspart container - overall responsive container element
- * @csspart content - the actual content of the section element
- * @cssprop {color} [--color-heading=inherit] - color of the section heading
+ * @summary
+ * Provides responsive layout and styling to the native HTML section element
+ * @slot {*} - Content of the section, typically article elements
+ * @slot {*} title - Element to show above content as section title
+ * @csspart container - Overall responsive container element
+ * @csspart content - The actual content of the section element
+ * @cssprop {color} [--title-color=#3C3C43] - Color of the section title
+ * @cssprop {color} [--title-icon-color=--title-color] - Color of the section title's leading icon
+ * @cssprop {display} [--title-icon-display=none] - Display property of the section title's leading icon
+ * @cssprop {url(SVG)} [--title-icon-mask] - Mask image of the section title's leading icon
  */
 @customElement("content-section")
 export class ContentSection extends LitElement {
+    /** Which layout to use for the section content */
+    @property({type: String, reflect: true})
+    accessor variant;
+    
     render() {
         return html`
             <section part="container">
@@ -31,7 +40,7 @@ export class ContentSection extends LitElement {
             padding: 16px;
           }
           
-          :host(.grid) [part=content] {
+          :host([variant=grid]) [part=content] {
             display: grid;
             gap: 16px;
             grid-template-columns: repeat(3, 1fr);
@@ -59,16 +68,19 @@ export class ContentSection extends LitElement {
             display: flex;
             align-items: center;
             position: relative;
-            color: var(--color-heading);
+            color: var(--title-color, #3c3c43);
           }
           
           ::slotted([slot=title]):before {
-            display: block;
+            content: "";
+            display: var(--title-icon-display, none);
+            mask-image: var(--title-icon-mask, unset);
             mask-repeat: no-repeat;
+            mask-size: 24px 24px;
             width: 24px;
             height: 24px;
             margin-right: 8px;
-            background-color: var(--color-heading);
+            background-color: var(--title-icon-color, var(--title-color, #3c3c43));
           }
         `;
     }

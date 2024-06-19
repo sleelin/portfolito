@@ -41,7 +41,7 @@ export class ContentDetails extends LitElement {
                         </ul>
                     `],
                     ["grid", () => html`
-                        <content-section part="content" class="grid">
+                        <content-section part="content" variant="grid">
                             <slot></slot>
                         </content-section>
                     `]
