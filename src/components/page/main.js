@@ -5,12 +5,12 @@ import {customElement} from "lit/decorators.js";
  * PageMain element
  * @summary
  * Provides a responsive container for the native HTML main element
- * @slot {*} - content to be wrapped in the HTML main element
- * @slot {*} hero - content to place above all other content
- * @csspart container - responsive container element
- * @csspart content - wrapper for main page content
- * @cssprop {color} [--color-background-maxi=inherit] - background color of the content part for large containers
- * @cssprop {color} [--color-background-mini=inherit] - background color of the content part for small containers
+ * @slot {*} - Content to be wrapped in the HTML main element
+ * @slot {*} hero - Content to place above all other content
+ * @csspart container - Responsive container element
+ * @csspart content - Wrapper for main page content
+ * @cssprop {color} [--color-background-maxi=inherit] - Background color of the content part for large containers
+ * @cssprop {color} [--color-background-mini=inherit] - Background color of the content part for small containers
  */
 @customElement("page-main")
 export class PageMain extends LitElement {

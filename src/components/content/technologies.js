@@ -5,11 +5,11 @@ import {customElement} from "lit/decorators.js";
  * ContentTechnologies element
  * @summary
  * Provides a scrollable list of technologies related to a specific job or project
- * @slot {<li>} - list of technologies related to the job or project
- * @csspart container - responsive container element
- * @csspart list - wrapper for technologies list items
- * @cssprop {color} [--color-foreground=#1D1D1D] - foreground color of the technologies list items
- * @cssprop {color} [--color-background=#D5D5D5] - background color of the technologies list items
+ * @slot {<li>} - List of technologies related to the job or project
+ * @csspart container - Responsive container element
+ * @csspart list - Wrapper for technologies list items
+ * @cssprop {color} [--color-foreground=#1D1D1D] - Foreground color of the technologies list items
+ * @cssprop {color} [--color-background=#D5D5D5] - Background color of the technologies list items
  */
 @customElement("content-technologies")
 export class ContentTechnologies extends LitElement {

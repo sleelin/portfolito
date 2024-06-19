@@ -6,14 +6,14 @@ import {styleMap} from "lit/directives/style-map.js";
  * ContentLanguages element
  * @summary
  * Provides a bar graph overview of programming languages with percentage for developer project listings
- * @slot {<li>} - language names and percent of overall code in project
- * @csspart container - responsive container element
- * @csspart heading - languages heading and icon container
- * @csspart list - wrapper for language names and color bubbles
- * @csspart line - wrapper for language percentage line graph
- * @cssprop {color} [--color-heading=#1A194F] - color of the languages heading and icon
- * @cssprop {color} [--color-foreground=#000000] - foreground color of text inside the languages element container
- * @cssprop {color} [--color-background=#F6F6F6] - background color of the languages element container
+ * @slot {<li>} - Language names and percent of overall code in project
+ * @csspart container - Responsive container element
+ * @csspart heading - Languages heading and icon container
+ * @csspart list - Wrapper for language names and color bubbles
+ * @csspart line - Wrapper for language percentage line graph
+ * @cssprop {color} [--color-heading=#1A194F] - Color of the languages heading and icon
+ * @cssprop {color} [--color-foreground=#000000] - Foreground color of text inside the languages element container
+ * @cssprop {color} [--color-background=#F6F6F6] - Background color of the languages element container
  * @cssprop {color} [--color-lang-js=#FFD700] - JavaScript line and bubble color
  * @cssprop {color} [--color-lang-ts=#4169E1] - TypeScript line and bubble color
  * @cssprop {color} [--color-lang-html=#FF4500] - HTML line and bubble color

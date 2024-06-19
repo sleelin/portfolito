@@ -5,23 +5,23 @@ import {customElement, property, query, queryAssignedNodes} from "lit/decorators
  * ContentArticle element
  * @summary
  * Provides responsive layout and styling to the native HTML article element
- * @slot - contents of the article, not including titles or tags
- * @slot {<h4>} title - primary title of the article
- * @slot {<h5>} subtitle - secondary subtitle of the article
- * @slot {<div>} timestamp - any date/time associated with the article
- * @slot {<div>} tags - any category or grouping details relevant to the article
- * @csspart container - overall responsive container element
- * @csspart header - container element for title, subtitle, and timestamp slots
- * @csspart content - the actual content of the article
- * @cssprop {color} [--header-color-fg=inherit] - foreground color of the article header
- * @cssprop {color} [--header-color-bg=#D5D5D5] - background color of the article header
- * @cssprop {color} [--header-color-bg-maxi] - background color of the article header for large containers
- * @cssprop {color} [--header-color-bg-mini] - background color of the article header for small containers
- * @cssprop {color} [--header-color-ul=#000000] - bottom border (underline) color of the article header
- * @cssprop {color} [--content-color-fg=inherit] - foreground color of the article content
- * @cssprop {color} [--content-color-bg] - background color of the article content
- * @cssprop {color} [--content-color-bg-maxi] - background color of the article content for large containers
- * @cssprop {color} [--content-color-bg-mini] - background color of the article content for small containers
+ * @slot - Contents of the article, not including titles or tags
+ * @slot {<h4>} title - Primary title of the article
+ * @slot {<h5>} subtitle - Secondary subtitle of the article
+ * @slot {<div>} timestamp - Any date/time associated with the article
+ * @slot {<div>} tags - Any category or grouping details relevant to the article
+ * @csspart container - Overall responsive container element
+ * @csspart header - Container element for title, subtitle, and timestamp slots
+ * @csspart content - The actual content of the article
+ * @cssprop {color} [--header-color-fg=inherit] - Foreground color of the article header
+ * @cssprop {color} [--header-color-bg=#D5D5D5] - Background color of the article header
+ * @cssprop {color} [--header-color-bg-maxi] - Background color of the article header for large containers
+ * @cssprop {color} [--header-color-bg-mini] - Background color of the article header for small containers
+ * @cssprop {color} [--header-color-ul=#000000] - Bottom border (underline) color of the article header
+ * @cssprop {color} [--content-color-fg=inherit] - Foreground color of the article content
+ * @cssprop {color} [--content-color-bg] - Background color of the article content
+ * @cssprop {color} [--content-color-bg-maxi] - Background color of the article content for large containers
+ * @cssprop {color} [--content-color-bg-mini] - Background color of the article content for small containers
  */
 @customElement("content-article")
 export class ContentArticle extends LitElement {
