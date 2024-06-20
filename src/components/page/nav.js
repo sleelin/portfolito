@@ -22,6 +22,7 @@ import YouTubeLogo from "../../assets/youtube.svg?raw";
  * @cssprop {color} [--color-primary=#1d1d1d] - Color of the links and social logos, and hamburger menu button
  * @cssprop {color} [--color-link-hover=#45bbfc] - Color of the links on hover
  * @cssprop {color} [--color-link-shadow=#646cffaa] - Color of the radial shadow of links on hover
+ * @cssprop {color} [--color-link-folded=#ffffff] - Color of the links and social logos when hidden behind hamburger menu
  */
 @customElement("page-nav")
 export class PageNav extends LitElement {
@@ -199,6 +200,12 @@ export class PageNav extends LitElement {
               --shadow: var(--color-link-shadow, #646cffaa);
               box-shadow: 0 0 3rem 1.3rem var(--shadow);
             }
+          
+            @container root (width < 480px) {
+              ::slotted(a) {
+                color: var(--color-link-folded, #ffffff);
+              }
+            }
             
             @container root (width < 228px) {
               grid-auto-flow: row;
@@ -233,6 +240,12 @@ export class PageNav extends LitElement {
               &:hover {
                 filter: drop-shadow(0 0 3rem var(--color-link-shadow, #646cffaa));
                 color: var(--color-link-hover, #45bbfc);
+              }
+            }
+          
+            @container root (width < 480px) {
+              svg {
+                color: var(--color-link-folded, #ffffff);
               }
             }
             
