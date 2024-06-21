@@ -69,7 +69,6 @@ export class PageNav extends LitElement {
                             <slot @slotchange=${this.#listenLinks}></slot>
                         </div>
                         <div part="socials">
-                            <slot name="socials" @slotchange=${() => this.requestUpdate()}></slot>
                             ${this.#socials.map((a) => html`
                                 <a href="${a.href}" target="_blank" title="${a.innerText || a.title || a.querySelector("img")?.alt}">
                                     ${choose(a.href?.match(/^https?:\/\/(?:www\.)?(.*?)\/.*$/)?.at(1), [
@@ -93,6 +92,7 @@ export class PageNav extends LitElement {
                                     })}
                                 </a>
                             `)}
+                            <slot name="socials" @slotchange=${() => this.requestUpdate()}></slot>
                         </div>
                     </nav>
                 </div>
