@@ -153,7 +153,7 @@ export class ContentArticle extends LitElement {
             :host([variant=job]) & {
               padding: 0;
               position: relative;
-              contain: paint;
+              contain: layout;
               background-color: var(--content-color-bg-maxi, var(--content-color-bg));
               
               ::slotted(p) {
@@ -165,6 +165,7 @@ export class ContentArticle extends LitElement {
               }
               
               @container content-article (width < 500px) {
+                contain: paint;
                 margin-top: 16px;
                 border-radius: 16px;
                 background-color: var(--content-color-bg-mini, var(--content-color-bg));
@@ -239,7 +240,7 @@ export class ContentArticle extends LitElement {
             }
             
             @container content-article (width < 500px) {
-              :host(.job:first-of-type) & {
+              :host([variant=job]:first-of-type) & {
                 margin-top: 0;
               }
             }
