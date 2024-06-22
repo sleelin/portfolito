@@ -6,7 +6,9 @@ import {customElement} from "lit/decorators.js";
  * @summary
  * Provides a scrollable list of technologies related to a specific job or project
  * @slot {<li>} - List of technologies related to the job or project
+ * @slot {<span>} [title=Core Technologies:] - Leading text to use in list title
  * @csspart container - Responsive container element
+ * @csspart title - Leading heading title element
  * @csspart list - Wrapper for technologies list items
  * @cssprop {color} [--color-foreground=#1D1D1D] - Foreground color of the technologies list items
  * @cssprop {color} [--color-background=#D5D5D5] - Background color of the technologies list items
@@ -16,7 +18,9 @@ export class ContentTechnologies extends LitElement {
     render() {
         return html`
             <div part="container">
-                <h6>Core Technologies:</h6>
+                <h6 part="title">
+                    <slot name="title">Core Technologies:</slot>
+                </h6>
                 <ul part="list">
                     <slot></slot>
                 </ul>
@@ -61,7 +65,8 @@ export class ContentTechnologies extends LitElement {
             padding-inline-start: 0;
             overflow-x: scroll;
             overflow-y: hidden;
-
+            scrollbar-width: thin;
+            
             ::slotted(li) {
               white-space: nowrap;
               padding: 0 8px;
