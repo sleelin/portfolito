@@ -104,7 +104,10 @@ export class ContentDetails extends LitElement {
             
             :host([variant=grid]) & {
               max-height: 0;
-              padding: 0;
+              
+              &::part(container) {
+                padding: 0;
+              }
               
               ::slotted([variant=panel]) {
                 opacity: 0;
