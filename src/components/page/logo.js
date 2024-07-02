@@ -49,7 +49,7 @@ export class PageLogo extends LitElement {
             display: grid;
             align-items: center;
             grid-template-rows: repeat(2, max-content);
-            grid-template-columns: max-content 1fr;
+            grid-template-columns: 52px 1fr;
             min-height: 52px;
           }
           
@@ -59,6 +59,7 @@ export class PageLogo extends LitElement {
             grid-row-start: 1;
             grid-row-end: span 2;
             max-height: 48px;
+            max-width: 100%;
             margin-top: 4px;
             margin-right: 12px;
             display: flex;
@@ -131,6 +132,8 @@ export class PageLogo extends LitElement {
           
           ::slotted(h1:last-child:only-of-type) {
             grid-row-end: span 2;
+            align-self: end;
+            line-height: 1.5;
           }
           
           ::slotted(h2) {
