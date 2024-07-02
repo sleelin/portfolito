@@ -5,14 +5,16 @@ import {customElement, property, query, queryAssignedNodes} from "lit/decorators
  * ContentArticle element
  * @summary
  * Provides responsive layout and styling to the native HTML article element
- * @slot - Contents of the article, not including titles or tags
- * @slot {<h4>} title - Primary title of the article
- * @slot {<h5>} subtitle - Secondary subtitle of the article
- * @slot {<div>} timestamp - Any date/time associated with the article
- * @slot {<div>} tags - Any category or grouping details relevant to the article
+ * @slot - Contents of the article, not including thumbnail, titles, or tags
+ * @slot {<img>} thumb - Thumbnail image of the article
+ * @slot {<h4>|*} title - Primary title of the article
+ * @slot {<h5>|*} subtitle - Secondary subtitle of the article
+ * @slot {<div>|*} timestamp - Any date/time associated with the article
+ * @slot {<div>|*} tags - Any category or grouping details relevant to the article
  * @csspart container - Overall responsive container element
  * @csspart header - Container element for title, subtitle, and timestamp slots
  * @csspart content - The actual content of the article
+ * @cssprop {color} [--container-color-outline] - Foreground color of the article header
  * @cssprop {color} [--header-color-fg=inherit] - Foreground color of the article header
  * @cssprop {color} [--header-color-bg=#D5D5D5] - Background color of the article header
  * @cssprop {color} [--header-color-bg-maxi] - Background color of the article header for large containers
@@ -35,13 +37,20 @@ export class ContentArticle extends LitElement {
     @queryAssignedNodes({slot: "title"})
     accessor #title;
     
+    @queryAssignedNodes({slot: "thumb"})
+    accessor #thumb;
+    
     #slotChange({currentTarget}) {
         // Reattach header with associated named slots...
         if (currentTarget.children.item(0) !== this.#header)
             currentTarget.prepend(this.#header);
-        // ...then remove it if there's no title
-        if (!this.#title.length)
-            this.#header.remove();
+        // Remove header if there's no title...
+        if (!this.#title.length) this.#header.remove();
+        // ...or add classes if it needs styling
+        else {
+            this.#header.classList.toggle("thumb", !!this.#thumb.length);
+            this.#header.classList.toggle("stack", this.variant === "panel" && 1>[...this.querySelectorAll("[slot]")].indexOf(this.#title.at(0)))
+        }
     }
     
     render() {
@@ -54,6 +63,7 @@ export class ContentArticle extends LitElement {
         return html`
             <article part="container" @slotchange=${this.#slotChange}>
                 <header part="header">
+                    <slot name="thumb"></slot>
                     <slot name="title"></slot>
                     <slot name="subtitle"></slot>
                     <slot name="timestamp"></slot>
@@ -97,11 +107,12 @@ export class ContentArticle extends LitElement {
               
               ::slotted(:is(h4, h5)) {
                 font-weight: normal;
+                margin: 0;
               }
             }
             
             ::slotted(:is(h4, h5)) {
-              margin: 0;
+              margin: 0 0 16px;
             }
             
             ::slotted(h4) {
@@ -110,18 +121,90 @@ export class ContentArticle extends LitElement {
             }
             
             ::slotted(p) {
-              margin-bottom: 0;
+              margin: 0;
             }
             
             :host([variant=panel]) & {
+              padding: 0;
               height: 100%;
               box-sizing: border-box;
               border-radius: 8px;
               box-shadow: inset 0 0 0 200px var(--content-color-bg);
               
+              [part=content] {
+                padding: 16px;
+              }
+              
               header {
-                margin-bottom: 8px;
+                padding: 12px 16px;
+                margin-bottom: 0;
                 border-bottom: unset;
+                border-start-start-radius: 8px;
+                border-start-end-radius: 8px;
+                color: var(--header-color-fg);
+                background-color: var(--header-color-bg);
+                outline: 1px solid var(--header-color-outline);
+                display: grid;
+                grid-template-columns: [thumb] min-content [headings] 1fr;
+                grid-template-rows: [thumb title] 1fr [subtitle] 1fr [timestamp] min-content [thumb];
+                
+                &.thumb {
+                  column-gap: 8px;
+                }
+                
+                &.stack {
+                  grid-template-columns: [thumb headings] 1fr;
+                  grid-template-rows: [title thumb] minmax(100px, 120px) [thumb] minmax(1.825cap, max-content) [title subtitle] max-content [subtitle];
+                  
+                  ::slotted([slot=thumb]) {
+                    min-width: unset;
+                    max-height: 100%;
+                    pointer-events: none;
+                    place-self: center;
+                    transition: transform 0.2s ease;
+                  }
+                  
+                  &:hover ::slotted([slot=thumb]) {
+                    transform: scale(1.025);
+                  }
+                  
+                  ::slotted([slot=title]) {
+                    grid-row: thumb / title 2;
+                  }
+                  
+                  ::slotted([slot=title].status) {
+                    display: grid;
+                    grid-auto-flow: column;
+                    justify-content: start;
+                    align-items: center;
+                    grid-template-rows: 1.1em;
+                  }
+                }
+                
+                ::slotted([slot=thumb]) {
+                  grid-column: thumb;
+                  grid-row: thumb / thumb 2;
+                  min-width: 52px;
+                  max-width: 100%;
+                  max-height: 52px;
+                  object-fit: contain;
+                }
+                
+                ::slotted([slot=title]) {
+                  align-content: end;
+                  grid-column: headings;
+                  grid-row: title;
+                }
+                
+                ::slotted([slot=subtitle]) {
+                  grid-column: headings;
+                  grid-row: subtitle;
+                }
+                
+                ::slotted([slot=timestamp]) {
+                  grid-column: headings;
+                  grid-row: timestamp;
+                }
                 
                 ::slotted(h5) {
                   font-size: 1em;
@@ -156,20 +239,16 @@ export class ContentArticle extends LitElement {
               contain: layout;
               background-color: var(--content-color-bg-maxi, var(--content-color-bg));
               
-              ::slotted(p) {
-                margin: 0;
-              }
-              
               ::slotted([slot=tags]) {
                 margin-top: -1px;
               }
               
               @container content-article (width < 500px) {
                 contain: paint;
-                margin-top: 16px;
+                margin-bottom: 16px;
                 border-radius: 16px;
                 background-color: var(--content-color-bg-mini, var(--content-color-bg));
-                box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
+                outline: 1px solid var(--container-color-outline);
                 
                 ::slotted([slot=tags]) {
                   margin-top: 0;
@@ -239,9 +318,9 @@ export class ContentArticle extends LitElement {
               }
             }
             
-            @container content-article (width < 500px) {
-              :host([variant=job]:first-of-type) & {
-                margin-top: 0;
+            :host([variant=job]:last-of-type) & {
+              &, [part=content] {
+                margin-bottom: 0;
               }
             }
           }
