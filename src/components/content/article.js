@@ -273,6 +273,7 @@ export class ContentArticle extends LitElement {
                 position: sticky;
                 margin-bottom: 0;
                 top: var(--header-top-maxi, 0px);
+                color: var(--header-color-fg);
                 background-color: var(--header-color-bg-maxi, var(--header-color-bg));
                 border-bottom: 1px solid var(--header-color-ul);
                 display: grid;
