@@ -49,11 +49,12 @@ export class PageLogo extends LitElement {
             display: grid;
             align-items: center;
             grid-template-rows: repeat(2, max-content);
-            grid-template-columns: 52px 1fr;
+            grid-template-columns: 60px 1fr;
             min-height: 52px;
           }
           
           .logo {
+            aspect-ratio: 1;
             cursor: pointer;
             position: relative;
             grid-row-start: 1;
