@@ -35,10 +35,20 @@ tr, th, td {
 
 th, td {
   border: none;
+  padding: 8px;
 }
 
 td.description {
   min-width: 240px;
+}
+
+td ul, td li {
+  margin: 0;
+  padding: 0;
+}
+
+li:only-child {
+  list-style: none;
 }
 
 code {
@@ -72,19 +82,24 @@ code {
             <tbody>
                 <tr v-for="row in $props.rows" :key="row.name">
                     <template v-for="col in columns" :key="col.name">
-                        <td :class="col.name" v-if="col.name === 'name'">
-                            <code v-if="row[col.name]">{{ row[col.name] }}</code>
-                            <i v-else>none</i>
-                        </td>
-                        <td :class="col.name" v-else-if="col.name === 'default' && row?.type?.text === 'color' && row?.default?.startsWith('#')">
-                            <div class="color">
-                                <div :style="{backgroundColor: row[col.name]}"></div>
-                                <div>{{ row[col.name].slice(1).toUpperCase() }}</div>
-                            </div>
-                        </td>
-                        <td :class="col.name" v-else>
-                            <code v-if="col.name === 'type' && !!row?.type?.text">{{ row.type.text }}</code>
-                            <code v-else-if="col.name === 'default' && !!row?.default?.startsWith('--')">{{ row.default }}</code>
+                        <td :class="col.name">
+                            <template v-if="col.name === 'name'">
+                                <code v-if="row[col.name]">{{ row[col.name] }}</code>
+                                <i v-else>none</i>
+                            </template>
+                            <code v-else-if="col.name === 'type' && !!row?.type?.text">{{ row.type.text }}</code>
+                            <ul v-else-if="col.name === 'default' && !!row.default">
+                                <li v-for="val in row.default.split('|')">
+                                    <template v-if="row?.type?.text === 'color' && val.startsWith('#')">
+                                        <div class="color">
+                                            <div :style="{backgroundColor: val}"></div>
+                                            <div>{{ val.slice(1).toUpperCase() }}</div>
+                                        </div>
+                                    </template>
+                                    <code v-else-if="val.startsWith('--')">{{ val }}</code>
+                                    <span v-else>{{ val || "-"}}</span>
+                                </li>
+                            </ul>
                             <template v-else>{{ row[col.name] || "-" }}</template>
                         </td>
                     </template>
