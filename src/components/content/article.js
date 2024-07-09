@@ -131,8 +131,11 @@ export class ContentArticle extends LitElement {
               height: 100%;
               box-sizing: border-box;
               border-radius: 8px;
-              box-shadow: inset 0 0 0 200px var(--content-bgColor);
               outline: 1px solid var(--container-outlineColor);
+              
+              &:not(:has(header)) {
+                box-shadow: inset 0 0 0 200px var(--content-bgColor);
+              }
               
               [part=content] {
                 padding: 16px;
