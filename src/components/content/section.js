@@ -9,10 +9,10 @@ import {customElement, property} from "lit/decorators.js";
  * @slot {*} title - Element to show above content as section title
  * @csspart container - Overall responsive container element
  * @csspart content - The actual content of the section element
- * @cssprop {color} [--title-color=#3C3C43] - Color of the section title
- * @cssprop {color} [--title-icon-color=--title-color] - Color of the section title's leading icon
- * @cssprop {display} [--title-icon-display=none] - Display property of the section title's leading icon
- * @cssprop {url(SVG)} [--title-icon-mask] - Mask image of the section title's leading icon
+ * @cssprop {color} [--title-textColor=#3C3C43] - Color of the section title
+ * @cssprop {color} [--title-iconColor=--title-textColor] - Color of the section title's leading icon
+ * @cssprop {display} [--title-iconDisplay=none] - Display property of the section title's leading icon
+ * @cssprop {url(SVG)} [--title-iconMask] - Mask image of the section title's leading icon
  */
 @customElement("content-section")
 export class ContentSection extends LitElement {
@@ -79,19 +79,19 @@ export class ContentSection extends LitElement {
             display: flex;
             align-items: center;
             position: relative;
-            color: var(--title-color, #3c3c43);
+            color: var(--title-textColor, #3c3c43);
           }
           
           ::slotted([slot=title]):before {
             content: "";
-            display: var(--title-icon-display, none);
-            mask-image: var(--title-icon-mask, unset);
+            display: var(--title-iconDisplay, none);
+            mask-image: var(--title-iconMask, unset);
             mask-repeat: no-repeat;
             mask-size: 24px 24px;
             width: 24px;
             height: 24px;
             margin-right: 8px;
-            background-color: var(--title-icon-color, var(--title-color, #3c3c43));
+            background-color: var(--title-iconColor, var(--title-textColor, #3c3c43));
           }
         `;
     }

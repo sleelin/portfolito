@@ -8,7 +8,7 @@ import {choose} from "lit/directives/choose.js";
  * Provides a responsive container for feature articles
  * @slot {* | <li>} - Elements to place in the carousel
  * @csspart container - Overall responsive container element
- * @cssprop {color} [--list-color-border=#C2C2C4] - Border color of list items in the list variant
+ * @cssprop {color} [--list-borderColor=#C2C2C4] - Border color of list items in the list variant
  */
 @customElement("content-carousel")
 export class ContentCarousel extends LitElement {
@@ -74,7 +74,7 @@ export class ContentCarousel extends LitElement {
                 align-items: center;
                 gap: 4px;
                 margin: 4px 0;
-                border: 1px solid var(--list-color-border, #c2c2c4);
+                border: 1px solid var(--list-borderColor, #c2c2c4);
                 border-radius: 32px;
                 padding: 4px 8px;
               }

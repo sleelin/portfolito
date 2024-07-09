@@ -11,13 +11,13 @@ import {styleMap} from "lit/directives/style-map.js";
  * @csspart heading - Languages heading and icon container
  * @csspart list - Wrapper for language names and color bubbles
  * @csspart line - Wrapper for language percentage line graph
- * @cssprop {color} [--color-heading=#1A194F] - Color of the languages heading and icon
- * @cssprop {color} [--color-foreground=#000000] - Foreground color of text inside the languages element container
- * @cssprop {color} [--color-background=#F6F6F6] - Background color of the languages element container
- * @cssprop {color} [--color-lang-js=#FFD700] - JavaScript line and bubble color
- * @cssprop {color} [--color-lang-ts=#4169E1] - TypeScript line and bubble color
- * @cssprop {color} [--color-lang-html=#FF4500] - HTML line and bubble color
- * @cssprop {color} [--color-lang-css=#663399] - CSS line and bubble color
+ * @cssprop {color} [--heading-textColor=#1A194F] - Color of the languages heading and icon
+ * @cssprop {color} [--container-textColor=#000000] - Foreground color of text inside the languages element container
+ * @cssprop {color} [--container-bgColor=#F6F6F6] - Background color of the languages element container
+ * @cssprop {color} [--languageColor-js=#FFD700] - JavaScript line and bubble color
+ * @cssprop {color} [--languageColor-ts=#4169E1] - TypeScript line and bubble color
+ * @cssprop {color} [--languageColor-html=#FF4500] - HTML line and bubble color
+ * @cssprop {color} [--languageColor-css=#663399] - CSS line and bubble color
  */
 @customElement("content-languages")
 export class ContentLanguages extends LitElement {
@@ -56,19 +56,19 @@ export class ContentLanguages extends LitElement {
     static get styles() {
         return css`
           :host {
-            --color-heading: #1a194f;
-            --color-foreground: #000000;
-            --color-background: #f6f6f6;
-            --color-lang-js: #ffd700;
-            --color-lang-ts: #4169e1;
-            --color-lang-html: #ff4500;
-            --color-lang-css: #663399;
+            --heading-textColor: #1a194f;
+            --container-textColor: #000000;
+            --container-bgColor: #f6f6f6;
+            --languageColor-js: #ffd700;
+            --languageColor-ts: #4169e1;
+            --languageColor-html: #ff4500;
+            --languageColor-css: #663399;
           }
           
           [part="container"] {
             container: content-languages / inline-size;
-            color: var(--color-foreground);
-            background-color: var(--color-background);
+            color: var(--container-textColor);
+            background-color: var(--container-bgColor);
             padding: 8px 8px 12px;
             row-gap: 8px;
             align-items: center;
@@ -86,7 +86,7 @@ export class ContentLanguages extends LitElement {
           h6 {
             grid-area: heading;
             padding-left: 4px;
-            color: var(--color-heading);
+            color: var(--heading-textColor);
             margin: 0 16px 0 0;
             font-weight: normal;
             font-size: 0.95em;
@@ -100,7 +100,7 @@ export class ContentLanguages extends LitElement {
             }
             
             svg {
-              fill: var(--color-heading);
+              fill: var(--heading-textColor);
             }
           }
           
@@ -136,19 +136,19 @@ export class ContentLanguages extends LitElement {
               }
               
               &.js:before {
-                background-color: var(--color-lang-js);
+                background-color: var(--languageColor-js);
               }
               
               &.ts:before {
-                background-color: var(--color-lang-ts);
+                background-color: var(--languageColor-ts);
               }
               
               &.html:before {
-                background-color: var(--color-lang-html);
+                background-color: var(--languageColor-html);
               }
               
               &.css:before {
-                background-color: var(--color-lang-css);
+                background-color: var(--languageColor-css);
               }
             }
           }
@@ -162,19 +162,19 @@ export class ContentLanguages extends LitElement {
             overflow: hidden;
             
             .js {
-              background-color: var(--color-lang-js);
+              background-color: var(--languageColor-js);
             }
             
             .ts {
-              background-color: var(--color-lang-ts);
+              background-color: var(--languageColor-ts);
             }
             
             .html {
-              background-color: var(--color-lang-html);
+              background-color: var(--languageColor-html);
             }
             
             .css {
-              background-color: var(--color-lang-css);
+              background-color: var(--languageColor-css);
             }
           }
         `;

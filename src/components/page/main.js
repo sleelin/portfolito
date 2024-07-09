@@ -9,8 +9,9 @@ import {customElement} from "lit/decorators.js";
  * @slot {*} hero - Content to place above all other content
  * @csspart container - Responsive container element
  * @csspart content - Wrapper for main page content
- * @cssprop {color} [--color-background-maxi=inherit] - Background color of the content part for large containers
- * @cssprop {color} [--color-background-mini=inherit] - Background color of the content part for small containers
+ * @cssprop {color} [--container-bgColor=inherit] - Background color of the outer container part
+ * @cssprop {color} [--container-fgColor] - Background color of the inner content part
+ * @cssprop {color} [--container-fgColor-sm] - Background color of the content part for small containers
  */
 @customElement("page-main")
 export class PageMain extends LitElement {
@@ -27,7 +28,12 @@ export class PageMain extends LitElement {
     
     static get styles() {
         return css`
+          :host {
+            background-color: var(--container-bgColor, inherit);
+          }
+          
           main {
+            background-color: inherit;
             container: page-main / inline-size;
             position: relative;
           }
@@ -39,7 +45,7 @@ export class PageMain extends LitElement {
             contain: paint;
             border-bottom-left-radius: 16px;
             border-bottom-right-radius: 16px;
-            background-color: var(--color-background-maxi, var(--color-foreground));
+            background-color: var(--container-fgColor);
             
             @container page-main (width <= 976px) {
               border-bottom-left-radius: 0;
@@ -47,7 +53,8 @@ export class PageMain extends LitElement {
             }
             
             @container page-main (width < 532px) {
-              background-color: var(--color-background-mini, var(--color-background));
+              box-shadow: unset;
+              background-color: var(--container-fgColor-sm, var(--container-fgColor));
             }
           }
         `;

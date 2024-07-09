@@ -19,10 +19,10 @@ import YouTubeLogo from "../../assets/youtube.svg?raw";
  * @csspart content - Wrapper for native nav element
  * @csspart links - Wrapper for non-social page links
  * @csspart socials - Wrapper for social page links
- * @cssprop {color} [--color-primary=#1d1d1d] - Color of the links and social logos, and hamburger menu button
- * @cssprop {color} [--color-link-hover=#45bbfc] - Color of the links on hover
- * @cssprop {color} [--color-link-shadow=#646cffaa] - Color of the radial shadow of links on hover
- * @cssprop {color} [--color-link-folded=#ffffff] - Color of the links and social logos when hidden behind hamburger menu
+ * @cssprop {color} [--container-textColor=#1D1D1D] - Color of the links and social logos, and hamburger menu button
+ * @cssprop {color} [--container-textColor-sm=#FFFFFF] - Color of the links and social logos when hidden behind hamburger menu
+ * @cssprop {color} [--container-hoverColor=#45BBFC] - Color of the links and social logos on hover
+ * @cssprop {color} [--link-shadowColor=#646CFFAA] - Color of the radial shadow of links on hover
  */
 @customElement("page-nav")
 export class PageNav extends LitElement {
@@ -174,7 +174,7 @@ export class PageNav extends LitElement {
             ::slotted(a) {
               position: relative;
               text-decoration: none;
-              color: var(--color-primary, #1d1d1d);
+              color: var(--container-textColor, #1d1d1d);
               display: flex;
               align-items: center;
               will-change: color;
@@ -182,7 +182,7 @@ export class PageNav extends LitElement {
             }
             
             ::slotted(a:hover) {
-              color: var(--color-link-hover, #45bbfc);
+              color: var(--container-hoverColor, #45bbfc);
             }
             
             ::slotted(a):before {
@@ -197,13 +197,12 @@ export class PageNav extends LitElement {
             }
             
             ::slotted(a:hover):before {
-              --shadow: var(--color-link-shadow, #646cffaa);
-              box-shadow: 0 0 3rem 1.3rem var(--shadow);
+              box-shadow: 0 0 3rem 1.3rem color-mix(in srgb, var(--link-shadowColor, #646cff), transparent 33%);
             }
           
             @container root (width < 480px) {
               ::slotted(a) {
-                color: var(--color-link-folded, #ffffff);
+                color: var(--container-textColor-sm, #ffffff);
               }
             }
             
@@ -233,19 +232,18 @@ export class PageNav extends LitElement {
             }
             
             svg {
-              color: var(--color-primary, #1d1d1d);
+              color: var(--container-textColor, #1d1d1d);
               transition: color 300ms;
               will-change: color;
               
               &:hover {
-                filter: drop-shadow(0 0 3rem var(--color-link-shadow, #646cffaa));
-                color: var(--color-link-hover, #45bbfc);
+                color: var(--container-hoverColor, #45bbfc);
               }
             }
           
             @container root (width < 480px) {
               svg {
-                color: var(--color-link-folded, #ffffff);
+                color: var(--container-textColor-sm, #ffffff);
               }
             }
             
@@ -309,7 +307,7 @@ export class PageNav extends LitElement {
               height: 4px;
               margin-bottom: 5px;
               position: relative;
-              background: var(--color-primary, #1d1d1d);
+              background: var(--container-textColor, #1d1d1d);
               border-radius: 3px;
               z-index: 1;
               transform-origin: 4px 0;

@@ -7,9 +7,9 @@ import {customElement} from "lit/decorators.js";
  * Provides a responsive container for a logo image and top level page headings
  * @slot {<img>} - Image to use as the logo in a page header
  * @slot {<h1> | <h2>} headings - Page headings to place next to the logo image
- * @cssprop {color} [--color-background=inherit] - Background color of the logo image
- * @cssprop {color} [--color-foreground=transparent] - Foreground color of logo image to blend with background and border colors
- * @cssprop {color} [--color-border=transparent] - Border color of logo image, if any
+ * @cssprop {color} [--logo-bgColor=inherit] - Background color of the logo image
+ * @cssprop {color} [--logo-fgColor=transparent] - Foreground color of logo image to blend with background and border colors
+ * @cssprop {color} [--logo-borderColor=transparent] - Border color of logo image, if any
  */
 @customElement("page-logo")
 export class PageLogo extends LitElement {
@@ -32,12 +32,6 @@ export class PageLogo extends LitElement {
     
     static get styles() {
         return css`
-          :host {
-            --color-background: inherit;
-            --color-foreground: var(--color-background, transparent);
-            --color-border: var(--color-background, transparent);
-          }
-          
           .collapse {
             position: sticky;
             top: 0;
@@ -78,7 +72,7 @@ export class PageLogo extends LitElement {
             }
             
             &:before {
-              background-image: radial-gradient(ellipse at center left, var(--color-foreground, transparent), var(--color-background, transparent));
+              background-image: radial-gradient(ellipse at center left, var(--logo-fgColor, transparent), var(--logo-bgColor, transparent));
             }
             
             :host(.animate) & {
@@ -99,12 +93,12 @@ export class PageLogo extends LitElement {
             
             :host(.border) & {
               &:before {
-                box-shadow: var(--color-border) 0 0 2px 0;
+                box-shadow: var(--logo-borderColor) 0 0 2px 0;
               }
               
               &:after {
                 border: 1px solid transparent;
-                background: linear-gradient(to right, white, white) padding-box, linear-gradient(to right, var(--color-border, transparent), var(--color-foreground, transparent)) border-box;
+                background: linear-gradient(to right, white, white) padding-box, linear-gradient(to right, var(--logo-borderColor, transparent), var(--logo-fgColor, transparent)) border-box;
                 mask-image: radial-gradient(circle, white, white), radial-gradient(circle, white, white);
                 mask-clip: content-box, border-box;
                 mask-composite: subtract;

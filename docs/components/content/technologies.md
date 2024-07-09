@@ -9,6 +9,16 @@ const element = inject("manifest").for("content", "technologies");
 
 ## Usage
 
+### Basic Usage
+
+<demo>
+  <content-technologies>
+    <li>AWS</li>
+    <li>GitHub</li>
+    <li>Microsoft</li>
+  </content-technologies>
+</demo>
+
 ## CSS Parts
 
 <declaration :rows="element.cssParts" />

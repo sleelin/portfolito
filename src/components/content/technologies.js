@@ -10,8 +10,13 @@ import {customElement} from "lit/decorators.js";
  * @csspart container - Responsive container element
  * @csspart title - Leading heading title element
  * @csspart list - Wrapper for technologies list items
- * @cssprop {color} [--color-foreground=#1D1D1D] - Foreground color of the technologies list items
- * @cssprop {color} [--color-background=#D5D5D5] - Background color of the technologies list items
+ * @cssprop {color} [--container-textColor=#1D1D1D] - Text color of title and list items
+ * @cssprop {color} [--container-borderColor=--container-textColor] - Border color of title and list items
+ * @cssprop {color} [--container-bgColor=#FAFAFA] - Background color of title and list items
+ * @cssprop {color} [--title-textColor=--container-bgColor] - Text color of the title heading element
+ * @cssprop {color} [--title-bgColor=--container-textColor] - Background color of the title heading element
+ * @cssprop {color} [--list-textColor=--container-textColor] - Text color of the technologies list items
+ * @cssprop {color} [--list-borderColor=--container-borderColor] - Background color of the technologies list items
  */
 @customElement("content-technologies")
 export class ContentTechnologies extends LitElement {
@@ -38,7 +43,9 @@ export class ContentTechnologies extends LitElement {
             display: grid;
             grid-template-columns: max-content 1fr;
             align-items: stretch;
-            border: 1px solid var(--color-background, #d5d5d5);
+            color: var(--container-textColor, inherit);
+            border: 1px solid var(--container-borderColor, var(--container-textColor, #1d1d1d));
+            background-color: var(--container-bgColor, #fafafa);
             border-radius: 16px;
             border-start-start-radius: 0;
             border-end-start-radius: 0;
@@ -50,8 +57,8 @@ export class ContentTechnologies extends LitElement {
             padding: 0 8px;
             display: grid;
             align-items: center;
-            color: var(--color-foreground, #1d1d1d);
-            background-color: var(--color-background, #d5d5d5);
+            color: var(--title-textColor, var(--container-bgColor, #fafafa));
+            background-color: var(--title-bgColor, var(--container-textColor, #1d1d1d));
             border-start-end-radius: 16px;
             border-end-end-radius: 16px;
           }
@@ -72,7 +79,8 @@ export class ContentTechnologies extends LitElement {
               padding: 0 8px;
               font-size: 0.8125rem;
               margin: -1px 0;
-              border: 1px solid var(--color-background, #d5d5d5);
+              color: var(--list-textColor, var(--container-textColor, #1d1d1d));
+              border: 1px solid var(--list-borderColor, var(--container-borderColor, var(--container-textColor, #1d1d1d)));
               border-left-width: 0;
               border-top-right-radius: 16px;
               border-bottom-right-radius: 16px;

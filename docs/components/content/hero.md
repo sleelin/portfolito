@@ -9,6 +9,13 @@ const element = inject("manifest").for("content", "hero");
 
 ## Usage
 
+### Basic Usage
+
+<demo>
+  <content-hero>
+  </content-hero>
+</demo>
+
 ## CSS Parts
 
 <declaration :rows="element.cssParts" />

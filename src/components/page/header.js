@@ -6,7 +6,7 @@ import {customElement} from "lit/decorators.js";
  * @summary
  * Provides a responsive container for the native HTML header element
  * @slot {*} - Contents of the page header
- * @cssprop {color} [--color-header=inherit] - Background color of the header element
+ * @cssprop {color} [--header-bgColor=inherit] - Background color of the header element
  */
 @customElement("page-header")
 export class PageHeader extends LitElement {
@@ -22,13 +22,17 @@ export class PageHeader extends LitElement {
     
     static get styles() {
         return css`
+          :host {
+            background-color: var(--header-bgColor, inherit);
+          }
+          
           header {
             container: header / inline-size;
             position: sticky;
             z-index: 100;
             top: -24px;
             width: 100%;
-            background-color: var(--color-header);
+            background-color: inherit;
             box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
             
             &::before, &::after {

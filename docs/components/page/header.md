@@ -10,10 +10,10 @@ const element = inject("manifest").for("page", "header");
 
 page-header {
   position: sticky;
-  --color-header: var(--vp-c-white);
+  --header-bgColor: var(--vp-c-white);
 
   .dark & {
-    --color-header: var(--vp-c-bg-alt);
+    --header-bgColor: var(--vp-c-bg-alt);
   }
 }
 </style>

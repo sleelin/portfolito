@@ -14,16 +14,18 @@ import {customElement, property, query, queryAssignedNodes} from "lit/decorators
  * @csspart container - Overall responsive container element
  * @csspart header - Container element for title, subtitle, and timestamp slots
  * @csspart content - The actual content of the article
- * @cssprop {color} [--container-color-outline] - Foreground color of the article header
- * @cssprop {color} [--header-color-fg=inherit] - Foreground color of the article header
- * @cssprop {color} [--header-color-bg=#D5D5D5] - Background color of the article header
- * @cssprop {color} [--header-color-bg-maxi] - Background color of the article header for large containers
- * @cssprop {color} [--header-color-bg-mini] - Background color of the article header for small containers
- * @cssprop {color} [--header-color-ul=#000000] - Bottom border (underline) color of the article header
- * @cssprop {color} [--content-color-fg=inherit] - Foreground color of the article content
- * @cssprop {color} [--content-color-bg] - Background color of the article content
- * @cssprop {color} [--content-color-bg-maxi] - Background color of the article content for large containers
- * @cssprop {color} [--content-color-bg-mini] - Background color of the article content for small containers
+ * @cssprop {color} [--container-outlineColor] - Outline color of the article container
+ * @cssprop {length} [--header-stickyTop-lg=0px] - Sticky header top position for large containers
+ * @cssprop {length} [--header-stickyTop-sm=0px] - Sticky header top position for small containers
+ * @cssprop {color} [--header-textColor=inherit] - Foreground color of the article header
+ * @cssprop {color} [--header-bgColor=#D5D5D5] - Background color of the article header
+ * @cssprop {color} [--header-bgColor-lg=--header-bgColor] - Background color of the article header for large containers
+ * @cssprop {color} [--header-bgColor-sm=--header-bgColor] - Background color of the article header for small containers
+ * @cssprop {color} [--header-borderColor=#000000] - Bottom border (underline) color of the article header
+ * @cssprop {color} [--content-textColor=inherit] - Foreground color of the article content
+ * @cssprop {color} [--content-bgColor] - Background color of the article content
+ * @cssprop {color} [--content-bgColor-lg=--content-bgColor] - Background color of the article content for large containers
+ * @cssprop {color} [--content-bgColor-sm=--content-bgColor] - Background color of the article content for small containers
  */
 @customElement("content-article")
 export class ContentArticle extends LitElement {
@@ -81,15 +83,15 @@ export class ContentArticle extends LitElement {
           :host {
             display: block;
             container: content-article / inline-size;
-            --header-color-fg: inherit;
-            --header-color-bg: #D5D5D5;
-            --header-color-bg-maxi: var(--header-color-bg);
-            --header-color-bg-mini: var(--header-color-bg);
-            --header-color-ul: #000000;
-            --content-color-fg: inherit;
-            --content-color-bg: color-mix(in srgb, var(--content-color-fg), transparent 92%);
-            --content-color-bg-maxi: var(--content-color-bg);
-            --content-color-bg-mini: var(--content-color-bg);
+            --header-textColor: inherit;
+            --header-bgColor: #D5D5D5;
+            --header-bgColor-lg: var(--header-bgColor);
+            --header-bgColor-sm: var(--header-bgColor);
+            --header-borderColor: #000000;
+            --content-textColor: inherit;
+            --content-bgColor: color-mix(in srgb, var(--content-textColor), transparent 92%);
+            --content-bgColor-lg: var(--content-bgColor);
+            --content-bgColor-sm: var(--content-bgColor);
           }
           
           :host([variant=panel]) {
@@ -98,11 +100,11 @@ export class ContentArticle extends LitElement {
           
           article {
             padding: 16px;
-            color: var(--content-color-fg);
-            background-color: var(--content-color-bg);
+            color: var(--content-textColor);
+            background-color: var(--content-bgColor);
             
             header {
-              border-bottom: 1px solid var(--header-color-ul);
+              border-bottom: 1px solid var(--header-borderColor);
               margin-bottom: 8px;
               
               ::slotted(:is(h4, h5)) {
@@ -129,7 +131,8 @@ export class ContentArticle extends LitElement {
               height: 100%;
               box-sizing: border-box;
               border-radius: 8px;
-              box-shadow: inset 0 0 0 200px var(--content-color-bg);
+              box-shadow: inset 0 0 0 200px var(--content-bgColor);
+              outline: 1px solid var(--container-outlineColor);
               
               [part=content] {
                 padding: 16px;
@@ -141,9 +144,8 @@ export class ContentArticle extends LitElement {
                 border-bottom: unset;
                 border-start-start-radius: 8px;
                 border-start-end-radius: 8px;
-                color: var(--header-color-fg);
-                background-color: var(--header-color-bg);
-                outline: 1px solid var(--header-color-outline);
+                color: var(--header-textColor);
+                background-color: var(--header-bgColor);
                 display: grid;
                 grid-template-columns: [thumb] min-content [headings] 1fr;
                 grid-template-rows: [thumb title] 1fr [subtitle] 1fr [timestamp] min-content [thumb];
@@ -237,7 +239,7 @@ export class ContentArticle extends LitElement {
               padding: 0;
               position: relative;
               contain: layout;
-              background-color: var(--content-color-bg-maxi, var(--content-color-bg));
+              background-color: var(--content-bgColor-lg, var(--content-bgColor));
               
               ::slotted([slot=tags]) {
                 margin-top: -1px;
@@ -247,8 +249,8 @@ export class ContentArticle extends LitElement {
                 contain: paint;
                 margin-bottom: 16px;
                 border-radius: 16px;
-                background-color: var(--content-color-bg-mini, var(--content-color-bg));
-                outline: 1px solid var(--container-color-outline);
+                background-color: var(--content-bgColor-sm, var(--content-bgColor));
+                outline: 1px solid var(--container-outlineColor);
                 
                 ::slotted([slot=tags]) {
                   margin-top: 0;
@@ -272,10 +274,10 @@ export class ContentArticle extends LitElement {
                 padding: 8px 8px 4px;
                 position: sticky;
                 margin-bottom: 0;
-                top: var(--header-top-maxi, 0px);
-                color: var(--header-color-fg);
-                background-color: var(--header-color-bg-maxi, var(--header-color-bg));
-                border-bottom: 1px solid var(--header-color-ul);
+                top: var(--header-stickyTop-lg, 0px);
+                color: var(--header-textColor);
+                background-color: var(--header-bgColor-lg, var(--header-bgColor));
+                border-bottom: 1px solid var(--header-borderColor);
                 display: grid;
                 align-items: center;
                 grid-template-columns: 1fr max-content;
@@ -300,10 +302,10 @@ export class ContentArticle extends LitElement {
                 }
                 
                 @container content-article (width < 500px) {
-                  top: var(--header-top-mini, 0px);
-                  background-color: var(--header-color-bg-mini, var(--header-color-bg));
+                  padding: 8px 12px 8px;
+                  top: var(--header-stickyTop-sm, 0px);
+                  background-color: var(--header-bgColor-sm, var(--header-bgColor));
                   margin-bottom: -1px;
-                  padding-bottom: 8px;
                   grid-template-columns: 1fr;
                   grid-template-areas:
                     "timestamp"
@@ -312,7 +314,7 @@ export class ContentArticle extends LitElement {
                   
                   ::slotted([slot=timestamp]) {
                     font-size: 1.3em;
-                    border-bottom: 1px solid var(--header-color-ul);
+                    border-bottom: 1px solid var(--header-borderColor);
                     margin-bottom: 8px;
                   }
                 }

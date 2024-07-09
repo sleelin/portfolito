@@ -6,10 +6,10 @@ const element = inject("manifest").for("page", "nav");
 <style scoped>
 .demo {
   page-nav {
-    --color-primary: var(--vp-c-neutral);
-    --color-link-hover: var(--vp-button-brand-active-bg);
-    --color-link-shadow: var(--vp-button-brand-hover-bg);
-    --color-link-folded: var(--vp-c-white);
+    --container-textColor: var(--vp-c-neutral);
+    --container-textColor-sm: var(--vp-c-white);
+    --container-hoverColor: var(--vp-button-brand-active-bg);
+    --link-shadowColor: var(--vp-button-brand-hover-bg);
     
     &::part(container) {
       position: relative;

@@ -18,9 +18,9 @@ const element = inject("manifest").for("content", "carousel");
     }
     
     content-carousel {
-      --list-color-border: var(--vp-c-border);
+      --list-borderColor: var(--vp-c-border);
     }
-
+    
     li {
       mask: unset;
       background-color: unset;

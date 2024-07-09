@@ -10,12 +10,12 @@ import {customElement} from "lit/decorators.js";
  * @slot {<img> | *} image - Image or other content to show in the hero section
  * @slot {*} feature - Articles to feature alongside hero image and tagline
  * @csspart container - Overall responsive container section element
- * @cssprop {color} [--color-border=#000000] - Bottom border color of hero section
- * @cssprop {color} [--color-tagline=#F4F4F4] - Foreground color of tagline text
- * @cssprop {color} [--color-background=#020024] - Primary background color, used as fallback to gradient 
- * @cssprop {color} [--color-gradient-from=#020024] - Primary color used in background gradient
- * @cssprop {color} [--color-gradient-mid=#646CFF] - Secondary color used in background gradient
- * @cssprop {color} [--color-gradient-to=#00D4FF] - Final color used in background gradient
+ * @cssprop {color} [--container-borderColor=#000000] - Bottom border color of hero section
+ * @cssprop {color} [--container-textColor=#F4F4F4] - Foreground text color of tagline text
+ * @cssprop {color} [--container-bgColor=#020024] - Primary background color, used as fallback to gradient 
+ * @cssprop {color} [--gradient-fromColor=#020024] - Primary color used in background gradient
+ * @cssprop {color} [--gradient-midColor=#646CFF] - Secondary color used in background gradient
+ * @cssprop {color} [--gradient-toColor=#00D4FF] - Final color used in background gradient
  */
 @customElement("content-hero")
 export class ContentHero extends LitElement {
@@ -44,9 +44,9 @@ export class ContentHero extends LitElement {
           
           section {
             overflow: hidden;
-            border-bottom: 1px solid var(--color-border, #000000);
-            background: var(--color-background, #020024);
-            background: linear-gradient(45deg, var(--color-gradient-from, #020024) 0%, var(--color-gradient-mid, #646CFF) 80%, var(--color-gradient-to, #00D4FF) 100%);
+            border-bottom: 1px solid var(--container-borderColor, #000000);
+            background: var(--container-bgColor, #020024);
+            background: linear-gradient(45deg, var(--gradient-fromColor, #020024) 0%, var(--gradient-midColor, #646CFF) 80%, var(--gradient-toColor, #00D4FF) 100%);
             height: 576px;
             display: grid;
             column-gap: 32px;
@@ -70,7 +70,7 @@ export class ContentHero extends LitElement {
               grid-area: tagline;
               text-align: center;
               align-content: center;
-              color: var(--color-tagline, #F4F4F4);
+              color: var(--container-textColor, #F4F4F4);
               animation: 1s ease-in-out fold;
               box-sizing: border-box;
             }

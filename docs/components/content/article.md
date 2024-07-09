@@ -10,7 +10,7 @@ q {
 
 .demo {
   content-article {
-    --header-color-ul: var(--vp-c-neutral);
+    --header-borderColor: var(--vp-c-neutral);
   }
 
   &.panel {
@@ -26,7 +26,7 @@ q {
     }
     
     content-article {
-      --content-color-fg: #fafafa;
+      --content-textColor: #fafafa;
       min-width: 250px;
       flex: 1;
     }
@@ -47,7 +47,7 @@ q {
     }
 
     content-article {
-      --header-color-bg: var(--vp-c-divider);
+      --header-bgColor: var(--vp-c-divider);
     }
   }
 }
