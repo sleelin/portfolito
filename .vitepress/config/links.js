@@ -20,8 +20,9 @@ export const sidebar = [
         items: [
             {text: "Header", link: "/components/page/header"},
             {text: "Logo", link: "/components/page/logo"},
+            {text: "Nav", link: "/components/page/nav"},
             {text: "Main", link: "/components/page/main"},
-            {text: "Nav", link: "/components/page/nav"}
+            {text: "Footer", link: "/components/page/footer"},
         ]
     },
     {

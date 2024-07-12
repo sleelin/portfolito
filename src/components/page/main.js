@@ -34,12 +34,12 @@ export class PageMain extends LitElement {
           
           main {
             background-color: inherit;
-            container: page-main / inline-size;
+            container-type: inline-size;
             position: relative;
           }
           
           [part=content] {
-            margin: 0 auto 32px;
+            margin: 0 auto 8px;
             max-width: 976px;
             box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
             contain: paint;
@@ -47,12 +47,12 @@ export class PageMain extends LitElement {
             border-bottom-right-radius: 16px;
             background-color: var(--container-fgColor);
             
-            @container page-main (width <= 976px) {
+            @container (width <= 976px) {
               border-bottom-left-radius: 0;
               border-bottom-right-radius: 0;
             }
             
-            @container page-main (width < 532px) {
+            @container (width < 532px) {
               box-shadow: unset;
               background-color: var(--container-fgColor-sm, var(--container-fgColor));
             }

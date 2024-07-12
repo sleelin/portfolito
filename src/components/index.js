@@ -1,3 +1,4 @@
+import "./page/footer.js";
 import "./page/header.js";
 import "./page/logo.js";
 import "./page/main.js";
