@@ -166,11 +166,6 @@ export class ContentArticle extends LitElement {
                     max-height: 100%;
                     pointer-events: none;
                     place-self: center;
-                    transition: transform 0.2s ease;
-                  }
-                  
-                  &:hover ::slotted([slot=thumb]) {
-                    transform: scale(1.025);
                   }
                   
                   ::slotted([slot=title]) {
