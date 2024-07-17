@@ -93,6 +93,23 @@ export class ContentSection extends LitElement {
             margin-right: 8px;
             background-color: var(--title-iconColor, var(--title-textColor, #3c3c43));
           }
+          
+          @media print {
+            [part=container] {
+              padding: 0;
+            }
+            
+            ::slotted([slot=title]) {
+              margin-bottom: 12pt;
+              justify-content: center;
+            }
+            
+            ::slotted([slot=title]):before {
+              -webkit-print-color-adjust: exact !important;
+              color-adjust: exact !important;
+              print-color-adjust: exact !important;
+            }
+          }
         `;
     }
 }

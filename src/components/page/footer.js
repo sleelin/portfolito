@@ -46,6 +46,10 @@ export class PageFooter extends LitElement {
             display: grid;
             grid-template-columns: minmax(auto, 976px);
             justify-content: center;
+            
+            @media print {
+              display: none;
+            }
           }
           
           footer {

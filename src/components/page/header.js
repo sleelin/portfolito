@@ -59,6 +59,27 @@ export class PageHeader extends LitElement {
             position: sticky;
             top: 4px;
           }
+          
+          @media print {
+            :host {
+              background-color: white;
+            }
+            
+            header, .container {
+              position: static;
+              display: block;
+            }
+            
+            header {
+              margin: 0 auto;
+              max-width: 21cm;
+              box-shadow: unset;
+              
+              &:before, &:after {
+                display: none;
+              }
+            }
+          }
         `;
     }
 }

@@ -57,6 +57,19 @@ export class PageMain extends LitElement {
               background-color: var(--container-fgColor-sm, var(--container-fgColor));
             }
           }
+          
+          @media print {
+            main {
+              margin: 0 auto;
+              max-width: 21cm;
+              background-color: var(--container-fgColor);
+              box-shadow: unset
+            }
+            
+            [part=content] {
+              box-shadow: unset;
+            }
+          }
         `;
     }
 }

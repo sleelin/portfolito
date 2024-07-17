@@ -41,7 +41,8 @@ export class PageLogo extends LitElement {
           
           .container {
             display: grid;
-            align-items: center;
+            align-items: end;
+            align-content: center;
             grid-template-rows: repeat(2, max-content);
             grid-template-columns: 60px 1fr;
             min-height: 52px;
@@ -55,7 +56,6 @@ export class PageLogo extends LitElement {
             grid-row-end: span 2;
             max-height: 48px;
             max-width: 100%;
-            margin-top: 4px;
             margin-right: 12px;
             display: flex;
             align-items: center;
@@ -86,8 +86,8 @@ export class PageLogo extends LitElement {
             }
             
             :host(.round) & {
-              &:before, &:after {
-                border-radius: 32px;
+              &, &:before, &:after, ::slotted(img) {
+                border-radius: 50%;
               }
             }
             
@@ -109,7 +109,7 @@ export class PageLogo extends LitElement {
           ::slotted(img) {
             width: 100%;
             aspect-ratio: 1;
-            max-height: 48px;
+            max-height: 100%;
             z-index: 0;
             object-fit: contain;
           }
@@ -127,7 +127,7 @@ export class PageLogo extends LitElement {
           
           ::slotted(h1:last-child:only-of-type) {
             grid-row-end: span 2;
-            align-self: end;
+            align-self: center;
             line-height: 1.5;
           }
           
@@ -147,6 +147,37 @@ export class PageLogo extends LitElement {
             
             to {
               transform: rotate(360deg);
+            }
+          }
+          
+          @media print {
+            .collapse {
+              position: static;
+            }
+            
+            .container {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              font-size: 18pt;
+            }
+            
+            .logo {
+              max-height: 96px;
+              margin-bottom: 6pt;
+              
+              &:before, &:after {
+                display: none;
+              }
+              
+              ::slotted(img) {
+                box-shadow: inset var(--logo-bgColor) 0 0 200px 0;
+              }
+              
+              :host(.border) & {
+                border: 2px solid var(--logo-borderColor);
+              }
             }
           }
         `;

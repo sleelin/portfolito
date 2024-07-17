@@ -346,6 +346,29 @@ export class ContentArticle extends LitElement {
               transform: translateY(0%);
             }
           }
+          
+          @media print {
+            article {
+              break-inside: avoid;
+              
+              [part=content] {
+                font-size: 9pt;
+              }
+              
+              :host([variant=job]) & {
+                padding: 2pt 4pt !important;
+                
+                header {
+                  position: static;
+                  margin-bottom: 6pt !important;
+                }
+                
+                [part=content] {
+                  padding: 0;
+                }
+              }
+            }
+          }
         `;
     }
 }

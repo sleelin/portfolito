@@ -113,6 +113,10 @@ export class PageNav extends LitElement {
             right: 0;
             width: calc(100% - 16px - 256px);
             padding: 0 16px;
+            
+            @media print {
+              display: none;
+            }
           }
           
           label, input {

@@ -208,6 +208,38 @@ export class ContentHero extends LitElement {
               transform: scale(1);
             }
           }
+          
+          @media print {
+            section {
+              height: auto;
+              min-height: unset;
+              padding: 0;
+              background: transparent;
+              display: block;
+              width: 100%;
+              
+              ::slotted([slot=image]), content-carousel {
+                display: none;
+              }
+              
+              .tagline {
+                color: inherit;
+                animation: unset;
+                max-width: 50ch;
+                padding: 0;
+                margin: 0 auto;
+                font-size: 11pt;
+              }
+              
+              &:after {
+                content: "";
+                display: block;
+                border-bottom: 1px solid;
+                margin: 12pt 2pt 18pt;
+                opacity: 0.25;
+              }
+            }
+          }
         `;
     }
 }

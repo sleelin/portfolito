@@ -160,6 +160,31 @@ export class ContentDetails extends LitElement {
               }
             }
           }
+          
+          @media print {
+            [part=summary] {
+              display: flex;
+              pointer-events: none;
+              
+              &:before {
+                display: none;
+              }
+              
+              &:after {
+                content: ":";
+              }
+            }
+            
+            :host([variant=list]) [part=content] {
+              max-height: 100%;
+              padding-left: 8pt;
+              
+              ::slotted(li) {
+                opacity: 1;
+                transform: unset;
+              }
+            }
+          }
         `;
     }
 }
