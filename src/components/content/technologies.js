@@ -70,7 +70,6 @@ export class ContentTechnologies extends LitElement {
             justify-content: start;
             list-style-type: none;
             padding-inline-start: 0;
-            overflow-x: scroll;
             overflow-y: hidden;
             scrollbar-width: thin;
             

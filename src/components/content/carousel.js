@@ -37,7 +37,7 @@ export class ContentCarousel extends LitElement {
         return css`
           :host {
             display: block;
-            container: content-carousel / inline-size;
+            container-type: inline-size;
           }
           
           [part=container] {
@@ -47,15 +47,14 @@ export class ContentCarousel extends LitElement {
             align-content: center;
             grid-auto-flow: column;
             box-sizing: border-box;
-            overflow-x: scroll;
             overflow-y: hidden;
             
-            @container content-carousel (width <= 1176px) {
+            @container (width <= 1176px) {
               column-gap: 16px;
               align-content: center;
             }
             
-            @container content-carousel (width <= 976px) {
+            @container (width <= 976px) {
               height: 100%;
               column-gap: 8px;
               grid-auto-columns: min(calc(100cqw - 32px), 352px);

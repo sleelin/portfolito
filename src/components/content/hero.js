@@ -38,8 +38,7 @@ export class ContentHero extends LitElement {
         return css`
           :host {
             display: block;
-            scroll-margin-top: 86px;
-            container: content-hero / inline-size;
+            container-type: inline-size;
           }
           
           section {
@@ -79,7 +78,7 @@ export class ContentHero extends LitElement {
               min-width: 352px;
               grid-area: carousel;
               
-              @container content-hero (width > 1176px) {
+              @container (width > 1176px) {
                 container-type: normal;
                 
                 &::part(container) {
@@ -88,7 +87,7 @@ export class ContentHero extends LitElement {
               }
             }
             
-            @container content-hero (width < 1400px) {
+            @container (width < 1400px) {
               grid-template-columns: min-content 1fr max-content;
               padding: 0 32px;
               
@@ -103,11 +102,11 @@ export class ContentHero extends LitElement {
               }
             }
             
-            @container content-hero (width <= 1225px) {
+            @container (width <= 1225px) {
               grid-template-columns: max-content 1fr max-content;
             }
             
-            @container content-hero (width <= 1176px) {
+            @container (width <= 1176px) {
               row-gap: 32px;
               height: auto;
               min-height: 576px;
@@ -140,7 +139,7 @@ export class ContentHero extends LitElement {
               }
             }
             
-            @container content-hero (width <= 1066px) {
+            @container (width <= 1066px) {
               content-carousel {
                 align-self: end;
                 
@@ -154,7 +153,7 @@ export class ContentHero extends LitElement {
               }
             }
             
-            @container content-hero (width <= 976px) {
+            @container (width <= 976px) {
               padding: 0 16px;
               column-gap: 16px;
             
@@ -171,7 +170,7 @@ export class ContentHero extends LitElement {
               }
             }
             
-            @container content-hero (width <= 876px) {
+            @container (width <= 876px) {
               height: auto;
               grid-auto-flow: row;
               grid-template-rows: auto min-content 1fr;
@@ -182,9 +181,13 @@ export class ContentHero extends LitElement {
                 "carousel";
             }
           
-            @container content-hero (width <= 425px) {
+            @container (width <= 425px) {
               .tagline {
                 padding: 0 4px;
+              }
+            
+              content-carousel::part(container) {
+                padding: 0 8px;
               }
             }
           }

@@ -59,7 +59,7 @@ export class ContentDetails extends LitElement {
     static get styles() {
         return css`
           [part=container] {
-            container: content-details / inline-size;
+            container-type: inline-size;
           }
           
           [part=summary] {
@@ -139,7 +139,7 @@ export class ContentDetails extends LitElement {
                 padding-left: 6px;
               }
               
-              @container content-details (width <= 576px) {
+              @container (width <= 576px) {
                 padding-left: 12px;
               
                 ::slotted(li) {

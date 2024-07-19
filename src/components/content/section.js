@@ -35,14 +35,13 @@ export class ContentSection extends LitElement {
         return css`
           :host {
             display: block;
-            container: content-section / inline-size;
-            scroll-margin-top: 76px;
+            container-type: inline-size;
           }
           
           [part=container] {
             padding: 16px;
             
-            @container content-section (width <= 425px) {
+            @container (width <= 425px) {
               padding: 16px 8px;
               
               ::slotted([slot=title]) {
@@ -61,11 +60,11 @@ export class ContentSection extends LitElement {
               margin-bottom: 0;
             }
             
-            @container content-section (width <= 90ch) {
+            @container (width <= 90ch) {
               grid-template-columns: repeat(2, 1fr);
             }
             
-            @container content-section (width <= 60ch) {
+            @container (width <= 60ch) {
               grid-template-columns: 1fr;
             }
           }

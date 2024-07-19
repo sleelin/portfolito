@@ -15,8 +15,8 @@ import {customElement, property, query, queryAssignedNodes} from "lit/decorators
  * @csspart header - Container element for title, subtitle, and timestamp slots
  * @csspart content - The actual content of the article
  * @cssprop {color} [--container-outlineColor] - Outline color of the article container
- * @cssprop {length} [--header-stickyTop-lg=0px] - Sticky header top position for large containers
- * @cssprop {length} [--header-stickyTop-sm=0px] - Sticky header top position for small containers
+ * @cssprop {length} [--header-stickyTop=0px] - Sticky header top position
+ * @cssprop {length} [--header-stickyTop-sm=--header-stickyTop] - Sticky header top position for small containers
  * @cssprop {color} [--header-textColor=inherit] - Foreground color of the article header
  * @cssprop {color} [--header-bgColor=#D5D5D5] - Background color of the article header
  * @cssprop {color} [--header-bgColor-lg=--header-bgColor] - Background color of the article header for large containers
@@ -82,7 +82,7 @@ export class ContentArticle extends LitElement {
         return css`
           :host {
             display: block;
-            container: content-article / inline-size;
+            container-type: inline-size;
             --header-textColor: inherit;
             --header-bgColor: #D5D5D5;
             --header-bgColor-lg: var(--header-bgColor);
@@ -243,7 +243,7 @@ export class ContentArticle extends LitElement {
                 margin-top: -1px;
               }
               
-              @container content-article (width < 500px) {
+              @container (width < 500px) {
                 contain: paint;
                 margin-bottom: 16px;
                 border-radius: 16px;
@@ -261,7 +261,7 @@ export class ContentArticle extends LitElement {
                 margin-bottom: 16px;
                 row-gap: 16px;
                 
-                @container content-article (width < 500px) {
+                @container (width < 500px) {
                   padding: 16px;
                   margin-bottom: 0;
                 }
@@ -272,7 +272,7 @@ export class ContentArticle extends LitElement {
                 padding: 8px 8px 4px;
                 position: sticky;
                 margin-bottom: 0;
-                top: var(--header-stickyTop-lg, 0px);
+                top: var(--header-stickyTop, 0px);
                 color: var(--header-textColor);
                 background-color: var(--header-bgColor-lg, var(--header-bgColor));
                 border-bottom: 1px solid var(--header-borderColor);
@@ -299,9 +299,9 @@ export class ContentArticle extends LitElement {
                   font-size: 1.1em;
                 }
                 
-                @container content-article (width < 500px) {
+                @container (width < 500px) {
                   padding: 8px 12px 8px;
-                  top: var(--header-stickyTop-sm, 0px);
+                  top: var(--header-stickyTop-sm, var(--header-stickyTop, 0px));
                   background-color: var(--header-bgColor-sm, var(--header-bgColor));
                   margin-bottom: -1px;
                   grid-template-columns: 1fr;
