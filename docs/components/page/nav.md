@@ -135,7 +135,7 @@ To facilitate this, the `<page-nav>` element provides a `socials` slot.
 Links placed in the `socials` slot will be automatically transformed into logo images for the site they link to,
 based on the contents of the `href` attribute of the link, and can be placed in any order.
 
-#### Other Content Sources
+#### BYO Socials
 
 It's also possible to include your own icon for links to sources that aren't already handled.
 This is done either by including an `<img>` element in the link, or with inline SVG markup.

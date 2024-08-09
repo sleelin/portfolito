@@ -6,7 +6,7 @@ import {head, nav, sidebar} from "./links.js";
 export default defineConfig({
     title: "PortfoLitO", srcDir: "./docs", base: "/portfolito/",
     description: "A Lit Web Components Library for building Software Developer Portfolio of Work Pages",
-    head, themeConfig: {logo: "/logo.svg", nav, sidebar, outline: {level: [2, 3]}},
+    head, themeConfig: {logo: "/logo.svg", nav, sidebar, outline: {level: [2, 4]}},
     markdown: {config: configureMarkdown},
     vite: {
         plugins: vite.plugins,
