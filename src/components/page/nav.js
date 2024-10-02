@@ -138,8 +138,8 @@ export class PageNav extends LitElement {
             }
             
             @container (width < 480px) {
-              overflow-x: scroll;
-              position: absolute;
+              overflow-y: hidden;
+              position: relative;
               top: -64px;
               bottom: 0;
               left: 0;
@@ -272,12 +272,12 @@ export class PageNav extends LitElement {
             contain: paint;
             
             @container (width < 480px) {
-              padding: 0 16px;
               pointer-events: none;
               overflow: hidden;
               position: fixed;
+              align-content: unset;
               top: 100%;
-              width: 100vw;
+              width: calc(100vw - 15px);
               height: calc(100vh - 64px);
               
               > :after {
