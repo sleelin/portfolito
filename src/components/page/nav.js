@@ -277,7 +277,7 @@ export class PageNav extends LitElement {
               position: fixed;
               align-content: unset;
               top: 100%;
-              width: calc(100vw - 15px);
+              width: 100vw;
               height: calc(100vh - 64px);
               
               > :after {
