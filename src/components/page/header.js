@@ -28,6 +28,7 @@ export class PageHeader extends LitElement {
           
           header {
             container: header / inline-size;
+            contain: layout;
             position: sticky;
             z-index: 100;
             top: -24px;

@@ -103,7 +103,8 @@ export class PageNav extends LitElement {
     static get styles() {
         return css`
           [part=container] {
-            container: root / inline-size;
+            container-type: inline-size;
+            contain: layout;
             box-sizing: border-box;
             display: flex;
             height: 100%;
@@ -132,11 +133,11 @@ export class PageNav extends LitElement {
             grid-template-columns: 1fr max-content;
             grid-template-areas: "links socials";
             
-            @container root (width <= 888px) {
+            @container (width <= 888px) {
               column-gap: 32px;
             }
             
-            @container root (width < 480px) {
+            @container (width < 480px) {
               overflow-x: scroll;
               position: absolute;
               top: -64px;
@@ -154,7 +155,7 @@ export class PageNav extends LitElement {
               }
             }
             
-            @container root (width < 228px) {
+            @container (width < 228px) {
               top: -100cqh;
               z-index: 999999;
               row-gap: 32px;
@@ -204,13 +205,13 @@ export class PageNav extends LitElement {
               box-shadow: 0 0 3rem 1.3rem color-mix(in srgb, var(--link-shadowColor, #646cff), transparent 33%);
             }
           
-            @container root (width < 480px) {
+            @container (width < 480px) {
               ::slotted(a) {
                 color: var(--container-textColor-sm, #ffffff);
               }
             }
             
-            @container root (width < 228px) {
+            @container (width < 228px) {
               grid-auto-flow: row;
               row-gap: 24px;
             }
@@ -245,17 +246,17 @@ export class PageNav extends LitElement {
               }
             }
           
-            @container root (width < 480px) {
+            @container (width < 480px) {
               svg {
                 color: var(--container-textColor-sm, #ffffff);
               }
             }
             
-            @container root (width < 228px) {
+            @container (width < 228px) {
               justify-self: center;
             }
           
-            @container root (width > 888px) {
+            @container (width > 888px) {
               min-width: 256px;
             }
           }
@@ -270,7 +271,7 @@ export class PageNav extends LitElement {
             box-sizing: border-box;
             contain: paint;
             
-            @container root (width < 480px) {
+            @container (width < 480px) {
               padding: 0 16px;
               pointer-events: none;
               overflow: hidden;
@@ -301,7 +302,7 @@ export class PageNav extends LitElement {
             position: sticky;
             top: 20px;
             
-            @container root (width < 480px) {
+            @container (width < 480px) {
               display: block;
             }
             
@@ -350,7 +351,7 @@ export class PageNav extends LitElement {
               transition: opacity 0.2s ease-in;
             }
             
-            @container root (width < 480px) {
+            @container (width < 480px) {
               & + [part=content] {
                 &:after {
                   opacity: 0.4;
@@ -364,14 +365,14 @@ export class PageNav extends LitElement {
                   pointer-events: all;
                   transform: translateY(64px);
                 
-                  @container root (width < 228px) {
+                  @container (width < 228px) {
                     transform: translateY(100cqh);
                   }
                 }
               }
             }
           
-            @container root (width < 228px) {
+            @container (width < 228px) {
               &:after {
                 opacity: 0.4;
               }
