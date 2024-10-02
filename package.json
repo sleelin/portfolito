@@ -24,16 +24,16 @@
     "docs:preview": "vitepress preview"
   },
   "peerDependencies": {
-    "lit": "^3.1.0"
+    "lit": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.23.6",
-    "@babel/preset-env": "^7.23.6",
+    "@babel/plugin-proposal-decorators": "^7.24.7",
+    "@babel/preset-env": "^7.25.4",
     "indent.js": "^0.3.5",
-    "vite": "^5.1.4",
+    "vite": "^5.4.8",
     "vite-plugin-babel": "^1.2.0",
-    "vite-plugin-cem": "^0.7.0",
-    "vitepress": "^1.2.2",
-    "vue": "^3.4.27"
+    "vite-plugin-cem": "^0.8.1",
+    "vitepress": "^1.3.4",
+    "vue": "^3.5.10"
   }
 }
