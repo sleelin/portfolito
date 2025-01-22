@@ -69,13 +69,14 @@ export class ContentDetails extends LitElement {
             
             &:before {
               content: "";
-              display: list-item;
-              width: 0.625em;
-              height: 1.5em;
-              line-height: 1.5;
-              font-size: 1em;
-              margin-right: 6px;
-              list-style: disclosure-closed inside;
+              width: 0;
+              height: 0;
+              border-top: 0.3em solid transparent;
+              border-bottom: 0.3em solid transparent;
+              border-left: 0.4em solid;
+              position: relative;
+              top: 30%;
+              margin-right: 8px;
               transform: rotate(0);
               transition: transform 0.3s ease-in-out;
             }
@@ -129,18 +130,26 @@ export class ContentDetails extends LitElement {
             
             :host([variant=list]) & {
               margin: 0;
-              list-style-type: "- ";
-              padding-left: 24px;
+              list-style: none;
+              padding-left: 12px;
               max-height: 0;
               
               ::slotted(li) {
                 opacity: 0;
+                display: grid;
+                grid-auto-flow: column;
+                justify-content: start;
+                column-gap: 12px;
                 transform: translateX(-2%);
-                padding-left: 6px;
+              }
+              
+              ::slotted(li):before {
+                content: "- ";
+                display: block;
               }
               
               @container (width <= 576px) {
-                padding-left: 12px;
+                padding-left: 0;
               
                 ::slotted(li) {
                   padding-left: 4px;
