@@ -90,7 +90,7 @@ export class ContentBadge extends LitElement {
             --content-bgColor: light-dark(#cecece, #b4b4b440);
           }
           
-          [part="container"] {
+          [part=container] {
             box-sizing: border-box;
             display: inline-block;
             white-space: nowrap;
