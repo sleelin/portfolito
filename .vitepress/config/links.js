@@ -32,6 +32,7 @@ export const sidebar = [
             {text: "Carousel", link: "/components/content/carousel"},
             {text: "Details", link: "/components/content/details"},
             {text: "Hero", link: "/components/content/hero"},
+            {text: "Badge", link: "/components/content/badge"},
             {text: "Languages", link: "/components/content/languages"},
             {text: "Section", link: "/components/content/section"},
             {text: "Technologies", link: "/components/content/technologies"}

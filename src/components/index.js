@@ -7,6 +7,7 @@ import "./content/article.js";
 import "./content/carousel.js";
 import "./content/details.js";
 import "./content/hero.js";
+import "./content/badge.js";
 import "./content/languages.js";
 import "./content/section.js";
 import "./content/technologies.js";
