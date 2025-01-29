@@ -93,6 +93,7 @@ export class ContentDetails extends LitElement {
           [part=content] {
             display: grid;
             grid-template-rows: 0fr;
+            pointer-events: none;
             
             div& > div {
               max-height: 100%;
@@ -101,6 +102,7 @@ export class ContentDetails extends LitElement {
             
             :host([open]) & {
               grid-template-rows: 1fr;
+              pointer-events: all;
             }
             
             :host([variant=grid]) & {
