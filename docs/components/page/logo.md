@@ -4,14 +4,38 @@ const element = inject("manifest").for("page", "logo");
 </script>
 
 <style scoped>
-.demo :deep(.content) {
-  justify-self: center;
+.demo {
+  &[static] page-main::part(content) {
+    margin: 0;
+  }
+  
+  &:not([static]) :deep(.content) {
+    justify-self: center;
+  }
 }
 </style>
 
 # Logo Element
 
 {{ element.summary }}
+
+<demo static class="scale">
+  <page-header>
+    <page-logo class="focus rounded">
+      <img src="/logo.svg" alt="PortfoLitO" />
+      <h1 slot="headings">PortfoLitO</h1>
+    </page-logo>
+    <page-nav class="blur">
+      <a>About</a>
+      <a>Components</a>
+      <a slot="socials" href="https://www.npmjs.com">NPM</a>
+      <a slot="socials" href="https://github.com">GitHub</a>
+    </page-nav>
+  </page-header>
+  <page-main class="blur">
+    <content-hero slot="hero"></content-hero>
+  </page-main>
+</demo>
 
 ## Usage
 

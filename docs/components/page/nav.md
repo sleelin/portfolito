@@ -5,6 +5,16 @@ const element = inject("manifest").for("page", "nav");
 
 <style scoped>
 .demo {
+  &[static] {
+    page-main::part(content) {
+      margin: 0;
+    }
+    
+    a {
+      cursor: pointer;
+    }
+  }
+  
   page-nav {
     --container-textColor: var(--vp-c-neutral);
     --container-textColor-sm: var(--vp-c-white);
@@ -88,6 +98,24 @@ const element = inject("manifest").for("page", "nav");
 # Nav Element
 
 {{ element.summary }}
+
+<demo static class="scale">
+  <page-header>
+    <page-logo class="blur">
+      <img src="/logo.svg" alt="PortfoLitO" />
+      <h1 slot="headings">PortfoLitO</h1>
+    </page-logo>
+    <page-nav class="focus rounded">
+      <a>About</a>
+      <a>Components</a>
+      <a slot="socials" href="https://www.npmjs.com">NPM</a>
+      <a slot="socials" href="https://github.com">GitHub</a>
+    </page-nav>
+  </page-header>
+  <page-main class="blur">
+    <content-hero slot="hero"></content-hero>
+  </page-main>
+</demo>
 
 ## Usage
 
