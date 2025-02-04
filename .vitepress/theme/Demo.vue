@@ -1,6 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import {ref} from "vue";
 
+const {static: isStatic} = defineProps<{static?: boolean}>();
 const source = ref();
 const hover = ref(false);
 const fold = ref(false);
@@ -29,6 +30,10 @@ async function copyCode() {
   display: grid;
   grid-template-columns: 100%;
   
+  &[static] {
+    background-color: var(--vp-c-border);
+  }
+  
   p {
     margin: 0;
   }
@@ -36,6 +41,34 @@ async function copyCode() {
   .content {
     margin: 20px 20px 18px;
     contain: paint;
+    
+    [static] & {
+      background-color: var(--vp-c-bg-alt);
+      overflow: auto;
+    }
+    
+    &:deep(.focus) {
+      position: relative;
+      
+      &:before {
+        content: "";
+        box-sizing: border-box;
+        border: 2px solid var(--vp-c-brand-1);
+        box-shadow: var(--vp-c-brand-1) 0 -1px 20px -8px;
+        position: absolute;
+        inset: 0;
+      }
+      
+      &.rounded:before {
+        border-radius: 6px;
+      }
+    }
+    
+    &:deep(.blur) {
+      user-select: none;
+      pointer-events: none;
+      opacity: 0.4;
+    }
   }
   
   &.resizable .content {
@@ -127,11 +160,11 @@ async function copyCode() {
 </style>
 
 <template>
-    <div class="demo">
+    <div class="demo" :static="isStatic ? 'static' : null">
         <div class="content vp-raw">
             <slot />
         </div>
-        <div class="code" ref="source" @mouseover="hover = true" @mouseleave="hover = false">
+        <div v-if="!isStatic" class="code" ref="source" @mouseover="hover = true" @mouseleave="hover = false">
             <transition name="fade">
                 <div class="controls" v-show="source && hover">
                     <button class="fold" :title="fold ? 'Collapse Code' : 'Expand Code'" @click="fold = !fold;" v-if="$slots.source">
