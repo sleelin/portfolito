@@ -71,6 +71,34 @@ async function copyCode() {
     }
   }
   
+  &.scale .content {
+    zoom: 50%;
+    
+    @media (960px <= width <= 1024px) {
+      zoom: 45%;
+    }
+    
+    @media (max-width: 680px) {
+      zoom: 45%;
+    }
+    
+    @media (max-width: 600px) {
+      zoom: 40%;
+    }
+    
+    @media (max-width: 536px) {
+      zoom: 35%;
+    }
+    
+    @media (max-width: 480px) {
+      zoom: 30%;
+    }
+    
+    @media (max-width: 415px) {
+      zoom: 25%;
+    }
+  }
+  
   &.resizable .content {
     overflow-x: hidden;
     resize: horizontal;
