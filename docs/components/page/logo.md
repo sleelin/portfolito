@@ -5,11 +5,7 @@ const element = inject("manifest").for("page", "logo");
 
 <style scoped>
 .demo {
-  &[static] page-main::part(content) {
-    margin: 0;
-  }
-  
-  &:not([static]) :deep(.content) {
+  & :deep(.content) {
     justify-self: center;
   }
 }
@@ -19,7 +15,7 @@ const element = inject("manifest").for("page", "logo");
 
 {{ element.summary }}
 
-<demo static class="scale">
+<demo static class="scale overview no-spacing">
   <page-header>
     <page-logo class="focus rounded">
       <img src="/logo.svg" alt="PortfoLitO" />
@@ -38,8 +34,6 @@ const element = inject("manifest").for("page", "logo");
 </demo>
 
 ## Usage
-
-### Basic Logo
 
 The `<page-logo>` element itself does not provide any content of its own.
 Instead, it acts as a responsive container for your supplied logo image and headings.

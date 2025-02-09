@@ -5,16 +5,6 @@ const element = inject("manifest").for("page", "nav");
 
 <style scoped>
 .demo {
-  &[static] {
-    page-main::part(content) {
-      margin: 0;
-    }
-    
-    a {
-      cursor: pointer;
-    }
-  }
-  
   page-nav {
     --container-textColor: var(--vp-c-neutral);
     --container-textColor-sm: var(--vp-c-white);
@@ -27,11 +17,9 @@ const element = inject("manifest").for("page", "nav");
     }
   }
   
-  &:is(.expanded, .resizable) {
-    & :deep(.content) {
-      box-shadow: 0 0 1px 0;
-      border-radius: 2px;
-    }
+  &:is(.expanded, .resizable) :deep(.content) {
+    box-shadow: 0 0 1px 0;
+    border-radius: 2px;
   }
   
   &.expanded {
@@ -40,10 +28,8 @@ const element = inject("manifest").for("page", "nav");
       display: grid;
     }
     
-    page-nav {
-      &::part(container) {
-        container: unset;
-      }
+    page-nav::part(container) {
+      container: unset;
     }
   }
   
@@ -99,7 +85,7 @@ const element = inject("manifest").for("page", "nav");
 
 {{ element.summary }}
 
-<demo static class="scale">
+<demo static class="scale overview no-spacing">
   <page-header>
     <page-logo class="blur">
       <img src="/logo.svg" alt="PortfoLitO" />
@@ -118,8 +104,6 @@ const element = inject("manifest").for("page", "nav");
 </demo>
 
 ## Usage
-
-### Basic Usage
 
 The `<page-nav>` element is intended to act as the page's primary navigation menu.
 It does not provide any content of its own, instead wrapping supplied content with a native `<nav>` element, 

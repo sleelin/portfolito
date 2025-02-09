@@ -4,7 +4,7 @@ const element = inject("manifest").for("content", "carousel");
 </script>
 
 <style scoped>
-.demo {
+.demo:not([static]) {
   article, [variant=panel] {
     border: 1px solid var(--vp-c-border);
     border-radius: 16px;
@@ -47,9 +47,57 @@ const element = inject("manifest").for("content", "carousel");
 
 {{ element.summary }}
 
-## Usage
+<demo static class="scale">
+  <style>
+    .focus:before {
+      z-index: 1;
+    }
+    
+    content-article {
+      --container-outlineColor: var(--vp-c-border);
+    }
+    
+    content-carousel {
+      margin: 8px;
+      
+      &::part(container) {
+        padding: 16px 8px 0;
+      }
+    }
+  </style>
+  <page-header class="blur">
+    <page-logo>
+      <img src="/logo.svg" alt="PortfoLitO" />
+      <h1 slot="headings">PortfoLitO</h1>
+    </page-logo>
+    <page-nav>
+      <a>About</a>
+      <a>Components</a>
+      <a slot="socials" href="https://www.npmjs.com">NPM</a>
+      <a slot="socials" href="https://github.com">GitHub</a>
+    </page-nav>
+  </page-header>
+  <page-main>
+    <content-hero slot="hero" class="blur"></content-hero>
+    <content-carousel class="focus rounded">
+      <content-article variant="panel">
+        <h4>About</h4>
+        <p>Tamquam vitae curae dico dictas. Antiopam tempor hendrerit delicata maecenas repudiandae tractatos eripuit.</p>
+      </content-article>
+      <content-article variant="panel">
+        <h4>Tip</h4>
+        <p>Open the console and inspect the demo to see the page and content component structures</p>
+      </content-article>
+      <content-article variant="panel">
+        <h4>Focus on Your Content</h4>
+        <p>Native web components allow you to create an elegant showcase for your portfolio of work using HTML</p>
+      </content-article>
+    </content-carousel>
+  </page-main>
+  <page-footer class="blur"></page-footer>
+</demo>
 
-### Basic Usage
+## Usage
 
 The `<content-carousel>` element wraps content in a horizontally scrolling container.
 

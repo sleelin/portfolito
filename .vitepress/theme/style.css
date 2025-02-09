@@ -85,3 +85,88 @@
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
+
+/**
+ * Component: Demo
+ * -------------------------------------------------------------------------- */
+.demo.overview {
+  &.fixed-height {
+    height: min(max(50vw, 30vh), 360px);
+    
+    content-hero::part(container) {
+      height: 500px;
+    }
+  }
+  
+  &.no-overflow .content {
+    overflow: hidden;
+  }
+  
+  &.no-spacing .content {
+    padding: 0;
+    justify-self: stretch;
+    
+    page-main::part(content) {
+      margin: 0;
+    }
+    
+    page-header.focus:before {
+      z-index: 1000;
+    }
+  }
+  
+  a {
+    cursor: pointer;
+  }
+  
+  page-header {
+    --header-bgColor: var(--vp-c-bg-soft);
+  }
+  
+  page-nav {
+    --container-textColor: var(--vp-c-neutral);
+    --container-textColor-sm: var(--vp-c-white);
+    --container-hoverColor: var(--vp-button-brand-active-bg);
+    --link-shadowColor: var(--vp-c-indigo-3);
+  }
+  
+  page-main {
+    --container-fgColor: var(--vp-c-bg-elv);
+    --container-bgColor: transparent;
+  }
+  
+  content-technologies {
+    margin: -8px 0 16px;
+    --title-bgColor: var(--vp-c-text-1);
+    --title-textColor: var(--vp-c-bg);
+  }
+  
+  content-languages {
+    --heading-textColor: var(--vp-c-text-1);
+    --container-textColor: var(--vp-c-neutral);
+    --container-bgColor: var(--vp-c-bg-elv);
+  }
+  
+  content-hero::part(content) {
+    text-align: left;
+    max-width: 538px;
+    padding: 0;
+  }
+  
+  content-article {
+    grid-column: span 2;
+    --header-borderColor: var(--vp-c-neutral);
+    
+    &[variant] {
+      grid-column: span 1;
+      --header-bgColor: var(--vp-c-divider);
+      --content-bgColor: var(--vp-c-gray-3);
+      --container-outlineColor: var(--vp-c-border);
+      
+      h4[slot=title] {
+        font-weight: bold;
+        border-bottom: 1px solid var(--header-borderColor);
+      }
+    }
+  }
+}

@@ -3,31 +3,16 @@ import {inject} from "vue";
 const element = inject("manifest").for("page", "main");
 </script>
 
-<style scoped>
-.demo {
-  &[static] {
-    page-main {
-      --container-fgColor: var(--vp-c-bg-elv);
-      --container-bgColor: transparent;
-    }
-    
-    content-article {
-      --content-bgColor: var(--vp-c-gray-3);
-      --container-outlineColor: var(--vp-c-border);
-    }
-    
-    content-hero {
-      border: 2px solid transparent;
-    }
-  }
-}
-</style>
-
 # Main Element
 
 {{ element.summary }}
 
-<demo static class="scale">
+<demo static class="scale overview">
+  <style>
+    content-hero {
+      border: 2px solid transparent;
+    }
+  </style>
   <page-header class="blur">
     <page-logo>
       <img src="/logo.svg" alt="PortfoLitO" />
@@ -43,17 +28,33 @@ const element = inject("manifest").for("page", "main");
   <page-main class="focus">
     <content-hero slot="hero"></content-hero>
     <content-section variant="grid">
-      <content-article variant="panel">
-        <h4>Feature A</h4>
-        <p>Potenti tation mnesarchum volumus dis quisque facilisi. Lorem a consectetuer alienum has.</p>
-      </content-article>
-      <content-article variant="panel">
-        <h4>Feature B</h4>
+      <content-article>
+        <h4 slot="title">About</h4>
+        <h5 slot="subtitle">Getting Started</h5>
         <p>Tamquam vitae curae dico dictas. Antiopam tempor hendrerit delicata maecenas repudiandae tractatos eripuit.</p>
       </content-article>
       <content-article variant="panel">
-        <h4>Feature C</h4>
-        <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset.</p>
+        <h4>Tip</h4>
+        <p>Open the console and inspect the demo to see the page and content component structures</p>
+      </content-article>
+      <content-article variant="panel">
+        <h4 slot="title">Focus on Your Content</h4>
+        <content-languages slot="tags">
+          <li title="HTML" value="50">HTML</li>
+          <li title="CSS" value="40">CSS</li>
+          <li title="JS" value="10">JavaScript</li>
+        </content-languages>
+        <p>Native web components allow you to create an elegant showcase for your portfolio of work using HTML</p>
+      </content-article>
+      <content-article>
+        <h4 slot="title">Overview</h4>
+        <h5 slot="subtitle">Installation and Usage</h5>
+        <content-technologies slot="tags" variant="tile">
+          <content-badge color="teal">Lit</content-badge>
+          <content-badge color="red">HTML</content-badge>
+          <content-badge color="purple">CSS</content-badge>
+        </content-technologies>
+        <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
   </page-main>
@@ -61,8 +62,6 @@ const element = inject("manifest").for("page", "main");
 </demo>
 
 ## Usage
-
-### Basic Usage
 
 <demo>
   <page-main>

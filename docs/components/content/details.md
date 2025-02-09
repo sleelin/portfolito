@@ -7,9 +7,61 @@ const element = inject("manifest").for("content", "details");
 
 {{ element.summary }}
 
-## Usage
+<demo static class="scale overview">
+  <style>
+    content-details::part(summary) {
+      margin-left: 12px;
+    }
+    
+    content-details::part(content) {
+      transition: grid-template-rows 0.3s ease-in-out;
+    }
+  </style>
+  <page-header class="blur">
+    <page-logo>
+      <img src="/logo.svg" alt="PortfoLitO" />
+      <h1 slot="headings">PortfoLitO</h1>
+    </page-logo>
+    <page-nav>
+      <a>About</a>
+      <a>Components</a>
+      <a slot="socials" href="https://www.npmjs.com">NPM</a>
+      <a slot="socials" href="https://github.com">GitHub</a>
+    </page-nav>
+  </page-header>
+  <page-main>
+    <content-hero slot="hero" class="blur"></content-hero>
+    <content-section variant="grid">
+      <content-article class="blur">
+        <h4 slot="title">About</h4>
+        <h5 slot="subtitle">Getting Started</h5>
+        <p>Tamquam vitae curae dico dictas. Antiopam tempor hendrerit delicata maecenas repudiandae tractatos eripuit.</p>
+      </content-article>
+      <content-article variant="panel" class="blur">
+        <h4>Tip</h4>
+        <p>Open the console and inspect the demo to see the page and content component structures</p>
+      </content-article>
+      <content-details class="span focus rounded">
+        <u slot="summary">See More</u>
+        <content-section variant="grid">
+          <content-article variant="panel">
+            <h4>Focus on Your Content</h4>
+            <p>Native web components allow you to create an elegant showcase for your portfolio of work using HTML</p>
+          </content-article>
+          <content-article>
+            <h4 slot="title">Overview</h4>
+            <h5 slot="subtitle">Installation and Usage</h5>
+            <p>Libero curae luptatum intellegat evertitur elit.</p>
+            <p>Interesset inciderint enim eam sale maluisset.</p>
+          </content-article>
+        </content-section>
+      </content-details>
+    </content-section>
+  </page-main>
+  <page-footer class="blur"></page-footer>
+</demo>
 
-### Basic Usage
+## Usage
 
 The `<content-details>` element is intended to behave the same as the native `<details>` element.
 Its internal structure is similar to, albeit divergent from its native counterpart.

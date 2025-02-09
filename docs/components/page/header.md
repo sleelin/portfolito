@@ -5,17 +5,7 @@ const element = inject("manifest").for("page", "header");
 
 <style scoped>
 .demo {
-  &[static] {
-    .focus:before {
-      z-index: 1000;
-    }
-    
-    page-main::part(content) {
-      margin: 0;
-    }
-  }
-  
-  &:not([static]) :deep(.content) {
+  & :deep(.content) {
     padding: 4px;
   }
   
@@ -34,7 +24,7 @@ const element = inject("manifest").for("page", "header");
 
 {{ element.summary }}
 
-<demo static class="scale">
+<demo static class="scale overview no-spacing">
   <page-header class="focus">
     <page-logo class="blur">
       <img src="/logo.svg" alt="PortfoLitO" />
@@ -53,8 +43,6 @@ const element = inject("manifest").for("page", "header");
 </demo>
 
 ## Usage
-
-### Basic Usage
 
 The `<page-header>` element itself does not provide any content of its own.
 Instead, it acts as a sticky, responsive container wrapping your supplied content in a native `<header>` element.

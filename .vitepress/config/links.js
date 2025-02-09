@@ -28,13 +28,13 @@ export const sidebar = [
     {
         text: "Content",
         items: [
-            {text: "Article", link: "/components/content/article"},
-            {text: "Carousel", link: "/components/content/carousel"},
-            {text: "Details", link: "/components/content/details"},
             {text: "Hero", link: "/components/content/hero"},
+            {text: "Section", link: "/components/content/section"},
+            {text: "Article", link: "/components/content/article"},
+            {text: "Details", link: "/components/content/details"},
+            {text: "Carousel", link: "/components/content/carousel"},
             {text: "Badge", link: "/components/content/badge"},
             {text: "Languages", link: "/components/content/languages"},
-            {text: "Section", link: "/components/content/section"},
             {text: "Technologies", link: "/components/content/technologies"}
         ]
     }
