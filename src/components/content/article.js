@@ -158,18 +158,22 @@ export class ContentArticle extends LitElement {
                 }
                 
                 &.stack {
-                  grid-template-columns: [thumb headings] 1fr;
-                  grid-template-rows: [title thumb] minmax(100px, 120px) [thumb] minmax(1.825cap, max-content) [title subtitle] max-content [subtitle];
+                  grid-template-rows: [title] 1fr [subtitle] min-content [timestamp] min-content;
+                  
+                  &.thumb {
+                    grid-template-columns: [thumb headings] 1fr;
+                    grid-template-rows: [title thumb] minmax(100px, 120px) [thumb] minmax(1.825cap, max-content) [title subtitle] max-content [subtitle];
+                    
+                    ::slotted([slot=title]) {
+                      grid-row: thumb / title 2;
+                    }
+                  }
                   
                   ::slotted([slot=thumb]) {
                     min-width: unset;
                     max-height: 100%;
                     pointer-events: none;
                     place-self: center;
-                  }
-                  
-                  ::slotted([slot=title]) {
-                    grid-row: thumb / title 2;
                   }
                   
                   ::slotted([slot=title].status) {
