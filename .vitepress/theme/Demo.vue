@@ -52,6 +52,7 @@ async function copyCode() {
       
       &:before {
         content: "";
+        pointer-events: none;
         box-sizing: border-box;
         border: 2px solid var(--vp-c-brand-1);
         box-shadow: var(--vp-c-brand-1) 0 -1px 20px -8px;
