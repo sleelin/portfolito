@@ -46,11 +46,11 @@ const element = inject("manifest").for("content", "badge");
       <content-article>
         <h4 slot="title" class="blur">Overview</h4>
         <h5 slot="subtitle" class="blur">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal" class="focus rounded">Lit</content-badge>
           <content-badge color="red" class="focus rounded">HTML</content-badge>
           <content-badge color="purple" class="focus rounded">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p class="blur">Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>

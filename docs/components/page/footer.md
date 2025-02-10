@@ -34,11 +34,11 @@ const element = inject("manifest").for("page", "footer");
       <content-article>
         <h4 slot="title">Overview</h4>
         <h5 slot="subtitle">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>

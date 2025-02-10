@@ -3,6 +3,14 @@ import {inject} from "vue";
 const element = inject("manifest").for("content", "topics");
 </script>
 
+<style scoped>
+.demo {
+  content-article[variant=job]::part(content) {
+    display: none;
+  }
+}
+</style>
+
 # Topics Element
 
 {{ element.summary }}
@@ -53,32 +61,97 @@ const element = inject("manifest").for("content", "topics");
 
 ## Usage
 
+The `<content-topics />` element is designed to provide an overview of technologies and skills used in a given project or role. 
+
 <demo>
-  <content-topics>
-    <div>AWS</div>
-    <div>GitHub</div>
-    <div>Microsoft</div>
-  </content-topics>
+  <content-article variant="job">
+    <h4 slot="title">Big Tech Companies</h4>
+    <content-topics slot="tags">
+      <div>AWS</div>
+      <div>GitHub</div>
+      <div>Microsoft</div>
+    </content-topics>
+  </content-article>
+  <template #snippet>
+    <content-topics>
+      <div>AWS</div>
+      <div>GitHub</div>
+      <div>Microsoft</div>
+    </content-topics>
+  </template>
+  <template #source>
+    {{preview}}
+  </template>
+</demo>
+
+### With Custom Title
+
+It includes a `title` slot for overriding the default topics title with wording of your choice.
+
+<demo>
+  <content-article variant="job">
+    <h4 slot="title">Big Tech Companies</h4>
+    <content-topics slot="tags">
+      <span slot="title">Some Examples:</span>
+      <div>AWS</div>
+      <div>GitHub</div>
+      <div>Microsoft</div>
+    </content-topics>
+  </content-article>
+  <template #snippet>
+    <content-topics>
+      <span slot="title">Some Examples:</span>
+      <div>AWS</div>
+      <div>GitHub</div>
+      <div>Microsoft</div>
+    </content-topics>
+  </template>
 </demo>
 
 ### List Variant
 
+Topics can also be specified as list items by setting the `variant` attribute to `list`, which will style the topics into a rounded bar.
+When using this variant, excepting the title element, all children are expected to be `<li />` elements.
+
 <demo>
-  <content-topics variant="list">
-    <li>AWS</li>
-    <li>GitHub</li>
-    <li>Microsoft</li>
-  </content-topics>
+  <content-article variant="job">
+    <h4 slot="title">Some Content</h4>
+    <content-topics slot="tags" variant="list">
+      <li>AWS</li>
+      <li>GitHub</li>
+      <li>Microsoft</li>
+    </content-topics>
+  </content-article>
+  <template #snippet>
+    <content-topics variant="list">
+      <li>AWS</li>
+      <li>GitHub</li>
+      <li>Microsoft</li>
+    </content-topics>
+  </template>
 </demo>
 
 ### Tile Variant
 
+Topics can also be specified as badges by setting the `variant` attribute to `tile`, which will style the topics as tiled badges.
+When using this variant, excepting the title element, all children are expected to be [`<content-badge />`](./badge) elements.
+
 <demo>
-  <content-topics variant="tile">
-    <content-badge>AWS</content-badge>
-    <content-badge>GitHub</content-badge>
-    <content-badge>Microsoft</content-badge>
-  </content-topics>
+  <content-article variant="job">
+    <h4 slot="title">Some Content</h4>
+    <content-topics slot="tags" variant="tile">
+      <content-badge>AWS</content-badge>
+      <content-badge>GitHub</content-badge>
+      <content-badge>Microsoft</content-badge>
+    </content-topics>
+  </content-article>
+  <template #snippet>
+    <content-topics variant="tile">
+      <content-badge>AWS</content-badge>
+      <content-badge>GitHub</content-badge>
+      <content-badge>Microsoft</content-badge>
+    </content-topics>
+  </template>
 </demo>
 
 ## Attributes

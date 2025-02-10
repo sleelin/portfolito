@@ -6,7 +6,7 @@ import {choose} from "lit/directives/choose.js";
  * ContentTopics element
  * @summary
  * Provides a scrollable or wrapping list of topics related to a specific article
- * @slot {<li>} - List of topics related to the article
+ * @slot {<li>|<content-badge>|*} - List of topics related to the article
  * @slot {<span>} [title=Topics] - Leading text to use in list title
  * @csspart container - Responsive container element
  * @csspart title - Leading heading title element
