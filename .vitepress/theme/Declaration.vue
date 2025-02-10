@@ -43,8 +43,14 @@ td.description {
 }
 
 td ul, td li {
+  list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+td.type ul {
+  display: flex;
+  column-gap: 4px;
 }
 
 li:only-child {
@@ -87,7 +93,11 @@ code {
                                 <code v-if="row[col.name]">{{ row[col.name] }}</code>
                                 <i v-else>none</i>
                             </template>
-                            <code v-else-if="col.name === 'type' && !!row?.type?.text">{{ row.type.text }}</code>
+                            <ul v-else-if="col.name === 'type' && !!row?.type?.text">
+                                <li v-for="val in row.type.text.split('|')">
+                                    <code>{{ val || "*" }}</code>
+                                </li>
+                            </ul>
                             <ul v-else-if="col.name === 'default' && !!row.default">
                                 <li v-for="val in row.default.split('|')">
                                     <template v-if="row?.type?.text === 'color' && val.startsWith('#')">
