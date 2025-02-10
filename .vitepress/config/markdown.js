@@ -37,7 +37,7 @@ function insertCode(source, target, matcher, originalIndent, fallbackIndent) {
     // Check for indent group in matcher, otherwise use specified fallback or original indents...
     const indent = source?.match(matcher)?.groups?.indent ?? fallbackIndent ?? originalIndent;
     // ...then correctly indent target string, removing trailing whitespace
-    const insert = `${indent}${target.replaceAll(originalIndent, indent).replaceAll(/\n\s*$/g, "")}`;
+    const insert = `${indent}${target.replaceAll(originalIndent, indent || fallbackIndent).replaceAll(/\n\s*$/g, "")}`;
     
     return source?.replace(matcher, insert) ?? target;
 }
