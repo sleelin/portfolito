@@ -135,7 +135,7 @@
     --container-bgColor: transparent;
   }
   
-  content-technologies {
+  content-topics {
     margin: -8px 0 16px;
     --title-bgColor: var(--vp-c-text-1);
     --title-textColor: var(--vp-c-bg);

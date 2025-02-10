@@ -1,9 +1,9 @@
 <script setup>
 import {inject} from "vue";
-const element = inject("manifest").for("content", "technologies");
+const element = inject("manifest").for("content", "topics");
 </script>
 
-# Technologies Element
+# Topics Element
 
 {{ element.summary }}
 
@@ -39,11 +39,11 @@ const element = inject("manifest").for("content", "technologies");
       <content-article>
         <h4 slot="title" class="blur">Overview</h4>
         <h5 slot="subtitle" class="blur">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile" class="focus rounded">
+        <content-topics slot="tags" variant="tile" class="focus rounded">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p class="blur">Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
@@ -54,31 +54,31 @@ const element = inject("manifest").for("content", "technologies");
 ## Usage
 
 <demo>
-  <content-technologies>
+  <content-topics>
     <div>AWS</div>
     <div>GitHub</div>
     <div>Microsoft</div>
-  </content-technologies>
+  </content-topics>
 </demo>
 
 ### List Variant
 
 <demo>
-  <content-technologies variant="list">
+  <content-topics variant="list">
     <li>AWS</li>
     <li>GitHub</li>
     <li>Microsoft</li>
-  </content-technologies>
+  </content-topics>
 </demo>
 
 ### Tile Variant
 
 <demo>
-  <content-technologies variant="tile">
+  <content-topics variant="tile">
     <content-badge>AWS</content-badge>
     <content-badge>GitHub</content-badge>
     <content-badge>Microsoft</content-badge>
-  </content-technologies>
+  </content-topics>
 </demo>
 
 ## Attributes

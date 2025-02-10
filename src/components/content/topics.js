@@ -3,25 +3,25 @@ import {customElement, property} from "lit/decorators.js";
 import {choose} from "lit/directives/choose.js";
 
 /**
- * ContentTechnologies element
+ * ContentTopics element
  * @summary
- * Provides a scrollable or wrapping list of technologies related to a specific job or project
- * @slot {<li>} - List of technologies related to the job or project
- * @slot {<span>} [title=Core Technologies] - Leading text to use in list title
+ * Provides a scrollable or wrapping list of topics related to a specific article
+ * @slot {<li>} - List of topics related to the article
+ * @slot {<span>} [title=Topics] - Leading text to use in list title
  * @csspart container - Responsive container element
  * @csspart title - Leading heading title element
- * @csspart content - Wrapper element for technologies contents
+ * @csspart content - Wrapper element for topics contents
  * @cssprop {color} [--container-textColor=#1D1D1D] - Text color of title and list items
  * @cssprop {color} [--container-borderColor=--container-textColor] - Border color of title and list items
  * @cssprop {color} [--container-bgColor=#FAFAFA] - Background color of title and list items
  * @cssprop {color} [--title-textColor=--container-bgColor] - Text color of the title heading element
  * @cssprop {color} [--title-bgColor=--container-textColor] - Background color of the title heading element
- * @cssprop {color} [--list-textColor=--container-textColor] - Text color of the technologies list items
- * @cssprop {color} [--list-borderColor=--container-borderColor] - Background color of the technologies list items
+ * @cssprop {color} [--list-textColor=--container-textColor] - Text color of the topic list items
+ * @cssprop {color} [--list-borderColor=--container-borderColor] - Background color of the topic list items
  */
-@customElement("content-technologies")
-export class ContentTechnologies extends LitElement {
-    /** Which layout to use for the technologies contents */
+@customElement("content-topics")
+export class ContentTopics extends LitElement {
+    /** Which layout to use for the topics contents */
     @property({type: String, reflect: true})
     accessor variant;
     
@@ -29,7 +29,7 @@ export class ContentTechnologies extends LitElement {
         return html`
             <div part="container">
                 <h6 part="title">
-                    <slot name="title">Core Technologies</slot>
+                    <slot name="title">Topics</slot>
                 </h6>
                 ${choose(this.variant, [
                     ["list", () => html`

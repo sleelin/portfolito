@@ -56,11 +56,11 @@ Open the console and inspect the demo to see the page and content component stru
       <content-article>
         <h4 slot="title">Overview</h4>
         <h5 slot="subtitle">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
@@ -200,11 +200,11 @@ Similar to their native HTML equivalents, these components provide structure and
       <content-article>
         <h4 slot="title">Overview</h4>
         <h5 slot="subtitle">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
@@ -247,11 +247,11 @@ Similar to their native HTML equivalents, these components provide structure and
       <content-article>
         <h4 slot="title">Overview</h4>
         <h5 slot="subtitle">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
@@ -359,11 +359,11 @@ These components encapsulate and style the actual content of the page, and can b
       <content-article>
         <h4 slot="title">Overview</h4>
         <h5 slot="subtitle">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
@@ -416,11 +416,11 @@ These components encapsulate and style the actual content of the page, and can b
       <content-article class="focus rounded">
         <h4 slot="title">Overview</h4>
         <h5 slot="subtitle">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
@@ -563,7 +563,7 @@ These components encapsulate and style the actual content of the page, and can b
         --header-borderColor: color-mix(in srgb, var(--vp-c-neutral) 40%, transparent);
       }
       
-      content-technologies {
+      content-topics {
         --title-bgColor: color-mix(in srgb, var(--vp-c-text-1) 40%, transparent);
         --title-textColor: color-mix(in srgb, var(--vp-c-bg) 40%, transparent);
       }
@@ -595,11 +595,11 @@ These components encapsulate and style the actual content of the page, and can b
       <content-article>
         <h4 slot="title" class="blur">Overview</h4>
         <h5 slot="subtitle" class="blur">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal" class="focus rounded">Lit</content-badge>
           <content-badge color="red" class="focus rounded">HTML</content-badge>
           <content-badge color="purple" class="focus rounded">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p class="blur">Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
@@ -642,11 +642,11 @@ These components encapsulate and style the actual content of the page, and can b
       <content-article class="blur">
         <h4 slot="title">Overview</h4>
         <h5 slot="subtitle">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile">
+        <content-topics slot="tags" variant="tile">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p>Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
@@ -654,12 +654,12 @@ These components encapsulate and style the actual content of the page, and can b
   <page-footer class="blur"></page-footer>
 </demo>
 
-### Technologies
+### Topics
 
-::: tip `<content-technologies />`
-{{ manifest.for("content", "technologies").summary }}
+::: tip `<content-topics />`
+{{ manifest.for("content", "topics").summary }}
 
-[See more](./content/technologies)
+[See more](./content/topics)
 :::
 
 <demo static class="scale overview">
@@ -694,11 +694,11 @@ These components encapsulate and style the actual content of the page, and can b
       <content-article>
         <h4 slot="title" class="blur">Overview</h4>
         <h5 slot="subtitle" class="blur">Installation and Usage</h5>
-        <content-technologies slot="tags" variant="tile" class="focus rounded">
+        <content-topics slot="tags" variant="tile" class="focus rounded">
           <content-badge color="teal">Lit</content-badge>
           <content-badge color="red">HTML</content-badge>
           <content-badge color="purple">CSS</content-badge>
-        </content-technologies>
+        </content-topics>
         <p class="blur">Libero curae luptatum intellegat evertitur elit. Interesset inciderint enim eam sale maluisset. Graece regione urbanitas nominavi duis honestatis ancillae voluptatibus libero senectus.</p>
       </content-article>
     </content-section>
