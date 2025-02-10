@@ -499,23 +499,6 @@ These components encapsulate and style the actual content of the page, and can b
 :::
 
 <demo static class="scale overview">
-  <style>
-    .focus:before {
-      z-index: 1;
-    }
-    
-    content-article {
-      --container-outlineColor: var(--vp-c-border);
-    }
-    
-    content-carousel {
-      margin: 8px;
-      
-      &::part(container) {
-        padding: 16px 8px 0;
-      }
-    }
-  </style>
   <page-header class="blur">
     <page-logo>
       <img src="/logo.svg" alt="PortfoLitO" />

@@ -169,4 +169,20 @@
       }
     }
   }
+  
+  content-carousel {
+    margin: 8px;
+    
+    &::part(container) {
+      padding: 16px 8px 0;
+    }
+    
+    &.focus:before {
+      z-index: 1;
+    }
+    
+    content-article {
+      --container-outlineColor: var(--vp-c-border);
+    }
+  }
 }

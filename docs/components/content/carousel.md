@@ -47,24 +47,7 @@ const element = inject("manifest").for("content", "carousel");
 
 {{ element.summary }}
 
-<demo static class="scale">
-  <style>
-    .focus:before {
-      z-index: 1;
-    }
-    
-    content-article {
-      --container-outlineColor: var(--vp-c-border);
-    }
-    
-    content-carousel {
-      margin: 8px;
-      
-      &::part(container) {
-        padding: 16px 8px 0;
-      }
-    }
-  </style>
+<demo static class="scale overview">
   <page-header class="blur">
     <page-logo>
       <img src="/logo.svg" alt="PortfoLitO" />
