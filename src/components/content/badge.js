@@ -4,7 +4,7 @@ import {customElement, property} from "lit/decorators.js";
 /**
  * ContentBadge element
  * @summary
- * Provides a stylised "badge" element
+ * Provides a stylised badge element
  * @slot {*} - Text content of the badge element
  * @csspart container - Responsive container element
  * @cssprop {color} [--content-textColor=#1d1d1d|#ffffff] - Text color of badge contents
@@ -12,11 +12,11 @@ import {customElement, property} from "lit/decorators.js";
  */
 @customElement("content-badge")
 export class ContentBadge extends LitElement {
-    /** Which layout to use for the badge contents */
+    /** Which style to use for the badge */
     @property({type: String, reflect: true})
     accessor variant;
     
-    /** Which color style to use for the badge contents */
+    /** Which color to use for the badge */
     @property({type: String, reflect: true})
     accessor color;
     
@@ -102,6 +102,8 @@ export class ContentBadge extends LitElement {
           [part=container] {
             box-sizing: border-box;
             display: inline-flex;
+            grid-auto-flow: column;
+            column-gap: 4px;
             align-items: center;
             white-space: nowrap;
             padding: 1px 6px;

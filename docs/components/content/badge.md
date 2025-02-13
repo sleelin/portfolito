@@ -3,6 +3,15 @@ import {inject} from "vue";
 const element = inject("manifest").for("content", "badge");
 </script>
 
+<style scoped>
+.demo {
+  &:not([static]) :deep(.content) {
+    display: flex;
+    column-gap: 4px;
+  }
+}
+</style>
+
 # Badge Element
 
 {{ element.summary }}
@@ -60,6 +69,9 @@ const element = inject("manifest").for("content", "badge");
 
 ## Usage
 
+The `<content-badge />` element styles text content as a badge, or tile, setting the background color, text color, and border radius of the text.
+The background and text color can be set via the `color` attribute.
+
 <demo>
   <content-badge>Default</content-badge>
   <content-badge color="blue">Blue</content-badge>
@@ -74,7 +86,29 @@ const element = inject("manifest").for("content", "badge");
   <content-badge color="grey">Grey</content-badge>
 </demo>
 
+### With Thumbnails
+
+Thumbnail images can be added to badges using the `thumb` slot.
+
+<demo>
+  <content-badge>
+    <span slot="thumb" class="vpi-social-discord"></span>
+    <span>Discord</span>
+  </content-badge>
+  <content-badge color="blue">
+    <span slot="thumb" class="vpi-social-facebook"></span>
+    <span>Facebook</span>
+  </content-badge>
+  <content-badge color="red">
+    <span slot="thumb" class="vpi-social-youtube"></span>
+    <span>YouTube</span>
+  </content-badge>
+</demo>
+
 ### Outline Variant
+
+Badges can also be given a stamp-like appearance by setting the `variant` attribute to `outline`.
+This makes the background of the badge transparent. In place of the background, an outline is added.
 
 <demo>
   <content-badge variant="outline">Default</content-badge>
