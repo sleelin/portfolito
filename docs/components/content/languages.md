@@ -79,10 +79,25 @@ Languages are specified as `<li />` elements, with their text content used as th
   </content-languages>
 </demo>
 
+### With Percentages
+
+Different weights can be assigned to languages by specifying the weighting in the `value` attribute of the language's `<li />` element.
+Any remaining percentage will be evenly distributed between languages without a specified value attribute.
+
+<demo>
+  <content-languages>
+    <li title="JavaScript" value="20">JS</li>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li value="55">Java</li>
+  </content-languages>
+</demo>
+
 ### With Other Languages
 
 Support for styling other languages not covered by the `<content-languages />` element has also been included.
 As in the example below, this is done by adding CSS variables for each other language being used.
+If not specified, unknown languages will fall back to the color set in the `--languageColor-unknown` CSS variable.
 
 <demo>
   <style>

@@ -8,6 +8,7 @@ import {styleMap} from "lit/directives/style-map.js";
  * Provides a bar graph overview of programming languages with percentage for developer project listings
  * @slot {<li>} - Language names and percent of overall code in project
  * @csspart container - Responsive container element
+ * @csspart content - Wrapper for heading, list, and line elements
  * @csspart heading - Languages heading and icon container
  * @csspart list - Wrapper for language names and color bubbles
  * @csspart line - Wrapper for language percentage line graph
