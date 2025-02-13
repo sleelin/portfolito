@@ -3,6 +3,16 @@ import {inject} from "vue";
 const element = inject("manifest").for("content", "languages");
 </script>
 
+<style scoped>
+.demo {
+  content-languages {
+    --heading-textColor: var(--vp-c-text-1);
+    --container-textColor: var(--vp-c-neutral);
+    --container-bgColor: var(--vp-c-bg-elv);
+  }
+}
+</style>
+
 # Languages Element
 
 {{ element.summary }}
@@ -25,9 +35,9 @@ const element = inject("manifest").for("content", "languages");
       <content-article variant="panel">
         <h4 slot="title" class="blur">Focus on Your Content</h4>
         <content-languages slot="tags" class="focus">
-          <li title="HTML" value="50">HTML</li>
-          <li title="CSS" value="40">CSS</li>
-          <li title="JS" value="10">JavaScript</li>
+          <li value="50">HTML</li>
+          <li value="40">CSS</li>
+          <li title="JavaScript" value="10">JS</li>
         </content-languages>
         <p class="blur">Native web components allow you to create an elegant showcase for your portfolio of work using HTML</p>
       </content-article>
@@ -48,11 +58,45 @@ const element = inject("manifest").for("content", "languages");
 
 ## Usage
 
+The `<content-languages />` element provides a stylised list and line graph of languages used in a project.
+Languages are specified as `<li />` elements, with their text content used as the language name.
+
 <demo>
   <content-languages>
-    <li title="JS" value="60">JavaScript</li>
-    <li title="HTML" value="20">HTML</li>
-    <li title="CSS" value="20">CSS</li>
+    <li>C</li>
+    <li>C++</li>
+    <li>C#</li>
+    <li>CSS</li>
+    <li>Go</li>
+    <li>HTML</li>
+    <li>Java</li>
+    <li title="JavaScript">JS</li>
+    <li>PHP</li>
+    <li>Python</li>
+    <li>Rust</li>
+    <li title="TypeScript">TS</li>
+    <li>Shell</li>
+  </content-languages>
+</demo>
+
+### With Other Languages
+
+Support for styling other languages not covered by the `<content-languages />` element has also been included.
+As in the example below, this is done by adding CSS variables for each other language being used.
+
+<demo>
+  <style>
+    content-languages {
+      --languageColor-swift: var(--languageColor-html);
+      --languageColor-objective-c: var(--languageColor-ts);
+    }
+  </style>
+  <content-languages>
+    <li>Swift</li>
+    <li value="30">Objective-C</li>
+    <li value="6">Python</li>
+    <li value="3">C++</li>
+    <li value="1">Makefile</li>
   </content-languages>
 </demo>
 

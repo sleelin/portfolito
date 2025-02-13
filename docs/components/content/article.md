@@ -85,9 +85,9 @@ q {
       <content-article variant="panel" class="focus rounded">
         <h4 slot="title">Focus on Your Content</h4>
         <content-languages slot="tags">
-          <li title="HTML" value="50">HTML</li>
-          <li title="CSS" value="40">CSS</li>
-          <li title="JS" value="10">JavaScript</li>
+          <li value="50">HTML</li>
+          <li value="40">CSS</li>
+          <li title="JavaScript" value="10">JS</li>
         </content-languages>
         <p>Native web components allow you to create an elegant showcase for your portfolio of work using HTML</p>
       </content-article>
