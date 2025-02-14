@@ -74,8 +74,8 @@ const element = inject("manifest").for("content", "section");
 
 ## Usage
 
-The `<content-section>` element does not provide any content of its own.
-Instead, it wraps supplied content with a native `<section>` element,
+The `<content-section />` element does not provide any content of its own.
+Instead, it wraps supplied content with a native `<section />` element,
 providing styling and a responsive container for section headings and content.
 
 <demo>
@@ -90,7 +90,7 @@ providing styling and a responsive container for section headings and content.
 
 ### With Title Icon
 
-The `title` slot of the `<content-section>` element also provides support for adding a leading SVG icon.
+The `title` slot of the `<content-section />` element also provides support for adding a leading SVG icon.
 This is achieved using a [CSS mask](https://developer.mozilla.org/en-US/docs/Web/CSS/mask),
 meaning the icon can be colored alongside its associated title.
 
@@ -118,7 +118,7 @@ meaning the icon can be colored alongside its associated title.
 Section content can also be arranged in a grid, by setting the `variant` attribute to `grid`.
 In this variant, the `content` part is styled as a grid, with the number of columns being determined by the section's container width.
 
-The example below leverages the grid layout, in combination with the [`<content-article>`](./article) element,
+The example below leverages the grid layout, in combination with the [`<content-article />`](./article) element,
 to demonstrate how this looks in practice.
 
 <demo>

@@ -82,9 +82,9 @@ const element = inject("manifest").for("content", "carousel");
 
 ## Usage
 
-The `<content-carousel>` element wraps content in a horizontally scrolling container.
+The `<content-carousel />` element wraps content in a horizontally scrolling container.
 
-It is used internally by the [`<content-hero>`](./hero) element to display feature items,
+It is used internally by the [`<content-hero />`](./hero) element to display feature items,
 but has been abstracted for use in other scenarios.
 
 <demo>
@@ -134,7 +134,7 @@ It can also be used to show a scrolling list of chips by setting the `variant` a
 
 ### With Animated Entry
 
-When the `<content-carousel>` element is populated entirely with [`<content-article>`](./article#panel-variant) elements whose `variant` attribute is set to `panel`,
+When the `<content-carousel />` element is populated entirely with [`<content-article />`](./article#panel-variant) elements whose `variant` attribute is set to `panel`,
 the entry of each article will be animated, entering one after the other in order, as in the example below.
 
 <demo>

@@ -48,7 +48,7 @@ const element = inject("manifest").for("page", "footer");
 
 ## Usage
 
-The `<page-footer>` element wraps the native HTML `<footer>` element, and is intended to be the last child of the `<body>` element of a page.
+The `<page-footer />` element wraps the native HTML `<footer />` element, and is intended to be the last child of the `<body />` element of a page.
 It automatically includes a copyright for the current year, and an attribution link to PortfoLitO. 
 
 <demo>

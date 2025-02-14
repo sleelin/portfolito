@@ -105,8 +105,8 @@ const element = inject("manifest").for("page", "nav");
 
 ## Usage
 
-The `<page-nav>` element is intended to act as the page's primary navigation menu.
-It does not provide any content of its own, instead wrapping supplied content with a native `<nav>` element, 
+The `<page-nav />` element is intended to act as the page's primary navigation menu.
+It does not provide any content of its own, instead wrapping supplied content with a native `<nav />` element, 
 as well as responsive styling that rolls content behind a hamburger menu on smaller viewports.
 
 <demo class="expanded">
@@ -130,7 +130,7 @@ as well as responsive styling that rolls content behind a hamburger menu on smal
 
 It is common for a page's primary navigation menu to also include links to other sources of content,
 such as social networks like LinkedIn, or hosted services like GitHub.
-To facilitate this, the `<page-nav>` element provides a `socials` slot. 
+To facilitate this, the `<page-nav />` element provides a `socials` slot. 
 
 <demo class="expanded">
   <page-nav>
@@ -150,9 +150,9 @@ based on the contents of the `href` attribute of the link, and can be placed in 
 #### BYO Socials
 
 It's also possible to include your own icon for links to sources that aren't already handled.
-This is done either by including an `<img>` element in the link, or with inline SVG markup.
+This is done either by including an `<img />` element in the link, or with inline SVG markup.
 
-Where the `<page-nav>` element detects an `<img>` element whose source is an SVG file,
+Where the `<page-nav />` element detects an `<img />` element whose source is an SVG file,
 it will attempt to fetch the SVG file for inline rendering, so that styling can be applied consistently across all icons.
 
 <demo class="expanded">
@@ -170,10 +170,10 @@ it will attempt to fetch the SVG file for inline rendering, so that styling can 
 
 ### Responsive Sizing
 
-For container widths typical of smaller viewports, the `<page-nav>` element will automatically fold behind a "hamburger menu".
+For container widths typical of smaller viewports, the `<page-nav />` element will automatically fold behind a "hamburger menu".
 This means that navigation links need only be specified once in a page's markup.
 
-The appearance of the `<page-nav>` element and its contents for variable container widths is demonstrated in the example below.
+The appearance of the `<page-nav />` element and its contents for variable container widths is demonstrated in the example below.
 
 <demo class="resizable">
   <page-nav>

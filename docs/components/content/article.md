@@ -108,8 +108,8 @@ q {
 
 ## Usage
 
-The `<content-article>` element does not provide any content of its own.
-Instead, it wraps supplied content with a native `<article>` element.
+The `<content-article />` element does not provide any content of its own.
+Instead, it wraps supplied content with a native `<article />` element.
 
 <demo>
   <content-article>
@@ -140,7 +140,7 @@ Articles can also be styled as panels by setting the `variant` attribute to `pan
 
 Additionally, it triggers automatic assignment of the `--index` CSS variable as a style to the element.
 This is calculated using the article's position amongst any sibling articles within its parent element.
-The value is used to delay entry animations in the [`<content-carousel>`](./carousel) and [`<content-details>`](./details) elements.
+The value is used to delay entry animations in the [`<content-carousel />`](./carousel) and [`<content-details />`](./details) elements.
 
 <demo class="panel">
   <content-article variant="panel">

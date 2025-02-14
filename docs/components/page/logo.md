@@ -35,7 +35,7 @@ const element = inject("manifest").for("page", "logo");
 
 ## Usage
 
-The `<page-logo>` element itself does not provide any content of its own.
+The `<page-logo />` element itself does not provide any content of its own.
 Instead, it acts as a responsive container for your supplied logo image and headings.
 
 <demo>

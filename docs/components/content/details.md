@@ -63,11 +63,11 @@ const element = inject("manifest").for("content", "details");
 
 ## Usage
 
-The `<content-details>` element is intended to behave the same as the native `<details>` element.
+The `<content-details />` element is intended to behave the same as the native `<details />` element.
 Its internal structure is similar to, albeit divergent from its native counterpart.
 
 ::: tip NOTE
-Unlike other PortfoLitO elements, the `<content-details>` element does not wrap a native `<details>` element.
+Unlike other PortfoLitO elements, the `<content-details />` element does not wrap a native `<details />` element.
 :::
 
 The structural differences are to enable animation and layout shifts, which are not possible using the native element.
@@ -81,7 +81,7 @@ This can be seen with the rotating triangle when expanding or collapsing content
 
 ### With Summary
 
-When not otherwise specified, the `<content-details>` element provides a default summary.
+When not otherwise specified, the `<content-details />` element provides a default summary.
 This can be overridden with your desired summary by setting the `slot` attribute of any child element to `summary`.
 
 <demo>
@@ -97,7 +97,7 @@ This can be overridden with your desired summary by setting the `slot` attribute
 
 ### With Animation
 
-The primary purpose of the `<content-details>` element is to enable animations that are not possible with the native `<details>` element.
+The primary purpose of the `<content-details />` element is to enable animations that are not possible with the native `<details />` element.
 
 In the example below, a CSS transition has been set on the `grid-template-rows` property of the `content` part.
 This transition is between values of `0fr` when closed, and `1fr` when open, providing animation and layout shifts for the content height.
@@ -121,7 +121,7 @@ This transition is between values of `0fr` when closed, and `1fr` when open, pro
 ### List Variant
 
 For convenience, the details element can host list items by setting the `variant` attribute to `list`.
-In this variant, the `content` part is rendered as a `<ul>` element, and list items are styled and animated on entry, as in the example below.
+In this variant, the `content` part is rendered as a `<ul />` element, and list items are styled and animated on entry, as in the example below.
 
 <demo>
   <content-details variant="list">
@@ -137,9 +137,9 @@ In this variant, the `content` part is rendered as a `<ul>` element, and list it
 ### Grid Variant
 
 Details content can also be arranged in a grid, by setting the `variant` attribute to `grid`.
-In this variant, the `content` part is rendered as a [`<content-section>`](./section) element.
+In this variant, the `content` part is rendered as a [`<content-section />`](./section) element.
 
-The example below leverages the grid layout, in combination with the [`<content-article>`](./article) element,
+The example below leverages the grid layout, in combination with the [`<content-article />`](./article) element,
 to animate entry of each article individually when the details element is expanded.
 
 <demo>
