@@ -89,6 +89,7 @@ export class ContentCarousel extends LitElement {
           
           @container (width <= 1176px) {
             ::slotted([variant=panel]) {
+              max-width: unset;
               align-self: stretch;
               display: grid;
             }

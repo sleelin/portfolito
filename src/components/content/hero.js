@@ -84,7 +84,6 @@ export class ContentHero extends LitElement {
             [part=content] {
               padding: 0 48px;
               grid-area: content;
-              text-align: center;
               align-content: center;
               color: var(--container-textColor, #F4F4F4);
               animation: 1s ease-in-out fold;
@@ -129,7 +128,7 @@ export class ContentHero extends LitElement {
             }
             
             @container (width < 1400px) {
-              grid-template-columns: min-content auto max-content;
+              grid-template-columns: max-content auto max-content;
               padding: 0 32px;
               
               [part=content] {
@@ -137,20 +136,15 @@ export class ContentHero extends LitElement {
                 max-width: 452px;
                 justify-self: center;
               }
-              
-              ::slotted([slot=image]) {
-                justify-self: start;
-              }
             }
             
             @container (width <= 1225px) {
-              grid-template-columns: max-content auto max-content;
+              grid-template-columns: auto auto max-content;
             }
             
             @container (width <= 1176px) {
               padding-top: 32px;
               row-gap: 32px;
-              min-height: 576px;
               grid-template-rows: min-content 1fr;
               grid-template-columns: repeat(3, 1fr);
               grid-template-areas:
@@ -234,6 +228,7 @@ export class ContentHero extends LitElement {
               
               [part=content] {
                 margin-block: 1em;
+                text-align: center;
               }
             }
           

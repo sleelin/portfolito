@@ -5,24 +5,25 @@ const element = inject("manifest").for("content", "hero");
 
 <style scoped>
 .demo {
-  &[static] {
-    height: min(max(50vw, 30vh), 360px);
-  }
-  
   content-hero {
+    img {
+      width: clamp(176px, 100%, 338px);
+      height: clamp(176px, 100%, 338px);
+    }
+    
     content-article {
       --content-textColor: white;
     }
     
-    &::part(container) {
-      height: 500px;
-    }
-    
     &::part(content) {
-      text-align: left;
+      margin-block-start: 0;
       max-width: 538px;
       padding: 0;
     }
+  }
+  
+  &.gradient content-hero {
+    --container-textColor: var(--vp-c-neutral);
   }
 }
 </style>
@@ -31,31 +32,7 @@ const element = inject("manifest").for("content", "hero");
 
 {{ element.summary }}
 
-<demo static class="scale content hero">
-  <style>
-    & {
-      overflow: hidden !important;
-    }
-    
-    page-main {
-      --container-fgColor: var(--vp-c-bg-elv);
-      --container-bgColor: transparent;
-    }
-    
-    content-hero::part(container) {
-      height: 500px;
-    }
-    
-    content-article {
-      grid-column: span 2;
-      
-      &[variant] {
-        grid-column: span 1;
-        --content-bgColor: var(--vp-c-gray-3);
-        --container-outlineColor: var(--vp-c-border);
-      }
-    }
-  </style>
+<demo static class="scale overview fixed-height no-overflow">
   <page-header class="blur">
     <page-logo>
       <img src="/logo.svg" alt="PortfoLitO" />
@@ -90,7 +67,29 @@ const element = inject("manifest").for("content", "hero");
 
 ## Usage
 
+The `<content-hero />` element does not provide any content of its own.
+Instead, it wraps the leading content of a page in a full-width responsive container, and sets a gradient background for emphasis.
+
+It is intended to be used in the `hero` slot of the [`<page-main />`](../page/main) element.
+
 <demo class="scale">
+  <content-hero>
+    <img src="/logo.svg" alt="PortfoLitO" slot="image" />
+    <h3>Showcase your Portfolio of Work</h3>
+    <h4>A small library of Lit-based Web Components for Software Developers to build simple Portfolio of Work Pages</h4>
+  </content-hero>
+</demo>
+
+### Background Gradient
+
+The gradient background can be customised by overriding the CSS background property of the `container` part.
+
+<demo class="scale gradient">
+  <style>
+    content-hero::part(container) {
+      background: radial-gradient(circle closest-corner at 30% 50%, #3150fa 10%, light-dark(#f6f6f7, #202127) 100%);
+    }
+  </style>
   <content-hero>
     <img src="/logo.svg" alt="PortfoLitO" slot="image" />
     <h3>Showcase your Portfolio of Work</h3>
@@ -100,8 +99,11 @@ const element = inject("manifest").for("content", "hero");
 
 ### With Feature Articles
 
-<demo class="scale">
-  <content-hero slot="hero">
+Feature article content can be added to the `<content-carousel />` included in the hero element using the `feature` slot.
+This works best when using the `panel` variant of the [`<content-article />`](./article#panel-variant) element. 
+
+<demo class="scale resizable">
+  <content-hero>
     <img src="/logo.svg" alt="PortfoLitO" slot="image"/>
     <h3>Showcase your Portfolio of Work</h3>
     <h4>A small library of Lit-based Web Components for Software Developers to build simple Portfolio of Work Pages</h4>

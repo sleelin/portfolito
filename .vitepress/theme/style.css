@@ -148,7 +148,6 @@
   }
   
   content-hero::part(content) {
-    text-align: left;
     max-width: 538px;
     padding: 0;
   }
