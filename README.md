@@ -1,8 +1,8 @@
-# PortfoLitO
+# <img alt="PortfoLitO" src="https://raw.githubusercontent.com/sleelin/portfolito/f7025d621e24548cd254b24c662029dd023662da/docs/public/logo-text.svg" width="512" />
 
-PortfoLitO is a small library of Lit-based Web Components for Software Developers to build simple Portfolio of Work Pages.
+### Showcase your Portfolio of Work
 
-<img src="./docs/public/logo.svg" alt="PortfoLitO" width="128">
+A small library of Lit-based Web Components for Software Developers to build simple Portfolio of Work Pages.
 
 ##### Requirements
 
