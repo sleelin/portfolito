@@ -2,6 +2,11 @@
   scroll-margin-top: 134px;
 }
 
+
+.vp-doc :not(pre) > code:not(:where(.vp-raw, .vp-raw *)) {
+  white-space: nowrap;
+}
+
 /**
  * Colors
  * -------------------------------------------------------------------------- */
@@ -90,6 +95,10 @@
  * Component: Demo
  * -------------------------------------------------------------------------- */
 .demo.overview {
+  .container {
+    margin: 10px;
+  }
+  
   &.fixed-height {
     height: min(max(50vw, 30vh), 360px);
     
@@ -98,11 +107,11 @@
     }
   }
   
-  &.no-overflow .content {
+  &.no-overflow .container {
     overflow: hidden;
   }
   
-  &.no-spacing .content {
+  &.no-spacing .container {
     padding: 0;
     justify-self: stretch;
     

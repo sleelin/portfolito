@@ -113,7 +113,7 @@ export default (md) => {
             
             return (
                 `<demo${attribs} :class="'demo-${demoId}'">\n` +
-                    `${preview.replaceAll(/<style>(.*?)<\/style>/gs, `<component :is="'style'">\n.demo-${demoId} > .content {\n$1}\n</component>`)}\n` +
+                    `${preview.replaceAll(/<style>(.*?)<\/style>/gs, `<component :is="'style'">\n.demo-${demoId} > .container > .content {\n$1}\n</component>`)}\n` +
                     `<template #snippet>\n` +
                         `${renderCode(md, snippetCode)}\n` +
                     `</template>\n` + (!source ? "" : (

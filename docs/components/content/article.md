@@ -12,7 +12,7 @@ q {
   content-article {
     --header-borderColor: var(--vp-c-neutral);
   }
-
+  
   &.panel {
     & :deep(.content) {
       display: flex;
@@ -33,9 +33,9 @@ q {
   }
   
   &.job {
-    & :deep(.content) {
+    & :deep(.container) {
       height: 480px;
-      overflow-x: scroll;
+      overflow-y: scroll;
       box-shadow: 0 0 1px 0;
       border-radius: 2px;
       min-width: 400px;
@@ -45,9 +45,10 @@ q {
         line-height: 1.5;
       }
     }
-
+    
     content-article {
       --header-bgColor: var(--vp-c-divider);
+      --container-outlineColor: var(--vp-c-divider);
     }
   }
 }

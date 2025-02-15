@@ -17,13 +17,13 @@ const element = inject("manifest").for("page", "nav");
     }
   }
   
-  &:is(.expanded, .resizable) :deep(.content) {
+  &:is(.expanded, .resizable) :deep(.container) {
     box-shadow: 0 0 1px 0;
     border-radius: 2px;
   }
   
   &.expanded {
-    & :deep(.content) {
+    & :deep(.container) {
       height: 56px;
       display: grid;
     }
@@ -34,12 +34,15 @@ const element = inject("manifest").for("page", "nav");
   }
   
   &.resizable {
+    & :deep(.container) {
+      min-width: 256px;
+    }
+    
     & :deep(.content) {
       height: calc(64px + 180px);
       display: grid;
       grid-template-rows: 64px 1fr;
       container: demo-container / size;
-      min-width: 256px;
       
       @media (max-width: 640px) {
         zoom: calc(1 / 1.5);

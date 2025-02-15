@@ -44,8 +44,8 @@ const element = inject("manifest").for("page", "header");
 
 ## Usage
 
-The `<page-header />` element itself does not provide any content of its own.
-Instead, it acts as a sticky, responsive container wrapping your supplied content in a native `<header />` element.
+The `<page-header />` element wraps the native HTML `<header />` element, and is intended to be the first child of the `<body />` element of a page.
+It acts as a sticky, responsive container for your supplied content, and does not provide any content of its own.
 
 <demo>
   <page-header>PortfoLitO</page-header>

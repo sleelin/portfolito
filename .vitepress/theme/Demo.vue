@@ -38,7 +38,7 @@ async function copyCode() {
     margin: 0;
   }
   
-  .content {
+  .container {
     margin: 20px 20px 18px;
     contain: paint;
     
@@ -100,7 +100,7 @@ async function copyCode() {
     }
   }
   
-  &.resizable .content {
+  &.resizable .container {
     overflow-x: hidden;
     resize: horizontal;
     max-width: calc(100% - 40px);
@@ -190,8 +190,10 @@ async function copyCode() {
 
 <template>
     <div class="demo" :static="isStatic ? 'static' : null">
-        <div class="content vp-raw">
-            <slot />
+        <div class="container">
+            <div class="content vp-raw">
+                <slot />
+            </div>
         </div>
         <div v-if="!isStatic" class="code" ref="source" @mouseover="hover = true" @mouseleave="hover = false">
             <transition name="fade">
