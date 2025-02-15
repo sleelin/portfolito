@@ -3,6 +3,36 @@ import {inject} from "vue";
 const element = inject("manifest").for("page", "main");
 </script>
 
+<style scoped>
+.demo:not([static]) {
+  &.resizable :deep(.container) {
+    min-width: 280px;
+    box-shadow: 0 0 1px 0;
+    border-radius: 2px;
+  }
+  
+  page-header {
+    --header-bgColor: var(--vp-c-bg-elv);
+  }
+  
+  page-main {
+    --title-textColor: var(--vp-c-neutral);
+    --container-fgColor: var(--vp-c-bg-elv);
+    --container-bgColor: var(--vp-c-bg-alt);
+    
+    &::part(container) {
+      padding-bottom: 32px;
+    }
+  }
+  
+  content-article {
+    --header-bgColor: var(--vp-c-border);
+    --header-borderColor: var(--vp-c-neutral);
+    --container-outlineColor: var(--vp-c-divider);
+  }
+}
+</style>
+
 # Main Element
 
 {{ element.summary }}
@@ -63,9 +93,53 @@ const element = inject("manifest").for("page", "main");
 
 ## Usage
 
-<demo>
+The `<page-main />` element wraps the native HTML `<main />` element, and is intended to be a direct child of the `<body />` element of a page.
+It acts as a responsive container for your supplied content, and does not provide any content of its own.
+
+<demo class="scale resizable">
+  <page-header>PortfoLitO</page-header>
   <page-main>
+    <content-section>
+      <h3 slot="title">Experience</h3>
+      <content-article variant="job">
+        <h4 slot="title">Senior Software Developer</h4>
+        <h5 slot="subtitle">Corporation C</h5>
+        <div slot="timestamp">2024 - Present</div>
+        <p>
+          Rhoncus perpetua atqui harum signiferumque mea reprimique prodesset et.
+          Enim pulvinar senserit feugiat viris vim tale.
+          Oratio feugiat graeco mea vim fabulas definiebas varius discere.
+          Idque platonem gubergren noster interesset.
+        </p>
+      </content-article>
+      <content-article variant="job">
+        <h4 slot="title">Software Developer</h4>
+        <h5 slot="subtitle">Corporation B</h5>
+        <div slot="timestamp">2020 - 2024</div>
+        <p>
+          Gubergren ius mutat inceptos habitant habemus reque.
+          Consectetur vidisse ubique dolores natum iusto rhoncus assueverit cursus fusce.
+          Perpetua pellentesque ornatus imperdiet lacus vitae facilis deserunt.
+          Curae ligula ridens dolorem discere. Verterem in maluisset quod quaestio convallis.
+          Wisi convallis melius laudem veniam montes. Mi diam his augue quaerendum legere. 
+          Liber vehicula moderatius veritus nunc.
+        </p>
+      </content-article>
+    </content-section>
   </page-main>
+  <template #snippet>
+    <body>
+      <page-header>PortfoLitO</page-header>
+      <page-main>
+        <!-- Your Content -->
+      </page-main>
+    </body>
+  </template>
+  <template #source>
+    <body>
+      {{preview}}
+    </body>
+  </template>
 </demo>
 
 ## CSS Parts
