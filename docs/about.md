@@ -1,4 +1,7 @@
-# About PortfoLitO
+<img alt="PortfoLitO" src="/logo-text.svg" width="512" />
+<hr />
+
+# About
 
 PortfoLitO is a small library of Lit-based Web Components for Software Developers to build simple Portfolio of Work Pages.
 
