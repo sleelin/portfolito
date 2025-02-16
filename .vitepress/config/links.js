@@ -1,3 +1,7 @@
+import {repository} from "../../package.json";
+
+export const repo = repository.replace(/(^git\+)|(\.git$)/g, "");
+
 export const head = [
     ["link", {rel: "icon", type: "image/svg+xml", href: "/portfolito/logo.svg"}]
 ];

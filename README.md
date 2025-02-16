@@ -1,4 +1,4 @@
-# <img alt="PortfoLitO" src="https://raw.githubusercontent.com/sleelin/portfolito/f7025d621e24548cd254b24c662029dd023662da/docs/public/logo-text.svg" width="512" />
+# <a href="https://sleelin.io/portfolito"><img alt="PortfoLitO" src="https://raw.githubusercontent.com/sleelin/portfolito/f7025d621e24548cd254b24c662029dd023662da/docs/public/logo-text.svg" width="512" /></a>
 
 ### Showcase your Portfolio of Work
 
