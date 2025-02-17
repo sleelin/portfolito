@@ -1,5 +1,5 @@
 {
-  "name": "@sleelin/portfolito",
+  "name": "portfolito",
   "description": "A Lit Web Components Library for building Software Developer Portfolio of Work Pages",
   "version": "1.0.0",
   "type": "module",

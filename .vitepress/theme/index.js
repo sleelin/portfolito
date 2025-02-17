@@ -1,7 +1,7 @@
 import DefaultTheme from "vitepress/theme";
 import DeclarationComponent from "./Declaration.vue";
 import DemoComponent from "./Demo.vue";
-import "@sleelin/portfolito";
+import "portfolito";
 import "./style.css";
 
 /** @type {import("vitepress").Theme} */
