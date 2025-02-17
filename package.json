@@ -9,6 +9,19 @@
   "bugs": "https://github.com/sleelin/portfolito/issues",
   "repository": "git+https://github.com/sleelin/portfolito.git",
   "customElements": "./dist/custom-elements.json",
+  "keywords": [
+    "web components",
+    "web-components",
+    "web-component",
+    "custom elements",
+    "custom-elements",
+    "custom-element",
+    "lit-element",
+    "lit",
+    "portfolio",
+    "gh-pages",
+    "pages"
+  ],
   "exports": {
     ".": {
       "development": "./src/components/index.js",
