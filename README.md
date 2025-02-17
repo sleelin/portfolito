@@ -15,3 +15,5 @@ A small library of Lit-based Web Components for Software Developers to build sim
 Components are broken down into two categories:
 - Page components, which provide overall structure to a page
 - Content components, which encapsulate and style content within a page
+
+See [the PortfoLitO documentation](https://sleelin.io/portfolito/components/) for more details, including live usage examples.

@@ -1,5 +1,4 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
@@ -15,7 +14,7 @@ hero:
       link: /about
     - theme: alt
       text: View Components
-      link: /components/overview
+      link: /components/
 
 #features:
 #  - title: Feature A

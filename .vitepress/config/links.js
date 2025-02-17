@@ -8,7 +8,7 @@ export const head = [
 
 export const nav = [
     {text: "About", link: "/about"},
-    {text: "Components", link: "/components/overview"}
+    {text: "Components", link: "/components/"}
 ];
 
 export const sidebar = [
@@ -16,7 +16,7 @@ export const sidebar = [
         text: "About",
         items: [
             {text: "Getting Started", link: "/about"},
-            {text: "Overview of Components", link: "/components/overview"}
+            {text: "Overview of Components", link: "/components/"}
         ]
     },
     {
