@@ -1,4 +1,5 @@
 import {defineConfig} from "vite";
+import {readFileSync} from "fs";
 import babel from "vite-plugin-babel";
 import CEM from "vite-plugin-cem";
 
@@ -79,8 +80,35 @@ export default defineConfig({
                         // Filter out private class fields and methods
                         declaration.members = [...memberMap.values()].filter(({name}) => !name.startsWith("#"));
                     }
-                }
+                },
             }]
-        })
+        }),
+        {
+            name: "generate-types",
+            apply: "build", enforce: "post",
+            generateBundle() {
+                const manifest = JSON.parse(readFileSync("./dist/custom-elements.json", {encoding: "utf-8"}));
+                const components = manifest.modules.flatMap(({declarations}) => declarations);
+                const definitions = [
+                    `import {LitElement} from "lit";`,
+                    `import {customElement, property} from "lit/decorators.js";`,
+                    "", ...components.map(({name, tagName, attributes}) => ([
+                        `@customElement("${tagName}")`,
+                        `export class ${name} extends LitElement {${attributes?.length ? "" : "}"}`, ...(attributes?.length ? attributes.map(({name, type}, index) => ([
+                            `    @property({type: ${type?.text ?? `${type[0].toUpperCase()}${type.slice(1)}`}})`,
+                            `    accessor ${name}: ${type?.text?.toLowerCase() ?? type};`,
+                            index === attributes.length - 1 ? "}" : "    "
+                        ])) : []),
+                        ""])),
+                    "declare global {",
+                    "    interface HTMLElementTagNameMap {", ...components.map(({name, tagName}) =>
+                        `        "${tagName}": ${name};`),
+                    "    }",
+                    "}"
+                ].flat(Infinity).join("\r\n");
+                
+                this.emitFile({type: "asset", fileName: "portfolito.d.ts", source: definitions});
+            }
+        }
     ]
 });

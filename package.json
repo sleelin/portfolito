@@ -9,6 +9,7 @@
   "bugs": "https://github.com/sleelin/portfolito/issues",
   "repository": "git+https://github.com/sleelin/portfolito.git",
   "customElements": "./dist/custom-elements.json",
+  "types": "./dist/portfolito.d.ts",
   "keywords": [
     "web components",
     "web-components",
