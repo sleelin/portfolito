@@ -138,7 +138,8 @@ to demonstrate how this looks in practice.
     <content-article variant="panel">Requires a computer running an operating system.</content-article>
     <content-article variant="panel">The computer must have some memory.</content-article>
     <content-article variant="panel">Ideally also some kind of long-term storage.</content-article>
-    <content-article variant="panel">An input device as well as some form of output device is recommended.</content-article>
+    <content-article variant="panel">An input device must be attached.</content-article>
+    <content-article variant="panel">Some form of output device is recommended.</content-article>
   </content-section>
 </demo>
 

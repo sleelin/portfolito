@@ -60,8 +60,20 @@ export class ContentSection extends LitElement {
               margin-bottom: 0;
             }
             
-            @container (width <= 90ch) {
+            @container (width > 90ch) {
+              ::slotted(:not(.span):nth-of-type(3n + 1):nth-last-of-type(2)), ::slotted(:not(.span):nth-of-type(3n + 2):nth-last-of-type(1)) {
+                position: relative;
+                left: 50%;
+              }
+            }
+            
+            @container (60ch < width <= 90ch) {
               grid-template-columns: repeat(2, 1fr);
+              
+              ::slotted(:not(.span):nth-of-type(odd):last-of-type) {
+                position: relative;
+                left: 50%;
+              }
             }
             
             @container (width <= 60ch) {
