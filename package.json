@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "author": "sleelin",
-  "homepage": "https://sleelin.io/portfolito",
+  "homepage": "https://portfolito.js.org",
   "bugs": "https://github.com/sleelin/portfolito/issues",
   "repository": "git+https://github.com/sleelin/portfolito.git",
   "customElements": "./dist/custom-elements.json",

@@ -1,4 +1,4 @@
-# <a href="https://sleelin.io/portfolito"><img alt="PortfoLitO" src="https://raw.githubusercontent.com/sleelin/portfolito/f7025d621e24548cd254b24c662029dd023662da/docs/public/logo-text.svg" width="512" /></a>
+# <a href="https://portfolito.js.org"><img alt="PortfoLitO" src="https://raw.githubusercontent.com/sleelin/portfolito/f7025d621e24548cd254b24c662029dd023662da/docs/public/logo-text.svg" width="512" /></a>
 
 ### Showcase your Portfolio of Work
 
@@ -16,4 +16,4 @@ Components are broken down into two categories:
 - Page components, which provide overall structure to a page
 - Content components, which encapsulate and style content within a page
 
-See [the PortfoLitO documentation](https://sleelin.io/portfolito/components/) for more details, including live usage examples.
+See [the PortfoLitO documentation](https://portfolito.js.org/components/) for more details, including live usage examples.

@@ -32,7 +32,7 @@ export class PageFooter extends LitElement {
                         <span>Made with</span>
                         <span class="heart">&hearts;</span>
                         <span>using</span>
-                        <a href="https://www.sleelin.io/portfolito" target="_blank">PortfoLitO</a>
+                        <a href="https://portfolito.js.org" target="_blank">PortfoLitO</a>
                     </slot>
                 </div>
             </footer>
