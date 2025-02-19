@@ -162,6 +162,7 @@
   }
   
   content-article {
+    position: static;
     grid-column: span 2;
     --header-borderColor: var(--vp-c-neutral);
     
